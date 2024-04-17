@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs")
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 }
 
 android {
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.legacy.support.v4)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,12 +77,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
     //splash screen
+    implementation (libs.androidx.core.splashscreen)
 
     //glide
     implementation(libs.glide)
 
     //retrofit
     implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
 
     //interceptor
     implementation(libs.okhttp)
@@ -89,4 +93,14 @@ dependencies {
     //koin
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.navigation)
+
+    //maps
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+
+    //carousel
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+    //emoji
+    implementation("androidx.emoji:emoji:28.0.0")
 }

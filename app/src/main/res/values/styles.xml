@@ -10,4 +10,11 @@
         <item name="cornerSize">10%</item>
     </style>
 
+    <style name="selectableComponent">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+
 </resources>

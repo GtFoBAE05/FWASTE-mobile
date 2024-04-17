@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">ta_mobile</string>
+
+    <!--    base-->
+    <string name="form_empty_message">This field can\'t be empty!</string>
+    <string name="next_section">Continue</string>
+
+    <!--    auth-->
+    <!--    login-->
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="register">Register</string>
+    <string name="signup_pursue">Choose your role to help reduce happening food waste</string>
+    <string name="signin_pursue">Explore more products that you need \n and feel new experience for it.</string>
+
+    <string name="merchant_name">Merchant Name</string>
+    <string name="input_placeholder_merchant_name">Type your merchant name …</string>
+    <string name="name">Name</string>
+    <string name="input_placeholder_name">Type your name …</string>
+    <string name="email">Email</string>
+    <string name="input_placeholder_email">Type your email address …</string>
+    <string name="phone_number">Phone number</string>
+    <string name="input_placeholder_phone_number">Type your phone number …</string>
+    <string name="password">Password</string>
+    <string name="input_placeholder_password">Type your password …</string>
+    <string name="referal">Referral</string>
+    <string name="input_placeholder_referal">Type another user referral …</string>
+    <string name="address">Addresss</string>
+    <string name="input_placeholder_address">Type your address …</string>
+    <string name="location">Location</string>
+    <string name="input_placeholder_location">Tap to get your location …</string>
+    <string name="operational_open_hour">Operational open hour</string>
+    <string name="input_placeholder_operational_open_hour">Input your operational open hour …</string>
+    <string name="operational_close_hour">Operational close hour</string>
+    <string name="input_placeholder_operational_close_hour">Input your operational close hour …</string>
+
+    <!--    register-->
+    <string name="register_as_buyer">Register As Buyer</string>
+    <string name="register_as_seller">Register As Seller</string>
+    <string name="register_nas_buyer">Register \nAs Buyer</string>
+    <string name="register_nas_seller">Register \nAs Seller</string>
+
+    <!--    commont auth-->
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="now">Now</string>
+    <string name="dont_have_an_account">Dont have an account yet ? </string>
+
+    <!--    profile-->
+    <string name="my_account">My Account</string>
+    <string name="change_profile">Change Profile</string>
+    <string name="my_favourite_store">My Favourite Store</string>
+    <string name="change_password">Change Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

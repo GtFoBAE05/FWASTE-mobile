@@ -1,21 +1,43 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Ta_mobile" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Ta_mobile" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/primary_main</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="backgroundColor">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorSurfaceContainerHighest">@color/white</item>
 
+        <item name="fontFamily">@font/base_font</item>
+
     </style>
 
     <style name="Theme.Ta_mobile" parent="Base.Theme.Ta_mobile">
         <item name="android:fontFamily">@font/base_font</item>
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+
+
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.Ta_mobile</item>
+    </style>
+
 </resources>

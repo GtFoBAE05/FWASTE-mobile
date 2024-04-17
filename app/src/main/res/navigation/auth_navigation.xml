@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.ta_mobile.ui.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_buyerActivity"
+            app:destination="@id/buyerActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_sellerActivity"
+            app:destination="@id/sellerActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerAsFragment"
+            app:destination="@id/registerAsFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/buyerActivity"
+        android:name="com.example.ta_mobile.ui.buyer.BuyerActivity"
+        android:label="activity_buyer"
+        tools:layout="@layout/activity_buyer" />
+    <activity
+        android:id="@+id/sellerActivity"
+        android:name="com.example.ta_mobile.ui.seller.SellerActivity"
+        android:label="activity_seller"
+        tools:layout="@layout/activity_seller" />
+    <fragment
+        android:id="@+id/registerAsBuyerFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.buyer.RegisterAsBuyerFragment"
+        android:label="fragment_register_as_buyer"
+        tools:layout="@layout/fragment_register_as_buyer" >
+        <action
+            android:id="@+id/action_registerAsBuyerFragment_to_registerAsBuyerAdditionalFragment"
+            app:destination="@id/registerAsBuyerAdditionalFragment" />
+        <action
+            android:id="@+id/action_registerAsBuyerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAsSellerFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.seller.RegisterAsSellerFragment"
+        android:label="fragment_register_as_seller"
+        tools:layout="@layout/fragment_register_as_seller" >
+        <action
+            android:id="@+id/action_registerAsSellerFragment_to_registerAsSellerAdditionalFragment"
+            app:destination="@id/registerAsSellerAdditionalFragment" />
+        <action
+            android:id="@+id/action_registerAsSellerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAsSellerAdditionalFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.seller.RegisterAsSellerAdditionalFragment"
+        android:label="fragment_register_as_seller_additional"
+        tools:layout="@layout/fragment_register_as_seller_additional" >
+        <action
+            android:id="@+id/action_registerAsSellerAdditionalFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAsBuyerAdditionalFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.buyer.RegisterAsBuyerAdditionalFragment"
+        android:label="fragment_register_as_buyer_additional"
+        tools:layout="@layout/fragment_register_as_buyer_additional" >
+        <action
+            android:id="@+id/action_registerAsBuyerAdditionalFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAsFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.RegisterAsFragment"
+        android:label="fragment_register_as"
+        tools:layout="@layout/fragment_register_as" >
+        <action
+            android:id="@+id/action_registerAsFragment_to_registerAsBuyerFragment"
+            app:destination="@id/registerAsBuyerFragment" />
+        <action
+            android:id="@+id/action_registerAsFragment_to_registerAsSellerFragment"
+            app:destination="@id/registerAsSellerFragment" />
+        <action
+            android:id="@+id/action_registerAsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
