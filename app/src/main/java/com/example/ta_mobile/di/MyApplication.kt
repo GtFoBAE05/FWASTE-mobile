@@ -16,6 +16,7 @@ class MyApplication : Application() {
             modules(
                 apiModule,
                 userPreferenceModule,
+                roomModule,
                 repositoryModule,
                 viewModelModule
             )

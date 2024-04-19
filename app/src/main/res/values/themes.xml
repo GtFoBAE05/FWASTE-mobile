@@ -17,6 +17,7 @@
 
         <item name="fontFamily">@font/base_font</item>
 
+
     </style>
 
     <style name="Theme.Ta_mobile" parent="Base.Theme.Ta_mobile">

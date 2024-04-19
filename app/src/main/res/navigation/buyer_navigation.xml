@@ -9,7 +9,14 @@
         android:id="@+id/buyerHomeFragment"
         android:name="com.example.ta_mobile.ui.buyer.home.BuyerHomeFragment"
         android:label="fragment_buyer_home"
-        tools:layout="@layout/fragment_buyer_home" />
+        tools:layout="@layout/fragment_buyer_home" >
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerSearchStoreFragment"
+            app:destination="@id/buyerSearchStoreFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerStoreDetailFragment"
+            app:destination="@id/buyerStoreDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/buyerProfileFragment"
         android:name="com.example.ta_mobile.ui.buyer.profile.BuyerProfileFragment"
@@ -24,4 +31,55 @@
         android:name="com.example.ta_mobile.ui.auth.AuthActivity"
         android:label="activity_auth"
         tools:layout="@layout/activity_auth" />
+    <fragment
+        android:id="@+id/buyerSearchStoreFragment"
+        android:name="com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreFragment"
+        android:label="fragment_buyer_search_store"
+        tools:layout="@layout/fragment_buyer_search_store" >
+        <action
+            android:id="@+id/action_buyerSearchStoreFragment_to_buyerStoreDetailFragment"
+            app:destination="@id/buyerStoreDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerStoreDetailFragment"
+        android:name="com.example.ta_mobile.ui.buyer.store.BuyerStoreDetailFragment"
+        android:label="fragment_buyer_store_detail"
+        tools:layout="@layout/fragment_buyer_store_detail" >
+        <action
+            android:id="@+id/action_buyerStoreDetailFragment_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProductFragment"
+        android:name="com.example.ta_mobile.ui.buyer.product.BuyerProductFragment"
+        android:label="fragment_buyer_product"
+        tools:layout="@layout/fragment_buyer_product" />
+    <fragment
+        android:id="@+id/buyerCartFragment"
+        android:name="com.example.ta_mobile.ui.buyer.cart.BuyerCartFragment"
+        android:label="fragment_buyer_cart"
+        tools:layout="@layout/fragment_buyer_cart" >
+        <action
+            android:id="@+id/action_buyerCartFragment_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
+        <action
+            android:id="@+id/action_buyerCartFragment_to_buyerCheckoutFragment"
+            app:destination="@id/buyerCheckoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerCheckoutFragment"
+        android:name="com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutFragment"
+        android:label="fragment_buyer_checkout"
+        tools:layout="@layout/fragment_buyer_checkout" >
+        <action
+            android:id="@+id/action_buyerCheckoutFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerOrderStatusFragment"
+        android:name="com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusFragment"
+        android:label="fragment_buyer_order_status"
+        tools:layout="@layout/fragment_buyer_order_status" />
 </navigation>

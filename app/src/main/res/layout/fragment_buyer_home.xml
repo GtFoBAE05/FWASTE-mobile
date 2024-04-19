@@ -10,54 +10,67 @@
         android:id="@+id/buyerHomeToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:titleCentered="true" />
 
-    <TextView
-        android:id="@+id/buyerHomeUserNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Welcome, name"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buyerHomeToolbar" />
-
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/buyerHomeImageSlider"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        app:iss_auto_cycle="true"
-        app:iss_delay="5000"
-        app:iss_no_dots="true"
-        app:iss_period="1000"
-        app:iss_text_align="CENTER"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buyerHomeUserNameTv" />
-
-    <SearchView
-        android:id="@+id/buyerHomeSearchView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:queryHint="FInd something"
-        app:layout_constraintTop_toBottomOf="@+id/buyerHomeImageSlider"
-        tools:layout_editor_absoluteX="0dp" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/buyerHomeToolbar">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Store near you"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buyerHomeSearchView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/buyerHomeUserNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Welcome, name"
+                android:textStyle="bold" />
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/buyerHomeImageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                app:iss_auto_cycle="true"
+                app:iss_delay="5000"
+                app:iss_no_dots="true"
+                app:iss_period="1000"
+                app:iss_text_align="CENTER" />
+
+            <SearchView
+                android:id="@+id/buyerHomeSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:queryHint="FInd something" />
+
+            <TextView
+                android:id="@+id/storeNearYouTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Store near you"
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/buyerHomeStoreNearBuyerRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_store_near_buyer_card_layout" />
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

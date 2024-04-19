@@ -10,11 +10,11 @@
         android:icon="@drawable/outline_map_24"
         android:title="Map" />
     <item
-        android:id="@+id/buyer_order_list_screen"
+        android:id="@+id/buyerOrderStatusFragment"
         android:icon="@drawable/outline_quick_reorder_24"
         android:title="Order" />
     <item
-        android:id="@+id/buyer_cart_screen"
+        android:id="@+id/buyerCartFragment"
         android:icon="@drawable/outline_shopping_cart_24"
         android:title="Cart" />
     <item

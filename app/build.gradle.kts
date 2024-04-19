@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -101,6 +102,4 @@ dependencies {
     //carousel
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
-    //emoji
-    implementation("androidx.emoji:emoji:28.0.0")
 }

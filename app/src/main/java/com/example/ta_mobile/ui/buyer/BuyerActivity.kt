@@ -19,13 +19,13 @@ class BuyerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBuyerBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, 28, systemBars.right, 0)
-            insets
-        }
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewBuyerActivity) as NavHostFragment
         val navController = navHostFragment.navController
@@ -34,7 +34,7 @@ class BuyerActivity : AppCompatActivity() {
         binding.buyerBottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if(destination.id == R.id.buyerHomeFragment || destination.id == R.id.buyerProfileFragment ){
+            if(destination.id == R.id.buyerHomeFragment || destination.id == R.id.buyerCartFragment|| destination.id == R.id.buyerProfileFragment ){
                 binding.buyerBottomNavigationView.visibility = View.VISIBLE
             }else{
                 binding.buyerBottomNavigationView.visibility = View.GONE

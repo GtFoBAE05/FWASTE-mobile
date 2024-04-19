@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinever"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardSubtotalTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subtotal"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinever"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardTotalSubtotalPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp100.000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelinever"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardShippingPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Shipping Fee"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinever"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/paymentDetailCardSubtotalTv"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardSubtotalTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardShippingPriceAmountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Rp0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelinever"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardTotalSubtotalPriceTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardOrderTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Order Fee"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinever"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardShippingPriceTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardOrderPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Rp2000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelinever"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardShippingPriceAmountTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardDiscountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Discount Price"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinever"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardOrderTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardDiscountPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Rp0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelinever"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardOrderPriceTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailTotalTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Total Price"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guidelinever"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardDiscountTv" />
+
+    <TextView
+        android:id="@+id/paymentDetailCardTotalPriceTv"
+        style="@style/TextAppearance.Material3.LabelLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Rp100.231"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelinever"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDetailCardDiscountPriceTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
