@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.buyer.order.active.BuyerOrderStatusActiveFragment">
+    tools:context=".ui.buyer.order.rejected.BuyerOrderStatusRejectedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/buyerOrderStatusRv"

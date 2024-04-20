@@ -81,5 +81,20 @@
         android:id="@+id/buyerOrderStatusFragment"
         android:name="com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusFragment"
         android:label="fragment_buyer_order_status"
-        tools:layout="@layout/fragment_buyer_order_status" />
+        tools:layout="@layout/fragment_buyer_order_status" >
+        <action
+            android:id="@+id/action_buyerOrderStatusFragment_to_buyerOrderDetailFragment"
+            app:destination="@id/buyerOrderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerOrderDetailFragment"
+        android:name="com.example.ta_mobile.ui.buyer.order.detail.BuyerOrderDetailFragment"
+        android:label="fragment_buyer_order_detail"
+        tools:layout="@layout/fragment_buyer_order_detail" >
+        <action
+            android:id="@+id/action_buyerOrderDetailFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

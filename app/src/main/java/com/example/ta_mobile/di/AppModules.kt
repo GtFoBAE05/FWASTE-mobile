@@ -18,6 +18,8 @@ import com.example.ta_mobile.ui.buyer.cart.BuyerCartViewModel
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutFragment
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutViewModel
 import com.example.ta_mobile.ui.buyer.home.BuyerHomeViewModel
+import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusViewModel
+import com.example.ta_mobile.ui.buyer.order.detail.BuyerOrderDetailViewModel
 import com.example.ta_mobile.ui.buyer.product.BuyerProductViewModel
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreViewModel
@@ -73,6 +75,7 @@ val viewModelModule = module {
 
     //buyer
     viewModel { BuyerHomeViewModel(get(), get()) }
+    viewModel { BuyerOrderStatusViewModel(get())}
     viewModel { BuyerCartViewModel(get()) }
     viewModel { BuyerProfileViewModel(get()) }
 
@@ -81,13 +84,10 @@ val viewModelModule = module {
     viewModel { BuyerStoreDetailViewModel(get()) }
     viewModel { BuyerProductViewModel(get()) }
 
-//    viewModelOf(::BuyerCheckoutViewModel)
-//    scope<BuyerCheckoutViewModel> {
-//        scopedOf(::Session)
-//    }
 
     viewModel { BuyerCheckoutViewModel(get()) }
 
+    viewModel { BuyerOrderDetailViewModel(get()) }
 
 
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/deliveryDetaiCardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/outline_shipping_truck_24"
+            android:drawablePadding="4dp"
+            android:includeFontPadding="true"
+            android:text="Delivery Method"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/deliveryCardDetailSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Please wait until seller accepted your order"
+            app:layout_constraintStart_toStartOf="@+id/deliveryDetaiCardTitle"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryDetaiCardTitle" />
+
+        <TextView
+            android:id="@+id/buyerOrderStatusConfirmedTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Confirmed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/deliveryCardDetailSubtitle"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryCardDetailSubtitle" />
+
+        <View
+            android:id="@+id/buyerOrderStatusDivider1"
+            android:layout_width="52dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="@+id/buyerOrderStatusConfirmedTv"
+            app:layout_constraintStart_toEndOf="@+id/buyerOrderStatusConfirmedTv"
+            app:layout_constraintTop_toTopOf="@+id/buyerOrderStatusConfirmedTv" />
+
+        <TextView
+            android:id="@+id/buyerOrderStatusOnTheWay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="On The Way"
+            app:layout_constraintBottom_toBottomOf="@+id/buyerOrderStatusDivider1"
+            app:layout_constraintStart_toEndOf="@+id/buyerOrderStatusDivider1"
+            app:layout_constraintTop_toTopOf="@+id/buyerOrderStatusDivider1" />
+
+        <View
+            android:id="@+id/buyerOrderStatusDivider2"
+            android:layout_width="52dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="@+id/buyerOrderStatusOnTheWay"
+            app:layout_constraintStart_toEndOf="@+id/buyerOrderStatusOnTheWay"
+            app:layout_constraintTop_toTopOf="@+id/buyerOrderStatusOnTheWay" />
+
+        <TextView
+            android:id="@+id/buyerOrderStatusArrived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Arrived"
+            app:layout_constraintBottom_toBottomOf="@+id/buyerOrderStatusDivider2"
+            app:layout_constraintStart_toEndOf="@+id/buyerOrderStatusDivider2"
+            app:layout_constraintTop_toTopOf="@+id/buyerOrderStatusDivider2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

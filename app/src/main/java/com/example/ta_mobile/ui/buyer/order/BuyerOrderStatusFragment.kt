@@ -28,18 +28,21 @@ class BuyerOrderStatusFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buyerOrderStatusToolbar.title = "Order List"
-        val adapter = BuyerOrderStatusAdapter(childFragmentManager, lifecycle)
+        val adapter = BuyerOrderStatusViewPagerAdapter(childFragmentManager, lifecycle)
         binding.buyerOrderStatusViewPager.adapter = adapter
 
         TabLayoutMediator(binding.buyerOrderStatusTabs, binding.buyerOrderStatusViewPager){tab, pos ->
             when(pos){
                 0 -> {
-                    tab.text = "Active Order"
+                    tab.text = "Waiting Confirmation"
                 }
                 1-> {
-                    tab.text = "Finished Order"
+                    tab.text = "Active Order"
                 }
                 2-> {
+                    tab.text = "Finished Order"
+                }
+                3 -> {
                     tab.text = "Canceled Order"
                 }
             }

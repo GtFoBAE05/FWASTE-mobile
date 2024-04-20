@@ -34,7 +34,7 @@ class BuyerActivity : AppCompatActivity() {
         binding.buyerBottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if(destination.id == R.id.buyerHomeFragment || destination.id == R.id.buyerCartFragment|| destination.id == R.id.buyerProfileFragment ){
+            if(destination.id == R.id.buyerHomeFragment || destination.id == R.id.buyerOrderStatusFragment || destination.id == R.id.buyerCartFragment|| destination.id == R.id.buyerProfileFragment ){
                 binding.buyerBottomNavigationView.visibility = View.VISIBLE
             }else{
                 binding.buyerBottomNavigationView.visibility = View.GONE

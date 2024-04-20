@@ -1,4 +1,4 @@
-package com.example.ta_mobile.ui.buyer.order.finished
+package com.example.ta_mobile.ui.buyer.order.waiting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.FragmentBuyerOrderStatusActiveBinding
-import com.example.ta_mobile.databinding.FragmentBuyerOrderStatusFinishedBinding
-import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusAdapter
+import com.example.ta_mobile.databinding.FragmentBuyerOrderStatusWaitingBinding
 import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusViewModel
+import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusAdapter
 import com.example.ta_mobile.utils.NetworkResult
 import org.koin.android.ext.android.inject
 
 
-class BuyerOrderStatusFinishedFragment : Fragment() {
-    private var _binding : FragmentBuyerOrderStatusFinishedBinding? = null
+class BuyerOrderStatusWaitingFragment : Fragment() {
+    private var _binding : FragmentBuyerOrderStatusWaitingBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel : BuyerOrderStatusViewModel by inject()
@@ -27,20 +26,16 @@ class BuyerOrderStatusFinishedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBuyerOrderStatusFinishedBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentBuyerOrderStatusWaitingBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getOrderStatus("finished")
+        viewModel.getOrderStatus("waiting")
         setupAdapter()
         setupObserver()
-
     }
-
-
 
     private fun setupAdapter(){
         binding.buyerOrderStatusRv.layoutManager = LinearLayoutManager(requireContext())
@@ -68,5 +63,6 @@ class BuyerOrderStatusFinishedFragment : Fragment() {
             }
         }
     }
+
 
 }

@@ -1,22 +1,44 @@
 package com.example.ta_mobile.ui.buyer.order
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.lifecycle.Lifecycle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderStatusResponseData
+import com.example.ta_mobile.databinding.ItemOrderStatusCardLayoutBinding
+import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.example.ta_mobile.utils.helper.DiffUtil
 
-import com.example.ta_mobile.ui.buyer.order.active.BuyerOrderStatusActiveFragment
-import com.example.ta_mobile.ui.buyer.order.canceled.BuyerOrderStatusCanceledFragment
-import com.example.ta_mobile.ui.buyer.order.finished.BuyerOrderStatusFinishedFragment
+class BuyerOrderStatusAdapter(private val listener : (BuyerOrderStatusResponseData) -> Unit) : RecyclerView.Adapter<BuyerOrderStatusAdapter.BuyerOrderStatusViewHolder>(){
+    private var items = emptyList<BuyerOrderStatusResponseData>()
+    class BuyerOrderStatusViewHolder(val binding : ItemOrderStatusCardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item : BuyerOrderStatusResponseData){
+            Glide.with(binding.root).load(item.storeImageUrl).into(binding.orderStatusCardImageView)
+            binding.orderStatusCardTitleTv.text = item.storeName
+            binding.orderStatusCardTotalItemTv.text = CurrencyHelper.convertToRupiah(item.totalAmount)
 
-class BuyerOrderStatusAdapter(fm : FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
-    private val fragmentList = listOf(BuyerOrderStatusActiveFragment(), BuyerOrderStatusFinishedFragment(),  BuyerOrderStatusCanceledFragment() )
-    override fun getItemCount(): Int {
-        return fragmentList.size
+        }
     }
 
-    override fun createFragment(position: Int): Fragment {
-        return fragmentList[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuyerOrderStatusViewHolder {
+        return BuyerOrderStatusViewHolder(ItemOrderStatusCardLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    override fun onBindViewHolder(holder: BuyerOrderStatusViewHolder, position: Int) {
+        var item = items[position]
+        holder.bind(item)
+        holder.itemView.setOnClickListener { listener(item) }
+
+    }
+    fun setData(data : List<BuyerOrderStatusResponseData>){
+        val diffUtil = DiffUtil(items,data)
+        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtil)
+        items = data
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }

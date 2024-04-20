@@ -7,6 +7,9 @@ import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderF
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
 import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.order.AddOrderResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderDetailResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.UpdateOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
@@ -17,6 +20,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -63,4 +67,19 @@ interface ApiServices {
     suspend fun addOrder(
         @Body addOrderForm: BuyerAddOrderForm
     ) : Response<AddOrderResponse>
+
+    @GET("transaction/search-by-status")
+    suspend fun getOrderByStatus(
+        @Query("status") keyword:String
+    ) : Response<BuyerOrderStatusResponse>
+
+    @GET("transaction/order-detail/{transactionId}")
+    suspend fun getOrderDetailByTransaction(
+        @Path("transactionId") transactionId:String
+    ) : Response<BuyerOrderDetailResponse>
+
+    @PUT("transaction/update-order-status/{transactionId}")
+    suspend fun updateOrderStatusByTransaction(
+        @Path("transactionId") transactionId:String
+    ) : Response<UpdateOrderStatusResponse>
 }

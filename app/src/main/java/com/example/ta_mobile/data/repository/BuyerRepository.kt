@@ -8,6 +8,9 @@ import com.example.ta_mobile.data.source.remote.model.auth.BuyerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
 import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.order.AddOrderResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderDetailResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.order.UpdateOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
@@ -183,5 +186,90 @@ class BuyerRepository(
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getOrderByStatus(keyword : String): Flow<NetworkResult<BuyerOrderStatusResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val buyerOrderStatusResponse = apiServices.getOrderByStatus(
+                    keyword
+                )
+                if (buyerOrderStatusResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            buyerOrderStatusResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    buyerOrderStatusResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getOrderDetailByTransaction(transactionId : String): Flow<NetworkResult<BuyerOrderDetailResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val buyerOrderDetailResponse = apiServices.getOrderDetailByTransaction(
+                    transactionId
+                )
+                if (buyerOrderDetailResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            buyerOrderDetailResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    buyerOrderDetailResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun updateOrderStatusDetailByTransaction(transactionId : String): Flow<NetworkResult<UpdateOrderStatusResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val buyerUpdateOrderStatusResponse = apiServices.updateOrderStatusByTransaction(
+                    transactionId
+                )
+                if (buyerUpdateOrderStatusResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            buyerUpdateOrderStatusResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    buyerUpdateOrderStatusResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 
 }
