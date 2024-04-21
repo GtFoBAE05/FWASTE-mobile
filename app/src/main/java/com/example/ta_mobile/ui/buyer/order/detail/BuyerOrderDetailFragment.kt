@@ -1,6 +1,5 @@
 package com.example.ta_mobile.ui.buyer.order.detail
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
-import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderDetailResponse
-import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderDetailResponseData
-import com.example.ta_mobile.data.source.remote.response.buyer.order.BuyerOrderStatusResponseData
+import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponseData
 import com.example.ta_mobile.databinding.FragmentBuyerOrderDetailBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
@@ -62,7 +59,7 @@ class BuyerOrderDetailFragment : Fragment() {
         }
     }
 
-    private fun setupView(data : BuyerOrderDetailResponseData){
+    private fun setupView(data : OrderDetailResponseData){
         if(data.shippingMethod.equals("pickup")){
             binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusOnTheWay.text = "ready to pickup"
             binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusArrived.text = "finished"

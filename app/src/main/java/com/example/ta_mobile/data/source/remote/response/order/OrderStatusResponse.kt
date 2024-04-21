@@ -1,18 +1,18 @@
-package com.example.ta_mobile.data.source.remote.response.buyer.order
+package com.example.ta_mobile.data.source.remote.response.order
 
 import com.google.gson.annotations.SerializedName
 
-data class BuyerOrderStatusResponse(
+data class OrderStatusResponse(
 
     @SerializedName("status")
     val status: Boolean,
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: List<BuyerOrderStatusResponseData>
+    val data: List<OrderStatusResponseData>
 )
 
-data class BuyerOrderStatusResponseData(
+data class OrderStatusResponseData(
     @SerializedName("id")
     val id: String,
     @SerializedName("store_id")

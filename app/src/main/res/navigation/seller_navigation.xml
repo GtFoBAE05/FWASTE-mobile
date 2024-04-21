@@ -9,5 +9,52 @@
         android:id="@+id/sellerHomeFragment"
         android:name="com.example.ta_mobile.ui.seller.home.SellerHomeFragment"
         android:label="fragment_seller_home"
-        tools:layout="@layout/fragment_seller_home" />
+        tools:layout="@layout/fragment_seller_home" >
+        <action
+            android:id="@+id/action_sellerHomeFragment_to_sellerIncomingOrderFragment"
+            app:destination="@id/sellerIncomingOrderFragment" />
+        <action
+            android:id="@+id/action_sellerHomeFragment_to_sellerSendNotificationFragment"
+            app:destination="@id/sellerSendNotificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerOrderFragment"
+        android:name="com.example.ta_mobile.ui.seller.order.SellerOrderFragment"
+        android:label="fragment_seller_order"
+        tools:layout="@layout/fragment_seller_order" />
+    <fragment
+        android:id="@+id/sellerProfileFragment"
+        android:name="com.example.ta_mobile.ui.seller.profile.SellerProfileFragment"
+        android:label="fragment_seller_profile"
+        tools:layout="@layout/fragment_seller_profile" >
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductFragment"
+        android:name="com.example.ta_mobile.ui.seller.product.SellerProductFragment"
+        android:label="fragment_seller_product"
+        tools:layout="@layout/fragment_seller_product" />
+    <fragment
+        android:id="@+id/sellerIncomingOrderFragment"
+        android:name="com.example.ta_mobile.ui.seller.home.incoming_order.SellerIncomingOrderFragment"
+        android:label="fragment_seller_incoming_order"
+        tools:layout="@layout/fragment_seller_incoming_order" >
+        <action
+            android:id="@+id/action_sellerIncomingOrderFragment_to_sellerHomeFragment"
+            app:destination="@id/sellerHomeFragment"
+            app:popUpTo="@id/sellerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.ta_mobile.ui.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/sellerSendNotificationFragment"
+        android:name="com.example.ta_mobile.ui.seller.home.notification.SellerSendNotificationFragment"
+        android:label="fragment_seller_send_notification"
+        tools:layout="@layout/fragment_seller_send_notification" />
 </navigation>

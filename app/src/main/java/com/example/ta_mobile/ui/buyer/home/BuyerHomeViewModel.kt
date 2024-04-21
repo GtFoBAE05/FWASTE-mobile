@@ -22,7 +22,7 @@ class BuyerHomeViewModel(private val userPrefRepository: UserPrefRepository, pri
 
     fun getStoreNearBuyer(){
         viewModelScope.launch {
-            buyerRepository.searchStore("a").collect{
+            buyerRepository.searchStore("").collect{
                 _storeNearBuyerResult.postValue(it)
             }
         }

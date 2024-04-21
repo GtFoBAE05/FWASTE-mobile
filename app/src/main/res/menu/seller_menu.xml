@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sellerHomeFragment"
+        android:icon="@drawable/outline_home_24px"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/sellerProductFragment"
+        android:icon="@drawable/outline_product_24"
+        android:title="Product" />
+
+    <item
+        android:id="@+id/sellerOrderFragment"
+        android:icon="@drawable/outline_quick_reorder_24"
+        android:title="Order" />
+    <item
+        android:id="@+id/sellerProfileFragment"
+        android:icon="@drawable/outline_person_24"
+        android:title="Profile" />
+
+</menu>

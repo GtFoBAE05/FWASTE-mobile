@@ -6,6 +6,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.example.ta_mobile.data.repository.AuthRepository
 import com.example.ta_mobile.data.repository.BuyerRepository
+import com.example.ta_mobile.data.repository.SellerRepository
 import com.example.ta_mobile.data.repository.UserPrefRepository
 import com.example.ta_mobile.data.source.local.db.CartProductDatabase
 import com.example.ta_mobile.data.source.local.db.dao.CartProductDao
@@ -24,6 +25,7 @@ import com.example.ta_mobile.ui.buyer.product.BuyerProductViewModel
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreViewModel
 import com.example.ta_mobile.ui.buyer.store.BuyerStoreDetailViewModel
+import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
 import com.example.ta_mobile.utils.Session
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -61,6 +63,7 @@ val repositoryModule = module {
     single { AuthRepository(get(), get()) }
     single { UserPrefRepository(get()) }
     single { BuyerRepository(get(), get()) }
+    single { SellerRepository(get()) }
 
 }
 
@@ -77,7 +80,7 @@ val viewModelModule = module {
     viewModel { BuyerHomeViewModel(get(), get()) }
     viewModel { BuyerOrderStatusViewModel(get())}
     viewModel { BuyerCartViewModel(get()) }
-    viewModel { BuyerProfileViewModel(get()) }
+    viewModel { BuyerProfileViewModel(get(), get(), get()) }
 
 
     viewModel { BuyerSearchStoreViewModel(get())}
@@ -92,4 +95,5 @@ val viewModelModule = module {
 
 
     //seller
+    viewModel { SellerHomeViewModel(get(), get()) }
 }

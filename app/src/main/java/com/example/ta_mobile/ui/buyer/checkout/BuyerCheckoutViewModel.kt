@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ta_mobile.data.repository.BuyerRepository
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderFormProduct
-import com.example.ta_mobile.data.source.remote.response.buyer.order.AddOrderResponse
+import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponseData
 import com.example.ta_mobile.utils.NetworkResult

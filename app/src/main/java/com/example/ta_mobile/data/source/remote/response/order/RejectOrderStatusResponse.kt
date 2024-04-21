@@ -1,8 +1,8 @@
-package com.example.ta_mobile.data.source.remote.response.buyer.order
+package com.example.ta_mobile.data.source.remote.response.order
 
 import com.google.gson.annotations.SerializedName
 
-data class UpdateOrderStatusResponse(
+data class RejectOrderStatusResponse(
     @SerializedName("status")
     val status: Boolean,
     @SerializedName("message")

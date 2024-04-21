@@ -7,11 +7,13 @@ import com.example.ta_mobile.data.source.remote.ApiServices
 import com.example.ta_mobile.data.source.remote.model.auth.BuyerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.LoginForm
 import com.example.ta_mobile.data.source.remote.model.auth.SellerRegisterForm
+import com.example.ta_mobile.data.source.remote.model.auth.UpdatePasswordForm
+import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
 import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
+import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -137,6 +139,64 @@ class AuthRepository(
                 }
             } catch (e: HttpException) {
                 Log.e("AuthRepository", "register HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getUserDetail(
+    ): Flow<NetworkResult<UserDetailResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val buyerUserDetailResponse = apiServices.GetUserDetail(
+                )
+                if (buyerUserDetailResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            buyerUserDetailResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    buyerUserDetailResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("AuthRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun updateUserPassword( password: String
+    ): Flow<NetworkResult<UpdatePasswordResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val updateUserPasswordResponse = apiServices.updatePassword(
+                    UpdatePasswordForm(password)
+
+                )
+                if (updateUserPasswordResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            updateUserPasswordResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    updateUserPasswordResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("AuthRepository", "HttpException: " + e.message)
                 emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
             } catch (e: Exception) {
                 emit(NetworkResult.Error(e.message.toString()))

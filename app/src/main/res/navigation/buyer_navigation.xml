@@ -25,6 +25,18 @@
         <action
             android:id="@+id/action_buyerProfileFragment_to_authActivity"
             app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_buyerProfilePointFragment"
+            app:destination="@id/buyerProfilePointFragment" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_buyerProfileVoucherFragment"
+            app:destination="@id/buyerProfileVoucherFragment" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_buyerProfileEditFragment"
+            app:destination="@id/buyerProfileEditFragment" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_buyerProfileEditPasswordFragment"
+            app:destination="@id/buyerProfileEditPasswordFragment" />
     </fragment>
     <activity
         android:id="@+id/authActivity"
@@ -93,6 +105,47 @@
         tools:layout="@layout/fragment_buyer_order_detail" >
         <action
             android:id="@+id/action_buyerOrderDetailFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProfilePointFragment"
+        android:name="com.example.ta_mobile.ui.buyer.profile.point.BuyerProfilePointFragment"
+        android:label="fragment_buyer_profile_point"
+        tools:layout="@layout/fragment_buyer_profile_point" >
+        <action
+            android:id="@+id/action_buyerProfilePointFragment_to_buyerProfileMissionFragment"
+            app:destination="@id/buyerProfileMissionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProfileVoucherFragment"
+        android:name="com.example.ta_mobile.ui.buyer.profile.voucher.BuyerProfileVoucherFragment"
+        android:label="fragment_buyer_profile_voucher"
+        tools:layout="@layout/fragment_buyer_profile_voucher" />
+    <fragment
+        android:id="@+id/buyerProfileMissionFragment"
+        android:name="com.example.ta_mobile.ui.buyer.profile.mission.BuyerProfileMissionFragment"
+        android:label="fragment_buyer_profile_mission"
+        tools:layout="@layout/fragment_buyer_profile_mission" />
+    <fragment
+        android:id="@+id/buyerProfileEditFragment"
+        android:name="com.example.ta_mobile.ui.buyer.profile.edit_profile.BuyerProfileEditFragment"
+        android:label="fragment_buyer_profile_edit"
+        tools:layout="@layout/fragment_buyer_profile_edit" >
+        <action
+            android:id="@+id/action_buyerProfileEditFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProfileEditPasswordFragment"
+        android:name="com.example.ta_mobile.ui.buyer.profile.edit_profile.BuyerProfileEditPasswordFragment"
+        android:label="fragment_buyer_profile_edit_password"
+        tools:layout="@layout/fragment_buyer_profile_edit_password" >
+        <action
+            android:id="@+id/action_buyerProfileEditPasswordFragment_to_buyerHomeFragment"
             app:destination="@id/buyerHomeFragment"
             app:popUpTo="@id/buyerHomeFragment"
             app:popUpToInclusive="true" />

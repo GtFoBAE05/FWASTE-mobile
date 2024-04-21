@@ -1,18 +1,18 @@
-package com.example.ta_mobile.data.source.remote.response.buyer.order
+package com.example.ta_mobile.data.source.remote.response.order
 
 import com.google.gson.annotations.SerializedName
 
-data class BuyerOrderDetailResponse (
+data class OrderDetailResponse (
 
     @SerializedName("status")
     val status: Boolean,
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: BuyerOrderDetailResponseData
+    val data: OrderDetailResponseData
 )
 
-data class BuyerOrderDetailResponseData(
+data class OrderDetailResponseData(
     @SerializedName("id")
     val id: String,
     @SerializedName("store_id")
@@ -25,6 +25,12 @@ data class BuyerOrderDetailResponseData(
     val userName: String,
     @SerializedName("user_id")
     val userId: String,
+    @SerializedName("user_address")
+    val userAddress: String,
+    @SerializedName("user_phone_number")
+    val userPhoneNumber: String,
+    @SerializedName("user_location")
+    val userLocation: String,
     @SerializedName("order_id")
     val orderId: String,
     @SerializedName("total_amount")
