@@ -21,6 +21,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStore
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -132,6 +133,10 @@ interface ApiServices {
     suspend fun rejectOrderByTransaction(
         @Path("transactionId") transactionId: String
     ): Response<RejectOrderStatusResponse>
+
+    @GET("product/get-my-product")
+    suspend fun getMyProduct(
+    ): Response<SellerGetMyProductResponse>
 
 
 

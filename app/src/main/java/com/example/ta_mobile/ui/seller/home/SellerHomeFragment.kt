@@ -43,6 +43,7 @@ class SellerHomeFragment : Fragment() {
         viewModel.getOrderStatus()
         setupView()
         setupObserver()
+        setupButton()
 
     }
 

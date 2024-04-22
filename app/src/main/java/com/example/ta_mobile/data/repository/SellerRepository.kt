@@ -6,6 +6,7 @@ import com.example.ta_mobile.data.source.remote.response.order.OrderDetailRespon
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers
@@ -122,6 +123,34 @@ class SellerRepository(
                     )
                 } else {
                     rejectOrderResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("SellerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getMyProduct(): Flow<NetworkResult<SellerGetMyProductResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val sellerGetMyProductResponse = apiServices.getMyProduct(
+                )
+                if (sellerGetMyProductResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            sellerGetMyProductResponse.body()
+                                ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    sellerGetMyProductResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

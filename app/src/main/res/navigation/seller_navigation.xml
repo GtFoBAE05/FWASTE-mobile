@@ -56,5 +56,14 @@
         android:id="@+id/sellerSendNotificationFragment"
         android:name="com.example.ta_mobile.ui.seller.home.notification.SellerSendNotificationFragment"
         android:label="fragment_seller_send_notification"
-        tools:layout="@layout/fragment_seller_send_notification" />
+        tools:layout="@layout/fragment_seller_send_notification" >
+        <action
+            android:id="@+id/action_sellerSendNotificationFragment_to_sellerSendProductListProductFragment"
+            app:destination="@id/sellerSendProductListProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerSendProductListProductFragment"
+        android:name="com.example.ta_mobile.ui.seller.home.notification.SellerSendProductListProductFragment"
+        android:label="fragment_seller_send_product_list_product"
+        tools:layout="@layout/fragment_seller_send_product_list_product" />
 </navigation>

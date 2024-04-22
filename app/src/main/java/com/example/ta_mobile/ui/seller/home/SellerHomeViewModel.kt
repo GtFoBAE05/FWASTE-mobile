@@ -11,6 +11,7 @@ import com.example.ta_mobile.data.source.remote.response.order.OrderDetailRespon
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch
 
@@ -21,6 +22,9 @@ class SellerHomeViewModel(private val userPrefRepository: UserPrefRepository, pr
 
     private var _orderDetailData = MutableLiveData<NetworkResult<OrderDetailResponse>>()
     val orderDetailData : LiveData<NetworkResult<OrderDetailResponse>> = _orderDetailData
+
+    private var _myProductData = MutableLiveData<NetworkResult<SellerGetMyProductResponse>>()
+    val myProductData : LiveData<NetworkResult<SellerGetMyProductResponse>> = _myProductData
 
     private var _updateOrderStatusResult = MutableLiveData<NetworkResult<UpdateOrderStatusResponse>>()
     val updateOrderStatusResult : LiveData<NetworkResult<UpdateOrderStatusResponse>> = _updateOrderStatusResult
@@ -63,4 +67,13 @@ class SellerHomeViewModel(private val userPrefRepository: UserPrefRepository, pr
             }
         }
     }
+
+    fun getMyProduct(){
+        viewModelScope.launch {
+            sellerRepository.getMyProduct().collect{
+                _myProductData.postValue(it)
+            }
+        }
+    }
+
 }
