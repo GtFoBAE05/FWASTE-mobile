@@ -35,7 +35,14 @@
         android:id="@+id/sellerProductFragment"
         android:name="com.example.ta_mobile.ui.seller.product.SellerProductFragment"
         android:label="fragment_seller_product"
-        tools:layout="@layout/fragment_seller_product" />
+        tools:layout="@layout/fragment_seller_product" >
+        <action
+            android:id="@+id/action_sellerProductFragment_to_sellerAddProductFragment"
+            app:destination="@id/sellerAddProductFragment" />
+        <action
+            android:id="@+id/action_sellerProductFragment_to_sellerDetailProductFragment"
+            app:destination="@id/sellerDetailProductFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sellerIncomingOrderFragment"
         android:name="com.example.ta_mobile.ui.seller.home.incoming_order.SellerIncomingOrderFragment"
@@ -66,4 +73,29 @@
         android:name="com.example.ta_mobile.ui.seller.home.notification.SellerSendProductListProductFragment"
         android:label="fragment_seller_send_product_list_product"
         tools:layout="@layout/fragment_seller_send_product_list_product" />
+    <fragment
+        android:id="@+id/sellerAddProductFragment"
+        android:name="com.example.ta_mobile.ui.seller.product.add.SellerAddProductFragment"
+        android:label="fragment_seller_add_product"
+        tools:layout="@layout/fragment_seller_add_product" />
+    <fragment
+        android:id="@+id/sellerEditProductFragment"
+        android:name="com.example.ta_mobile.ui.seller.product.edit.SellerEditProductFragment"
+        android:label="fragment_seller_edit_product"
+        tools:layout="@layout/fragment_seller_edit_product" >
+        <action
+            android:id="@+id/action_sellerEditProductFragment_to_sellerProductFragment"
+            app:destination="@id/sellerProductFragment"
+            app:popUpTo="@id/sellerProductFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerDetailProductFragment"
+        android:name="com.example.ta_mobile.ui.seller.product.detail.SellerDetailProductFragment"
+        android:label="fragment_seller_detail_product"
+        tools:layout="@layout/fragment_seller_detail_product" >
+        <action
+            android:id="@+id/action_sellerDetailProductFragment_to_sellerEditProductFragment"
+            app:destination="@id/sellerEditProductFragment" />
+    </fragment>
 </navigation>

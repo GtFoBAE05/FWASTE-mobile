@@ -5,6 +5,7 @@ import com.example.ta_mobile.data.source.remote.model.auth.LoginForm
 import com.example.ta_mobile.data.source.remote.model.auth.SellerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.UpdatePasswordForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
+import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
 import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
@@ -21,7 +22,12 @@ import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStore
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerAddProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerDeleteProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerEditProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMySingleProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.product.SellerSetVisibilityProductResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -137,6 +143,46 @@ interface ApiServices {
     @GET("product/get-my-product")
     suspend fun getMyProduct(
     ): Response<SellerGetMyProductResponse>
+
+    @GET("product/get-single-product/{productId}")
+    suspend fun getSingleProduct(
+        @Path("productId") productId: String
+    ): Response<SellerGetMySingleProductResponse>
+
+    @Multipart
+    @POST("product/add")
+    suspend fun addProduct(
+        @Part image: MultipartBody.Part,
+        @Part("name") name: RequestBody,
+        @Part("category") category: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part("stock_count") stockCount: RequestBody,
+        @Part("rack_position") rackPosition: RequestBody,
+    ): Response<SellerAddProductResponse>
+
+    @Multipart
+    @PUT("product/update/{productId}")
+    suspend fun editProduct(
+        @Path("productId") productId: String,
+        @Part image: MultipartBody.Part,
+        @Part("name") name: RequestBody,
+        @Part("category") category: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part("stock_count") stockCount: RequestBody,
+        @Part("rack_position") rackPosition: RequestBody,
+    ): Response<SellerEditProductResponse>
+
+    @PUT("product/edit-visible")
+    suspend fun setProductVisibility(
+        @Body body : SetProductVisibilityForm
+    ): Response<SellerSetVisibilityProductResponse>
+
+    @PUT("product/delete/{productId}")
+    suspend fun deleteProduct(
+        @Path("productId") productId: String
+    ): Response<SellerDeleteProductResponse>
 
 
 

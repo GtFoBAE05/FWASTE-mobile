@@ -18,4 +18,5 @@
 
     <color name="success_main">#00AA76</color>
     <color name="success_surface">#CBFFE7</color>
+    <color name="yellow">#FFF59D</color>
 </resources>

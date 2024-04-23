@@ -49,13 +49,18 @@ class SellerProductFragment : Fragment() {
     }
 
     private fun setupButton(){
+        binding.sellerProductfloatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_sellerProductFragment_to_sellerAddProductFragment)
+        }
 
     }
 
     private fun setupAdapter() {
         binding.sellerProductRv.layoutManager = GridLayoutManager(requireContext(), 2)
         adapter = SellerProductAdapter {
-
+            val bundle = Bundle()
+            bundle.putString("productId", it.id)
+            findNavController().navigate(R.id.action_sellerProductFragment_to_sellerDetailProductFragment, bundle)
         }
         binding.sellerProductRv.adapter = adapter
 
