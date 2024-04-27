@@ -97,7 +97,7 @@ class SellerDetailProductFragment : Fragment() {
                     productVisible = it.data.data.products.isVisible
 
 
-                    if (isVisible) {
+                    if (productVisible) {
                         binding.productDetailUpdateVisibilitybtn.text = "Set as Hidden"
                     } else {
                         binding.productDetailUpdateVisibilitybtn.text = "Set as Visible"

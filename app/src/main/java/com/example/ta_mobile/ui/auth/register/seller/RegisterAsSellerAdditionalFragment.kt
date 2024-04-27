@@ -121,7 +121,7 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                     binding.sellerRegisterProgressBar.gone()
-                    findNavController().navigate(R.id.action_registerAsSellerAdditionalFragment_to_loginFragment)
+                    findNavController().popBackStack()
                     showToast(it.data.message)
                 }
             }

@@ -21,15 +21,28 @@
         android:id="@+id/sellerOrderFragment"
         android:name="com.example.ta_mobile.ui.seller.order.SellerOrderFragment"
         android:label="fragment_seller_order"
-        tools:layout="@layout/fragment_seller_order" />
+        tools:layout="@layout/fragment_seller_order" >
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_sellerDetailOrderFragment"
+            app:destination="@id/sellerDetailOrderFragment" />
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_sellerIncomingOrderFragment"
+            app:destination="@id/sellerIncomingOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sellerProfileFragment"
         android:name="com.example.ta_mobile.ui.seller.profile.SellerProfileFragment"
         android:label="fragment_seller_profile"
         tools:layout="@layout/fragment_seller_profile" >
         <action
-            android:id="@+id/action_sellerProfileFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_sellerProfileFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_sellerEditProfileFragment"
+            app:destination="@id/sellerEditProfileFragment" />
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_sellerEditPasswordFragment"
+            app:destination="@id/sellerEditPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductFragment"
@@ -54,11 +67,6 @@
             app:popUpTo="@id/sellerHomeFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.ta_mobile.ui.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/sellerSendNotificationFragment"
         android:name="com.example.ta_mobile.ui.seller.home.notification.SellerSendNotificationFragment"
@@ -98,4 +106,24 @@
             android:id="@+id/action_sellerDetailProductFragment_to_sellerEditProductFragment"
             app:destination="@id/sellerEditProductFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/sellerDetailOrderFragment"
+        android:name="com.example.ta_mobile.ui.seller.order.detail.SellerDetailOrderFragment"
+        android:label="fragment_seller_detail_order"
+        tools:layout="@layout/fragment_seller_detail_order" />
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.example.ta_mobile.ui.auth.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
+    <fragment
+        android:id="@+id/sellerEditProfileFragment"
+        android:name="com.example.ta_mobile.ui.seller.profile.edit_profile.SellerEditProfileFragment"
+        android:label="fragment_seller_edit_profile"
+        tools:layout="@layout/fragment_seller_edit_profile" />
+    <fragment
+        android:id="@+id/sellerEditPasswordFragment"
+        android:name="com.example.ta_mobile.ui.seller.profile.edit_profile.SellerEditPasswordFragment"
+        android:label="fragment_seller_edit_password"
+        tools:layout="@layout/fragment_seller_edit_password" />
 </navigation>

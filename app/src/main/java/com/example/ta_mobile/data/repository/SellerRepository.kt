@@ -3,6 +3,7 @@ package com.example.ta_mobile.data.repository
 import android.util.Log
 import com.example.ta_mobile.data.source.remote.ApiServices
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
+import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
@@ -13,6 +14,7 @@ import com.example.ta_mobile.data.source.remote.response.seller.product.SellerEd
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMySingleProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerSetVisibilityProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +30,48 @@ import retrofit2.HttpException
 class SellerRepository(
     private val apiServices: ApiServices,
 ) {
+    suspend fun updateSellerProfile(
+        fileImage: MultipartBody.Part,
+        name: String,
+        email: String,
+        phoneNumber: String,
+        address: String,
+        location: String,
+        operationalHour : String
+    ): Flow<NetworkResult<SellerUpdateProfileResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val sellerUpdateProfileResponse = apiServices.sellerUpdateUserProfile(
+                    fileImage,
+                    name.toRequestBody("text/plain".toMediaType()),
+                    email.toRequestBody("text/plain".toMediaType()),
+                    phoneNumber.toRequestBody("text/plain".toMediaType()),
+                    address.toRequestBody("text/plain".toMediaType()),
+                    location.toRequestBody("text/plain".toMediaType()),
+                    operationalHour.toRequestBody("text/plain".toMediaType())
+                )
+                if (sellerUpdateProfileResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            sellerUpdateProfileResponse.body()
+                                ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    sellerUpdateProfileResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("SellerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
     suspend fun getOrderByStatus(keyword: String): Flow<NetworkResult<OrderStatusResponse>> {
         return flow {

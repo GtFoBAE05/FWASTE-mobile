@@ -119,14 +119,14 @@
                 android:background="@drawable/btn_primary_main"
                 android:text="Edit Product" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/productDetailUpdateVisibilitybtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/btn_yellow_main"
                 android:text="Button"
-                android:textColor="#FFA726" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/productDetailDeleteProduct"

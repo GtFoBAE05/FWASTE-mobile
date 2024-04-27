@@ -26,7 +26,9 @@ import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreViewModel
 import com.example.ta_mobile.ui.buyer.store.BuyerStoreDetailViewModel
 import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
+import com.example.ta_mobile.ui.seller.order.SellerOrderViewModel
 import com.example.ta_mobile.ui.seller.product.SellerProductViewModel
+import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
 import com.example.ta_mobile.utils.Session
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -98,4 +100,6 @@ val viewModelModule = module {
     //seller
     viewModel { SellerHomeViewModel(get(), get()) }
     viewModel { SellerProductViewModel(get(),) }
+    viewModel { SellerOrderViewModel(get()) }
+    viewModel { SellerProfileViewModel(get(), get(), get()) }
 }

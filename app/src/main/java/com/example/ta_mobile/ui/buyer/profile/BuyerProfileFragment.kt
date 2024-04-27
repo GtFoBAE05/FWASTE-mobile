@@ -73,6 +73,7 @@ class BuyerProfileFragment : Fragment() {
         Glide.with(requireContext()).load(data.imageUrl).into(binding.imgProfileCard)
         binding.profileEmail.text = data.fullname
         binding.profileLevel.text = data.level
+        binding.profileBalance.text = data.balance.toString()
         binding.profileCreatedAt.text = DateTimeHelper.convertDate(data.member_since)
 
         binding.voucherTotalTv.text = data.totalVoucher.toString()

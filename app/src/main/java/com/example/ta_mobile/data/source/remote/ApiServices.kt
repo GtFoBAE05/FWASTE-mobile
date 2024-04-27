@@ -28,6 +28,7 @@ import com.example.ta_mobile.data.source.remote.response.seller.product.SellerEd
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMySingleProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerSetVisibilityProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -72,6 +73,18 @@ interface ApiServices {
         @Part("address") address: RequestBody,
         @Part("location") location: RequestBody,
     ): Response<BuyerUpdateProfileResponse>
+
+    @Multipart
+    @PUT("user/seller/update")
+    suspend fun sellerUpdateUserProfile(
+        @Part image: MultipartBody.Part,
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("phone_number") phoneNumber: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part("operational_hour") operationalHour: RequestBody,
+    ): Response<SellerUpdateProfileResponse>
 
     @PUT("user/password/update")
     suspend fun updatePassword(

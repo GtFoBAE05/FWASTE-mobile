@@ -30,7 +30,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/buyerCardProfilePicture"
-            android:layout_width="56dp"
+            android:layout_width="72dp"
             android:layout_height="56dp"
             android:layout_alignTop="@+id/topProfileContainer"
             android:layout_alignBottom="@+id/topProfileContainer"
@@ -38,7 +38,7 @@
 
             <ImageView
                 android:id="@+id/imgProfileCard"
-                android:layout_width="56dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:scaleType="centerCrop"
@@ -69,6 +69,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Newb" />
+
+            <TextView
+                android:id="@+id/profileBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="balance" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
