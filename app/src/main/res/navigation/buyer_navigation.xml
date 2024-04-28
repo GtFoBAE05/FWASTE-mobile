@@ -150,4 +150,9 @@
             app:popUpTo="@id/buyerHomeFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/buyerNearestStoreFragment"
+        android:name="com.example.ta_mobile.ui.buyer.nearest_store.BuyerNearestStoreFragment"
+        android:label="fragment_buyer_nearest_store"
+        tools:layout="@layout/fragment_buyer_nearest_store" />
 </navigation>

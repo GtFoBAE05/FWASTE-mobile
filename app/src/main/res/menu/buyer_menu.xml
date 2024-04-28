@@ -6,7 +6,7 @@
         android:icon="@drawable/outline_home_24px"
         android:title="Home" />
     <item
-        android:id="@+id/buyer_map_screen"
+        android:id="@+id/buyerNearestStoreFragment"
         android:icon="@drawable/outline_map_24"
         android:title="Map" />
     <item

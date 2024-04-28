@@ -8,6 +8,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStore
 import com.example.ta_mobile.databinding.ItemSearchStoreCardLayoutBinding
 import com.example.ta_mobile.databinding.ItemStoreNearBuyerCardLayoutBinding
 import com.example.ta_mobile.utils.helper.DiffUtil
+import com.example.ta_mobile.utils.helper.EmojiHelper
 
 class BuyerSearchStoreAdapter(private val listener: (SearchStoreData) -> Unit) :
     RecyclerView.Adapter<BuyerSearchStoreAdapter.BuyerSearchStoreViewHolder>() {
@@ -18,7 +19,7 @@ class BuyerSearchStoreAdapter(private val listener: (SearchStoreData) -> Unit) :
         fun bind(item: SearchStoreData) {
             Glide.with(binding.root).load(item.imageUrl).into(binding.SearchStoreCardImageView)
             binding.SearchStoreCardStoreName.setText(item.fullname)
-            binding.SearchStoreCardStoreRating.setText(getEmoji(0x2605) + item.rating.toString())
+            binding.SearchStoreCardStoreRating.setText(EmojiHelper.getEmoji(0x2605) + item.rating.toString())
             binding.SearchStoreCardStoreAddress.setText(item.address)
         }
     }
@@ -54,6 +55,4 @@ class BuyerSearchStoreAdapter(private val listener: (SearchStoreData) -> Unit) :
 
 }
 
-fun getEmoji(unicode: Int): String {
-    return String(Character.toChars(unicode))
-}
+

@@ -5,6 +5,7 @@ import com.example.ta_mobile.data.source.local.db.dao.CartProductDao
 import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.ApiServices
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
+import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
@@ -68,6 +69,34 @@ class BuyerRepository(
                     )
                 } else {
                     searchStoreResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getNearestStore(latitude: Double, longitude: Double, radius: Double): Flow<NetworkResult<NearestStoreResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val nearestStoreResponse = apiServices.getNearestStore(
+                    latitude, longitude, radius
+                )
+                if (nearestStoreResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            nearestStoreResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    nearestStoreResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

@@ -19,6 +19,7 @@ import com.example.ta_mobile.ui.buyer.cart.BuyerCartViewModel
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutFragment
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutViewModel
 import com.example.ta_mobile.ui.buyer.home.BuyerHomeViewModel
+import com.example.ta_mobile.ui.buyer.nearest_store.BuyerNearestStoreViewModel
 import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusViewModel
 import com.example.ta_mobile.ui.buyer.order.detail.BuyerOrderDetailViewModel
 import com.example.ta_mobile.ui.buyer.product.BuyerProductViewModel
@@ -81,6 +82,7 @@ val viewModelModule = module {
 
     //buyer
     viewModel { BuyerHomeViewModel(get(), get()) }
+    viewModel { BuyerNearestStoreViewModel(get())}
     viewModel { BuyerOrderStatusViewModel(get())}
     viewModel { BuyerCartViewModel(get()) }
     viewModel { BuyerProfileViewModel(get(), get(), get()) }

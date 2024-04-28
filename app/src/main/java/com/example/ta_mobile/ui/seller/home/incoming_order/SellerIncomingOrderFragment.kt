@@ -82,6 +82,14 @@ class SellerIncomingOrderFragment : Fragment() {
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardName.text = data.userName
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardPhoneNumber.text = data.userPhoneNumber
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardAddress.text = data.userAddress
+
+        binding.sellerIncomingOrderBuyerInfoCard.root.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("lat", data.userLocation.split(",")[0])
+            bundle.putString("lon", data.userLocation.split(",")[1])
+
+            findNavController().navigate(R.id.action_sellerIncomingOrderFragment_to_sellerOrderMapsFragment, bundle )
+        }
     }
 
     private fun setupAdapter(){

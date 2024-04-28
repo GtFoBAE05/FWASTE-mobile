@@ -17,6 +17,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDe
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
@@ -99,6 +100,13 @@ interface ApiServices {
     @GET("mission/available-mission")
     suspend fun getBuyerMission(
     ): Response<BuyerMissionResponse>
+
+    @GET("user/find-nearest-store")
+    suspend fun getNearestStore(
+        @Query("lat") latitude: Double,
+        @Query("long") longitude: Double,
+        @Query("radius") radius: Double
+    ): Response<NearestStoreResponse>
 
 
     //buyer

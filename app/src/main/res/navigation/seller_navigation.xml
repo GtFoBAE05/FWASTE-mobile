@@ -66,6 +66,9 @@
             app:destination="@id/sellerHomeFragment"
             app:popUpTo="@id/sellerHomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_sellerIncomingOrderFragment_to_sellerOrderMapsFragment"
+            app:destination="@id/sellerOrderMapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerSendNotificationFragment"
@@ -110,7 +113,11 @@
         android:id="@+id/sellerDetailOrderFragment"
         android:name="com.example.ta_mobile.ui.seller.order.detail.SellerDetailOrderFragment"
         android:label="fragment_seller_detail_order"
-        tools:layout="@layout/fragment_seller_detail_order" />
+        tools:layout="@layout/fragment_seller_detail_order" >
+        <action
+            android:id="@+id/action_sellerDetailOrderFragment_to_sellerOrderMapsFragment"
+            app:destination="@id/sellerOrderMapsFragment" />
+    </fragment>
     <activity
         android:id="@+id/authActivity"
         android:name="com.example.ta_mobile.ui.auth.AuthActivity"
@@ -126,4 +133,9 @@
         android:name="com.example.ta_mobile.ui.seller.profile.edit_profile.SellerEditPasswordFragment"
         android:label="fragment_seller_edit_password"
         tools:layout="@layout/fragment_seller_edit_password" />
+    <fragment
+        android:id="@+id/sellerOrderMapsFragment"
+        android:name="com.example.ta_mobile.ui.seller.order.maps.SellerOrderMapsFragment"
+        android:label="fragment_seller_order_maps"
+        tools:layout="@layout/fragment_seller_order_maps" />
 </navigation>

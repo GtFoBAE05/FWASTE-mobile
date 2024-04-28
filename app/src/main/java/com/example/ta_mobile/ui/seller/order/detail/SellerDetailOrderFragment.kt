@@ -62,6 +62,8 @@ class SellerDetailOrderFragment : Fragment() {
         binding.sellerOrderDetailUpdateBtn.setOnClickListener {
             viewModel.updateOrderStatus(transactionId)
         }
+
+
     }
 
     private fun setupView(data : OrderDetailResponseData){
@@ -116,6 +118,14 @@ class SellerDetailOrderFragment : Fragment() {
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardName.text = data.userName
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardPhoneNumber.text = data.userPhoneNumber
         binding.sellerIncomingOrderBuyerInfoCard.buyerInformationCardAddress.text = data.userAddress
+
+        binding.sellerIncomingOrderBuyerInfoCard.root.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("lat", data.userLocation.split(",")[0])
+            bundle.putString("lon", data.userLocation.split(",")[1])
+
+            findNavController().navigate(R.id.action_sellerDetailOrderFragment_to_sellerOrderMapsFragment, bundle )
+        }
 
     }
 
