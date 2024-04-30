@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_buyerHomeFragment_to_buyerStoreDetailFragment"
             app:destination="@id/buyerStoreDetailFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/buyerProfileFragment"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_buyerProfileFragment_to_buyerProfileEditPasswordFragment"
             app:destination="@id/buyerProfileEditPasswordFragment" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_favouriteStoreFragment"
+            app:destination="@id/favouriteStoreFragment" />
     </fragment>
     <activity
         android:id="@+id/authActivity"
@@ -155,4 +161,13 @@
         android:name="com.example.ta_mobile.ui.buyer.nearest_store.BuyerNearestStoreFragment"
         android:label="fragment_buyer_nearest_store"
         tools:layout="@layout/fragment_buyer_nearest_store" />
+    <fragment
+        android:id="@+id/favouriteStoreFragment"
+        android:name="com.example.ta_mobile.ui.buyer.favourite_store.FavouriteStoreFragment"
+        android:label="fragment_favourite_store"
+        tools:layout="@layout/fragment_favourite_store" >
+        <action
+            android:id="@+id/action_favouriteStoreFragment_to_buyerStoreDetailFragment"
+            app:destination="@id/buyerStoreDetailFragment" />
+    </fragment>
 </navigation>

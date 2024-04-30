@@ -5,6 +5,9 @@ import com.example.ta_mobile.data.source.local.db.dao.CartProductDao
 import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.ApiServices
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.AddFavouriteStoreResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.GetFavouriteStoreResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.RemoveFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
@@ -97,6 +100,89 @@ class BuyerRepository(
                     )
                 } else {
                     nearestStoreResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun addFavouriteStore(storeId: String): Flow<NetworkResult<AddFavouriteStoreResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val addFavouriteStoreResponse = apiServices.addFavouriteStore(
+                    storeId
+                )
+                if (addFavouriteStoreResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            addFavouriteStoreResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    addFavouriteStoreResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun removeFavouriteStore(favId: String): Flow<NetworkResult<RemoveFavouriteStoreResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val removeFavouriteStoreResponse = apiServices.removeFavouriteStore(
+                    favId
+                )
+                if (removeFavouriteStoreResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            removeFavouriteStoreResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    removeFavouriteStoreResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getFavouriteStore(): Flow<NetworkResult<GetFavouriteStoreResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val getFavouriteStoreResponse = apiServices.getFavouriteStore(
+                )
+                if (getFavouriteStoreResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            getFavouriteStoreResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    getFavouriteStoreResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

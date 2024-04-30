@@ -38,6 +38,8 @@ class SellerProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.sellerProfileToolbar.title = "Profile"
+
         viewModel.getUserDetail()
         setupObserver()
         setupButton()

@@ -88,7 +88,6 @@ class BuyerProductFragment : Fragment() {
                     findNavController().popBackStack()
                     showToast("Success Add To Cart")
                 }else{
-                    showToast("All cart product has changed")
                     AlertDialog.Builder(requireContext())
                         .setTitle("Are you sure want to change cart product from this store?")
                         .setMessage("Cart will get cleared")

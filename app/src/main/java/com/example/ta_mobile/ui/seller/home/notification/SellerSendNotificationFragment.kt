@@ -12,6 +12,9 @@ import com.bumptech.glide.Glide
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentSellerSendNotificationBinding
 import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
+import com.example.ta_mobile.utils.NetworkResult
+import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
 import org.koin.java.KoinJavaComponent.inject
@@ -61,6 +64,10 @@ class SellerSendNotificationFragment : Fragment() {
         binding.chooseProductCard.root.setOnClickListener {
             findNavController().navigate(R.id.action_sellerSendNotificationFragment_to_sellerSendProductListProductFragment)
         }
+
+        binding.sendNotificationButton.setOnClickListener {
+            checkSendNotificationForm()
+        }
     }
 
     private fun setupView(){
@@ -73,8 +80,54 @@ class SellerSendNotificationFragment : Fragment() {
         }
     }
 
-    private fun setupObserver(){
+    private fun checkSendNotificationForm() {
+        var isError = false
+        val title = binding.etSellerSendNotificationTitle.text.toString()
+        val message = binding.etSellerSendNotificationDescription.text.toString().trim()
 
+        if (title.isEmpty()) {
+            isError = true
+            binding.etSellerSendNotificationTitle.error = getString(R.string.form_empty_message)
+        }
+
+        if (message.isEmpty()) {
+            isError = true
+            binding.etSellerSendNotificationDescription.error = getString(R.string.form_empty_message)
+        }
+
+        if(productId == null){
+            isError = true
+            showToast("Please choose product")
+        }
+
+
+
+
+
+        if (!isError) {
+            viewModel.sendNotification(title, message, productId.toString())
+        }
+    }
+
+    private fun setupObserver(){
+        viewModel.sendNotificationResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Error -> {
+                    showToast(it.error)
+                    binding.sellerSendNotificationProgressBar.gone()
+                }
+
+                NetworkResult.Loading -> {
+                    binding.sellerSendNotificationProgressBar.visible()
+                }
+
+                is NetworkResult.Success -> {
+                    binding.sellerSendNotificationProgressBar.gone()
+                    showToast("Success send notification")
+                    findNavController().popBackStack()
+                }
+            }
+        }
     }
 }
 

@@ -2,15 +2,15 @@ package com.example.ta_mobile.ui.buyer
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.NavController
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.ActivityBuyerBinding
+import com.example.ta_mobile.ui.buyer.product.BuyerProductFragment
+
 
 class BuyerActivity : AppCompatActivity() {
 
@@ -27,6 +27,9 @@ class BuyerActivity : AppCompatActivity() {
 //            insets
 //        }
 
+
+
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewBuyerActivity) as NavHostFragment
         val navController = navHostFragment.navController
 
@@ -40,6 +43,20 @@ class BuyerActivity : AppCompatActivity() {
                 binding.buyerBottomNavigationView.visibility = View.GONE
             }
         }
+
+//        val extras = intent.getStringExtra("productId")
+//        if (extras != null) {
+//            val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+//            val fragment = BuyerProductFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString("productId", extras)
+//                }
+//            }
+//            fragmentTransaction.replace(R.id.fragmentContainerViewBuyerActivity, fragment)
+//                .addToBackStack(null)
+//                .commit()
+//
+//        }
 
     }
 }

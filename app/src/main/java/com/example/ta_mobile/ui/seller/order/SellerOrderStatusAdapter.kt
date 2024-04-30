@@ -15,7 +15,7 @@ class SellerOrderStatusAdapter(private val listener : (OrderStatusResponseData) 
     class SellerOrderStatusViewHolder(val binding : ItemOrderStatusCardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : OrderStatusResponseData){
             binding.orderStatusCardImageView.gone()
-            binding.orderStatusCardTitleTv.text = item.storeName
+            binding.orderStatusCardTitleTv.text = item.userName
             binding.orderStatusCardTotalItemTv.text = CurrencyHelper.convertToRupiah(item.totalAmount)
 
         }

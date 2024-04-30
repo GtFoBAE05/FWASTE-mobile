@@ -45,7 +45,7 @@ class BuyerStoreDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getStoreDetail(storeId)
-
+        viewModel.getFavouriteStore()
         setupButton()
         setupAdapter()
         setupObserver()
@@ -111,6 +111,87 @@ class BuyerStoreDetailFragment : Fragment() {
                         it.data.data.storeAddress,
                         it.data.data.storeOperationalHour
                     )
+                }
+            }
+        }
+
+        viewModel.favStoreResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Error -> {
+                    Log.e("TAG", "setupObserver: " + it.error, )
+                    showToast(it.error)
+                    binding.buyerStoreDetailProgressBar.gone()
+                }
+
+                NetworkResult.Loading -> {
+                    binding.buyerStoreDetailProgressBar.visible()
+                }
+
+                is NetworkResult.Success -> {
+                    binding.buyerStoreDetailProgressBar.gone()
+                    if (it.data.data.isEmpty()) {
+                        binding.buyerStoreDetailFAB.setOnClickListener {
+                            viewModel.addFavouriteStore(storeId)
+                        }
+                        binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
+                    }
+
+                    for (favStore in it.data.data) {
+
+                        if (favStore.storeId == storeId) {
+                            binding.buyerStoreDetailFAB.setOnClickListener {
+                                viewModel.removeFavouriteStore(favStore.id)
+                            }
+                            binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_24)
+                        }else{
+                            binding.buyerStoreDetailFAB.setOnClickListener {
+                            viewModel.addFavouriteStore(storeId)
+                        }
+                            binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModel.addFavStoreResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Error -> {
+                    Log.e("TAG", "setupObserver: " + it.error, )
+                    showToast(it.error)
+                    binding.buyerStoreDetailProgressBar.gone()
+                }
+
+                NetworkResult.Loading -> {
+                    binding.buyerStoreDetailProgressBar.visible()
+                }
+
+                is NetworkResult.Success -> {
+                    binding.buyerStoreDetailProgressBar.gone()
+                    binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_24)
+                    showToast("Store added to favourite")
+                    viewModel.subscribeTopic(storeId)
+                }
+            }
+        }
+
+        viewModel.removeFavStoreResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Error -> {
+                    Log.e("TAG", "setupObserver: " + it.error, )
+                    showToast(it.error)
+                    binding.buyerStoreDetailProgressBar.gone()
+                }
+
+                NetworkResult.Loading -> {
+                    binding.buyerStoreDetailProgressBar.visible()
+                }
+
+                is NetworkResult.Success -> {
+                    binding.buyerStoreDetailProgressBar.gone()
+                    binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
+                    showToast("Store removed from favourite")
+                    viewModel.unsubscribeTopic(storeId)
                 }
             }
         }

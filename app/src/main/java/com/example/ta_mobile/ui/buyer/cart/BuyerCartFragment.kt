@@ -17,8 +17,8 @@ import org.koin.android.ext.android.inject
 
 class BuyerCartFragment : Fragment() {
 
-    private lateinit var _binding : FragmentBuyerCartBinding
-    private val binding get() = _binding
+    private var _binding : FragmentBuyerCartBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: BuyerCartViewModel by inject()
 
@@ -77,6 +77,11 @@ class BuyerCartFragment : Fragment() {
                 binding.buyerCartTotalPrice.text = CurrencyHelper.convertToRupiah(price)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

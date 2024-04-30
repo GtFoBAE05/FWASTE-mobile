@@ -40,6 +40,8 @@ class SellerHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.sellerHomeToolbar.title = "Home"
+
         viewModel.getOrderStatus()
         setupView()
         setupObserver()

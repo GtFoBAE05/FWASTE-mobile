@@ -11,6 +11,7 @@ import com.example.ta_mobile.data.source.remote.response.order.OrderDetailRespon
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.notification.SendNotificationResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMyProductResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch
@@ -31,6 +32,9 @@ class SellerHomeViewModel(private val userPrefRepository: UserPrefRepository, pr
 
     private var _rejectOrderStatusResult = MutableLiveData<NetworkResult<RejectOrderStatusResponse>>()
     val rejectOrderStatusResult : LiveData<NetworkResult<RejectOrderStatusResponse>> = _rejectOrderStatusResult
+
+    private var _sendNotificationResult = MutableLiveData<NetworkResult<SendNotificationResponse>>()
+    val sendNotificationResult : LiveData<NetworkResult<SendNotificationResponse>> = _sendNotificationResult
 
     fun getUserName() = userPrefRepository.getUserName().asLiveData()
 
@@ -72,6 +76,14 @@ class SellerHomeViewModel(private val userPrefRepository: UserPrefRepository, pr
         viewModelScope.launch {
             sellerRepository.getMyProduct().collect{
                 _myProductData.postValue(it)
+            }
+        }
+    }
+
+    fun sendNotification(title: String, message: String, productId: String){
+        viewModelScope.launch {
+            sellerRepository.sendNotification(title, message, productId).collect{
+                _sendNotificationResult.postValue(it)
             }
         }
     }

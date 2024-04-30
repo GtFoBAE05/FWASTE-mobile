@@ -16,6 +16,7 @@ import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
+import com.example.ta_mobile.utils.helper.CurrencyHelper
 import com.example.ta_mobile.utils.helper.DateTimeHelper
 import org.koin.android.ext.android.inject
 
@@ -62,6 +63,10 @@ class BuyerProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_buyerProfileFragment_to_buyerProfileEditPasswordFragment)
         }
 
+        binding.btnMyFavouriteStore.setOnClickListener {
+            findNavController().navigate(R.id.action_buyerProfileFragment_to_favouriteStoreFragment)
+        }
+
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
             findNavController().navigate(R.id.action_buyerProfileFragment_to_authActivity)
@@ -73,7 +78,7 @@ class BuyerProfileFragment : Fragment() {
         Glide.with(requireContext()).load(data.imageUrl).into(binding.imgProfileCard)
         binding.profileEmail.text = data.fullname
         binding.profileLevel.text = data.level
-        binding.profileBalance.text = data.balance.toString()
+        binding.profileBalance.text = "Balance ${CurrencyHelper.convertToRupiah(data.balance)}"
         binding.profileCreatedAt.text = DateTimeHelper.convertDate(data.member_since)
 
         binding.voucherTotalTv.text = data.totalVoucher.toString()

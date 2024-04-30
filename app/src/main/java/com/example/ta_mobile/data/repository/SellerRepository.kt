@@ -2,12 +2,14 @@ package com.example.ta_mobile.data.repository
 
 import android.util.Log
 import com.example.ta_mobile.data.source.remote.ApiServices
+import com.example.ta_mobile.data.source.remote.model.seller.notification.SendNotificationForm
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.notification.SendNotificationResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerAddProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerDeleteProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerEditProductResponse
@@ -383,6 +385,36 @@ class SellerRepository(
                     )
                 } else {
                     sellerDeleteProductReponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("SellerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun sendNotification(title:String, message:String, productId: String): Flow<NetworkResult<SendNotificationResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val sendNotificationResponse = apiServices.sendNotification(
+                    SendNotificationForm(
+                        title, message, productId
+                    )
+                )
+                if (sendNotificationResponse.isSuccessful) {
+                    emit(NetworkResult.Success(
+                        sendNotificationResponse.body()
+                            ?: throw NoDataException("No data found")
+                    )
+                    )
+                } else {
+                    sendNotificationResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

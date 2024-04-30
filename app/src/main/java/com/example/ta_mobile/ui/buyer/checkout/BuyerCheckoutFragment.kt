@@ -143,6 +143,7 @@ class BuyerCheckoutFragment : Fragment() {
                     binding.buyerCheckoutPB.gone()
                     viewModel.clearData()
                     showToast("Success Order")
+                    activity?.viewModelStore?.clear()
                     findNavController().navigate(R.id.action_buyerCheckoutFragment_to_buyerHomeFragment)
                 }
             }

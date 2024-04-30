@@ -5,6 +5,7 @@ import com.example.ta_mobile.data.source.remote.model.auth.LoginForm
 import com.example.ta_mobile.data.source.remote.model.auth.SellerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.UpdatePasswordForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
+import com.example.ta_mobile.data.source.remote.model.seller.notification.SendNotificationForm
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
@@ -17,12 +18,16 @@ import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDe
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.AddFavouriteStoreResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.GetFavouriteStoreResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.RemoveFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.seller.notification.SendNotificationResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerAddProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerDeleteProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerEditProductResponse
@@ -34,6 +39,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -115,6 +121,20 @@ interface ApiServices {
         @Query("keyword") keyword: String
     ): Response<SearchStoreResponse>
 
+    @POST("user/buyer/add-fav-store/{storeId}")
+    suspend fun addFavouriteStore(
+        @Path("storeId") storeId: String
+    ): Response<AddFavouriteStoreResponse>
+
+    @DELETE("user/buyer/remove-fav-store/{favId}")
+    suspend fun removeFavouriteStore(
+        @Path("favId") storeId: String
+    ): Response<RemoveFavouriteStoreResponse>
+
+    @GET("user/buyer/get-fav-store")
+    suspend fun getFavouriteStore(
+    ): Response<GetFavouriteStoreResponse>
+
     @GET("product/get-store-product/{storeId}")
     suspend fun getStoreDetail(
         @Path("storeId") storeId: String
@@ -136,6 +156,11 @@ interface ApiServices {
 
 
     //order
+    @POST("user/seller/send-notification")
+    suspend fun sendNotification(
+        @Body body : SendNotificationForm
+    ): Response<SendNotificationResponse>
+
     @GET("transaction/search-by-status")
     suspend fun getOrderByStatus(
         @Query("status") keyword: String
@@ -204,6 +229,8 @@ interface ApiServices {
     suspend fun deleteProduct(
         @Path("productId") productId: String
     ): Response<SellerDeleteProductResponse>
+
+
 
 
 
