@@ -1,17 +1,16 @@
 package com.example.ta_mobile.ui.buyer.favourite_store
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentFavouriteStoreBinding
-import com.example.ta_mobile.ui.buyer.home.BuyerHomeStoreNearBuyerAdapter
 import com.example.ta_mobile.utils.NetworkResult
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import org.koin.android.ext.android.inject
 
@@ -53,7 +52,7 @@ class FavouriteStoreFragment : Fragment() {
         viewModel.favStoreResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
 

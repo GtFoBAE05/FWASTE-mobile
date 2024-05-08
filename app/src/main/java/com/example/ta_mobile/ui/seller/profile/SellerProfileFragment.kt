@@ -1,11 +1,10 @@
 package com.example.ta_mobile.ui.seller.profile
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.ta_mobile.R
@@ -13,12 +12,12 @@ import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.databinding.FragmentSellerProfileBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
 import com.example.ta_mobile.utils.helper.DateTimeHelper
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SellerProfileFragment : Fragment() {
 
@@ -79,7 +78,7 @@ class SellerProfileFragment : Fragment() {
             viewModel.userDetailData.observe(viewLifecycleOwner){
                 when(it){
                     is NetworkResult.Error -> {
-                        showToast(it.error)
+                        showErrorToast(it.error)
                         binding.sellerProfileProgressBar.gone()
                     }
                     NetworkResult.Loading -> {

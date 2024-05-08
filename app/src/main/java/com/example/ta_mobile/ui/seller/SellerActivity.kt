@@ -2,14 +2,10 @@ package com.example.ta_mobile.ui.seller
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.ActivityBuyerBinding
 import com.example.ta_mobile.databinding.ActivitySellerBinding
 
 class SellerActivity : AppCompatActivity() {

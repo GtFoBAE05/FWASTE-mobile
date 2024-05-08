@@ -1,16 +1,18 @@
 package com.example.ta_mobile.ui.seller.profile.edit_profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentSellerEditPasswordBinding
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -24,7 +26,7 @@ class SellerEditPasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerEditPasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,7 +81,7 @@ class SellerEditPasswordFragment : Fragment() {
         viewModel.updateUserPasswordesult.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerEditPasswordPB.gone()
                 }
 
@@ -89,7 +91,7 @@ class SellerEditPasswordFragment : Fragment() {
 
                 is NetworkResult.Success -> {
                     binding.buyerEditPasswordPB.gone()
-                    showToast("Success change password")
+                    showSuccessToast("Success change password")
                     findNavController().popBackStack()
                 }
             }

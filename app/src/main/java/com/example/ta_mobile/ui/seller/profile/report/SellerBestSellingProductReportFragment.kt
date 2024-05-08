@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ta_mobile.R
 import com.example.ta_mobile.data.source.remote.response.seller.report.BestSellingProductResponseData
 import com.example.ta_mobile.databinding.FragmentSellerBestSellingProductReportBinding
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
@@ -35,7 +34,7 @@ class SellerBestSellingProductReportFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerBestSellingProductReportBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -99,7 +98,7 @@ class SellerBestSellingProductReportFragment : Fragment() {
         dataSet.setDrawIcons(false)
         dataSet.setSliceSpace(3f)
         dataSet.setIconsOffset(MPPointF(0F, 40F))
-        dataSet.setSelectionShift(5f)
+        dataSet.selectionShift = 5f
 
         // add a lot of colors
         val colors = ArrayList<Int>()
@@ -109,7 +108,7 @@ class SellerBestSellingProductReportFragment : Fragment() {
         for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
         for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
         colors.add(ColorTemplate.getHoloBlue())
-        dataSet.setColors(colors)
+        dataSet.colors = colors
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
         data.setValueTextSize(11f)

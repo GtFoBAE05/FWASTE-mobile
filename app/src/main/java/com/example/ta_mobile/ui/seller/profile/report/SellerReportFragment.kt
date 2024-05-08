@@ -1,9 +1,5 @@
 package com.example.ta_mobile.ui.seller.profile.report
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -11,32 +7,17 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.Toast
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import by.dzmitry_lakisau.month_year_picker_dialog.MonthYearPickerDialog
-import com.anychart.AnyChart
-import com.anychart.AnyChartView
-import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.DialogMonthYearPickerBinding
 import com.example.ta_mobile.databinding.FragmentSellerReportBinding
-import com.example.ta_mobile.ui.buyer.checkout.PaymentAndDeliveryDialogFragment
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
-import com.example.ta_mobile.utils.extension.showToast
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 
 class SellerReportFragment : Fragment() {
 
@@ -48,7 +29,7 @@ class SellerReportFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerReportBinding.inflate(inflater, container, false)
         return binding.root
     }

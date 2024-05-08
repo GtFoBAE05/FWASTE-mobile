@@ -9,7 +9,6 @@ import com.example.ta_mobile.data.source.remote.response.order.AddSellerRatingRe
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
 import com.example.ta_mobile.utils.NetworkResult
-import com.hadi.emojiratingbar.RateStatus
 import kotlinx.coroutines.launch
 
 class BuyerOrderDetailViewModel(private val buyerRepository: BuyerRepository) : ViewModel() {

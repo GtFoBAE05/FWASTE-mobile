@@ -1,6 +1,5 @@
 package com.example.ta_mobile.ui.auth.register
 
-import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -25,11 +24,6 @@ class RegisterMapsFragment : Fragment() {
     private var _binding: FragmentRegisterMapsBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     private val callback = OnMapReadyCallback { googleMap ->
         /**
          * Manipulates the map once available.
@@ -52,7 +46,7 @@ class RegisterMapsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         _binding = FragmentRegisterMapsBinding.inflate(inflater, container, false)
         return binding.root
     }

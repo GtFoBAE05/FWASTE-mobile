@@ -2,20 +2,20 @@ package com.example.ta_mobile.ui.seller.home.incoming_order
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
-import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponseData
 import com.example.ta_mobile.databinding.FragmentSellerIncomingOrderBinding
-import com.example.ta_mobile.ui.buyer.order.detail.BuyerOrderDetailAdapter
 import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -41,7 +41,7 @@ class SellerIncomingOrderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerIncomingOrderBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -102,7 +102,7 @@ class SellerIncomingOrderFragment : Fragment() {
         viewModel.orderDetailData.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.sellerIncomingOrderProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
@@ -121,7 +121,7 @@ class SellerIncomingOrderFragment : Fragment() {
         viewModel.updateOrderStatusResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.sellerIncomingOrderProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
@@ -129,7 +129,7 @@ class SellerIncomingOrderFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                     binding.sellerIncomingOrderProgressBar.gone()
-                    showToast("Success accept order")
+                    showSuccessToast("Success accept order")
                     findNavController().navigate(R.id.action_sellerIncomingOrderFragment_to_sellerHomeFragment)
 
                 }
@@ -139,7 +139,7 @@ class SellerIncomingOrderFragment : Fragment() {
         viewModel.rejectOrderStatusResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.sellerIncomingOrderProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
@@ -147,7 +147,7 @@ class SellerIncomingOrderFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                     binding.sellerIncomingOrderProgressBar.gone()
-                    showToast("Success reject order")
+                    showSuccessToast("Success reject order")
                     findNavController().navigate(R.id.action_sellerIncomingOrderFragment_to_sellerHomeFragment)
 
                 }

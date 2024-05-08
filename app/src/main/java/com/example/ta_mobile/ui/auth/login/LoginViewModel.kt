@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ta_mobile.data.repository.AuthRepository
 import com.example.ta_mobile.data.repository.UserPrefRepository
-import com.example.ta_mobile.data.source.local.user_preference.UserPreferenceClass
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch

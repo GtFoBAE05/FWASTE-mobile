@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreData
-import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponseData
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponseProductsData
 import com.example.ta_mobile.databinding.StoreProductCardLayoutBinding
 import com.example.ta_mobile.utils.helper.CurrencyHelper
@@ -20,8 +18,8 @@ class BuyerStoreDetailProductAdapter(private val listener: (StoreDetailResponseP
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: StoreDetailResponseProductsData) {
             Glide.with(binding.root).load(item.imageUrl).into(binding.productCardItemImageView)
-            binding.productCardItemTitleTv.setText(item.name)
-            binding.productCardItemPriceTv.setText(CurrencyHelper.convertToRupiah(item.price))
+            binding.productCardItemTitleTv.text = item.name
+            binding.productCardItemPriceTv.text = CurrencyHelper.convertToRupiah(item.price)
         }
     }
 

@@ -1,10 +1,10 @@
 package com.example.ta_mobile.ui.seller.product.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.ta_mobile.R
@@ -13,6 +13,8 @@ import com.example.ta_mobile.databinding.FragmentSellerDetailProductBinding
 import com.example.ta_mobile.ui.seller.product.SellerProductViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
@@ -37,7 +39,7 @@ class SellerDetailProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerDetailProductBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -128,7 +130,7 @@ class SellerDetailProductFragment : Fragment() {
 
                 is NetworkResult.Error -> {
                     binding.sellerDetailProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.sellerDetailProgressBar.visible()
@@ -141,14 +143,14 @@ class SellerDetailProductFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.sellerDetailProgressBar.gone()
                     findNavController().popBackStack()
-                    showToast("Product Deleted")
+                    showSuccessToast("Product Deleted")
 
 
                 }
 
                 is NetworkResult.Error -> {
                     binding.sellerDetailProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.sellerDetailProgressBar.visible()

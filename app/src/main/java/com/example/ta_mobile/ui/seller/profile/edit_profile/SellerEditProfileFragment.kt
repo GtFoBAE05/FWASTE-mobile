@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -25,6 +25,7 @@ import com.example.ta_mobile.databinding.FragmentSellerEditProfileBinding
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.DateTimeHelper
@@ -68,7 +69,7 @@ class SellerEditProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerEditProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -182,7 +183,7 @@ class SellerEditProfileFragment : Fragment() {
         viewModel.userDetailData.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerEditProfileProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
@@ -198,13 +199,14 @@ class SellerEditProfileFragment : Fragment() {
         viewModel.updateProfileResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerEditProfileProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
                     binding.buyerEditProfileProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    showToast("Profile updated")
                     binding.buyerEditProfileProgressBar.gone()
                     findNavController().popBackStack()
                 }

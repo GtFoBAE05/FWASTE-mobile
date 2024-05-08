@@ -1,14 +1,11 @@
 package com.example.ta_mobile.ui.seller.order
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ta_mobile.R
+import androidx.fragment.app.Fragment
 import com.example.ta_mobile.databinding.FragmentSellerOrderBinding
-import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
 

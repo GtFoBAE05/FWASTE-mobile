@@ -1,7 +1,5 @@
 package com.example.ta_mobile.data.source.remote
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey

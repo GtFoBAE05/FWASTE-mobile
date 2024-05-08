@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.fragment.app.activityViewModels
 import com.example.ta_mobile.databinding.FragmentPaymentAndDeliveryDialogListDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PaymentAndDeliveryDialogFragment : BottomSheetDialogFragment() {
@@ -22,7 +20,7 @@ class PaymentAndDeliveryDialogFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding =
             FragmentPaymentAndDeliveryDialogListDialogBinding.inflate(inflater, container, false)

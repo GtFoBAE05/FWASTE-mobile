@@ -3,20 +3,20 @@ package com.example.ta_mobile.ui.buyer.profile.point
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponseData
 import com.example.ta_mobile.databinding.FragmentBuyerProfilePointBinding
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
-import com.example.ta_mobile.ui.buyer.profile.voucher.BuyerProfileVoucherListAdapter
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -33,7 +33,7 @@ class BuyerProfilePointFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerProfilePointBinding.inflate(layoutInflater, container, false)
         return  binding.root
     }
@@ -60,7 +60,7 @@ class BuyerProfilePointFragment : Fragment() {
 
         binding.buyerProfilePointHintScrollView.earnPointOrderCard.root.setOnClickListener {
             val title = TextView(requireContext())
-            title.setText("Order by App")
+            title.text = "Order by App"
             title.gravity = Gravity.CENTER
             title.textSize= 20F
             val alertDialog = AlertDialog.Builder(requireActivity())
@@ -75,7 +75,7 @@ class BuyerProfilePointFragment : Fragment() {
 
         binding.buyerProfilePointHintScrollView.earnPointMissionCard.root.setOnClickListener {
             val title = TextView(requireContext())
-            title.setText("Mission Reward")
+            title.text = "Mission Reward"
             title.gravity = Gravity.CENTER
             title.textSize= 20F
             val alertDialog = AlertDialog.Builder(requireActivity())
@@ -90,7 +90,7 @@ class BuyerProfilePointFragment : Fragment() {
 
         binding.buyerProfilePointHintScrollView.earnPointReferralCard.root.setOnClickListener {
             val title = TextView(requireContext())
-            title.setText("Share Referral")
+            title.text = "Share Referral"
             title.gravity = Gravity.CENTER
             title.textSize= 20F
             val alertDialog = AlertDialog.Builder(requireActivity())
@@ -118,7 +118,7 @@ class BuyerProfilePointFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerProfilePointProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.buyerProfilePointProgressBar.visible()

@@ -1,15 +1,13 @@
 package com.example.ta_mobile.ui.auth.register.buyer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.FragmentRegisterAsBinding
 import com.example.ta_mobile.databinding.FragmentRegisterAsBuyerBinding
-import com.example.ta_mobile.ui.auth.register.seller.RegisterAsSellerFragmentDirections
 
 
 class RegisterAsBuyerFragment : Fragment() {
@@ -20,7 +18,7 @@ class RegisterAsBuyerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterAsBuyerBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

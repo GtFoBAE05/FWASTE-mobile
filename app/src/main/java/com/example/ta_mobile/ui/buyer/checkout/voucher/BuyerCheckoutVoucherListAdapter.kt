@@ -3,7 +3,6 @@ package com.example.ta_mobile.ui.buyer.checkout.voucher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponseData
 import com.example.ta_mobile.databinding.ItemVoucherLayoutBinding
 import com.example.ta_mobile.utils.helper.DiffUtil

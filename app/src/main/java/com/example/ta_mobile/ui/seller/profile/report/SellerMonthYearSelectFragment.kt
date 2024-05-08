@@ -1,8 +1,6 @@
 package com.example.ta_mobile.ui.seller.profile.report
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,6 @@ import com.example.ta_mobile.databinding.FragmentSellerMonthYearSelectBinding
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
 import com.example.ta_mobile.utils.extension.showToast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.android.ext.android.inject
 import java.text.DateFormatSymbols
 import java.util.Calendar
 import java.util.Locale
@@ -34,7 +31,7 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerMonthYearSelectBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,7 +46,7 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
                 { year, month ->
                     startMonth = month
                     startYear = year
-                    binding.etStartDate.setText("${DateFormatSymbols(Locale.US).getMonths()[month]}/$year")
+                    binding.etStartDate.setText("${DateFormatSymbols(Locale.US).months[month]}/$year")
                 },
                 2024,
                 Calendar.JULY
@@ -70,7 +67,7 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
                 { year, month ->
                     endMonth = month
                     endYear = year
-                    binding.etEndDate.setText("${DateFormatSymbols(Locale.US).getMonths()[month]}/$year")
+                    binding.etEndDate.setText("${DateFormatSymbols(Locale.US).months[month]}/$year")
                 },
                 2024,
                 Calendar.JULY
@@ -107,7 +104,7 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
                 endYear = endYear
             )
 
-            viewModel.setChartTitle("${DateFormatSymbols(Locale.US).getMonths()[startMonth]}/$startYear - ${DateFormatSymbols(Locale.US).getMonths()[endMonth]}/$endYear")
+            viewModel.setChartTitle("${DateFormatSymbols(Locale.US).months[startMonth]}/$startYear - ${DateFormatSymbols(Locale.US).months[endMonth]}/$endYear")
             dismiss()
         }
 

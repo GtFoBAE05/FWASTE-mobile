@@ -3,13 +3,10 @@ package com.example.ta_mobile.ui.buyer
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.ActivityBuyerBinding
-import com.example.ta_mobile.ui.buyer.product.BuyerProductFragment
 
 
 class BuyerActivity : AppCompatActivity() {

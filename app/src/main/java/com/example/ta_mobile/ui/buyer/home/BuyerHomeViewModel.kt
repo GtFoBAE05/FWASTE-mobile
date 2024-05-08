@@ -7,9 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.ta_mobile.data.repository.BuyerRepository
 import com.example.ta_mobile.data.repository.UserPrefRepository
-import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
-import com.example.ta_mobile.databinding.FragmentBuyerHomeBinding
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch
 

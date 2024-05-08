@@ -3,7 +3,6 @@ package com.example.ta_mobile.ui.seller.order
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponseData
 import com.example.ta_mobile.databinding.ItemOrderStatusCardLayoutBinding
 import com.example.ta_mobile.utils.extension.gone

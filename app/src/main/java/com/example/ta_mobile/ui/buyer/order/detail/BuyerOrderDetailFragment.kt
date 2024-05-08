@@ -1,10 +1,10 @@
 package com.example.ta_mobile.ui.buyer.order.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
@@ -12,6 +12,7 @@ import com.example.ta_mobile.data.source.remote.response.order.OrderDetailRespon
 import com.example.ta_mobile.databinding.FragmentBuyerOrderDetailBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
@@ -77,23 +78,32 @@ class BuyerOrderDetailFragment : Fragment() {
         }
 
         if(data.order.orderStatus.equals("confirmed")){
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(getResources().getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(
+                resources.getColor(R.color.success_main))
         }
 
         if (data.order.orderStatus.equals("on the way") || data.order.orderStatus.equals("ready to pickup")){
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider1.setBackgroundColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusOnTheWay.setTextColor(getResources().getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider1.setBackgroundColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusOnTheWay.setTextColor(
+                resources.getColor(R.color.success_main))
 
             binding.buyerOrderDetailUpdateBtn.visible()
         }
 
         if (data.order.orderStatus.equals("arrived") || data.order.orderStatus.equals("finished")){
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider1.setBackgroundColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusOnTheWay.setTextColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider2.setBackgroundColor(getResources().getColor(R.color.success_main))
-            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusArrived.setTextColor(getResources().getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusConfirmedTv.setTextColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider1.setBackgroundColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusOnTheWay.setTextColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusDivider2.setBackgroundColor(
+                resources.getColor(R.color.success_main))
+            binding.buyerOrderDetailDeliveryMethodCard.buyerOrderStatusArrived.setTextColor(
+                resources.getColor(R.color.success_main))
 
         }
 
@@ -180,7 +190,7 @@ class BuyerOrderDetailFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.buyerOrderDetailProgressBar.gone()
                     findNavController().navigate(R.id.action_buyerOrderDetailFragment_to_buyerHomeFragment)
-                    showToast("Success Update Order")
+                    showSuccessToast("Success Update Order")
                 }
             }
         }
@@ -196,7 +206,7 @@ class BuyerOrderDetailFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                     binding.buyerOrderDetailProgressBar.gone()
-                    showToast("Success give rating")
+                    showSuccessToast("Success give rating")
                     binding.giveRatingCard.gone()
                 }
             }

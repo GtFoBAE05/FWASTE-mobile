@@ -3,25 +3,23 @@ package com.example.ta_mobile.ui.buyer.nearest_store
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.ta_mobile.R
-import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponseData
 import com.example.ta_mobile.databinding.FragmentBuyerNearestStoreBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.EmojiHelper
@@ -30,7 +28,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -89,7 +86,7 @@ class BuyerNearestStoreFragment : Fragment() {
             })
                 .addOnSuccessListener { location: Location? ->
                     if (location == null)
-                        showToast("error get location")
+                        showErrorToast("error get location")
                     else {
                         val lat = location.latitude
                         val lon = location.longitude
@@ -153,7 +150,7 @@ class BuyerNearestStoreFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerNearestStoreBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -182,7 +179,7 @@ class BuyerNearestStoreFragment : Fragment() {
         viewmodel.userNearestStore.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
 

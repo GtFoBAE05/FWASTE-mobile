@@ -8,10 +8,10 @@ import com.example.ta_mobile.data.source.remote.model.auth.BuyerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.LoginForm
 import com.example.ta_mobile.data.source.remote.model.auth.SellerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.UpdatePasswordForm
-import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.auth.LoginResponse
 import com.example.ta_mobile.data.source.remote.response.auth.RegisterResponse
 import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResponse
+import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers

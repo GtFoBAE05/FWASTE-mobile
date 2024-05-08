@@ -1,11 +1,10 @@
 package com.example.ta_mobile.ui.seller.home.notification
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -14,10 +13,11 @@ import com.example.ta_mobile.databinding.FragmentSellerSendNotificationBinding
 import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
-import org.koin.java.KoinJavaComponent.inject
 
 
 class SellerSendNotificationFragment : Fragment() {
@@ -35,7 +35,7 @@ class SellerSendNotificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerSendNotificationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -113,7 +113,7 @@ class SellerSendNotificationFragment : Fragment() {
         viewModel.sendNotificationResult.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.sellerSendNotificationProgressBar.gone()
                 }
 
@@ -123,7 +123,7 @@ class SellerSendNotificationFragment : Fragment() {
 
                 is NetworkResult.Success -> {
                     binding.sellerSendNotificationProgressBar.gone()
-                    showToast("Success send notification")
+                    showSuccessToast("Success send notification")
                     findNavController().popBackStack()
                 }
             }

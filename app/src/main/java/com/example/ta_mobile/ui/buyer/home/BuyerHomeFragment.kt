@@ -1,12 +1,11 @@
 package com.example.ta_mobile.ui.buyer.home
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -14,6 +13,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerHomeBinding
 import com.example.ta_mobile.utils.NetworkResult
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import org.koin.android.ext.android.inject
 
@@ -47,13 +47,13 @@ class BuyerHomeFragment : Fragment() {
 
     private fun setupObserver(){
         viewModel.getUserName().observe(viewLifecycleOwner){
-            binding.buyerHomeUserNameTv.setText("Welcome, ${it}")
+            binding.buyerHomeUserNameTv.text = "Welcome, ${it}"
         }
 
         viewModel.storeNearBuyerResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
 

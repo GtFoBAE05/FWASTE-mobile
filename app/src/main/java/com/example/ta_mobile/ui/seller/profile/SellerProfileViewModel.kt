@@ -9,7 +9,6 @@ import com.example.ta_mobile.data.repository.SellerRepository
 import com.example.ta_mobile.data.repository.UserPrefRepository
 import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResponse
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
-import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.seller.report.BestSellingProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponse

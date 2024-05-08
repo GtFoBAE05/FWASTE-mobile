@@ -1,19 +1,17 @@
 package com.example.ta_mobile.ui.buyer.profile.voucher
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerProfileVoucherBinding
-import com.example.ta_mobile.ui.buyer.checkout.voucher.BuyerCheckoutVoucherListAdapter
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -28,7 +26,7 @@ class BuyerProfileVoucherFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerProfileVoucherBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -60,7 +58,7 @@ class BuyerProfileVoucherFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerProfileVoucherProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.buyerProfileVoucherProgressBar.visible()

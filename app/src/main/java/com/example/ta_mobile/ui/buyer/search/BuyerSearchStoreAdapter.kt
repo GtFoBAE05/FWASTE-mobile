@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreData
 import com.example.ta_mobile.databinding.ItemSearchStoreCardLayoutBinding
-import com.example.ta_mobile.databinding.ItemStoreNearBuyerCardLayoutBinding
 import com.example.ta_mobile.utils.helper.DiffUtil
 import com.example.ta_mobile.utils.helper.EmojiHelper
 
@@ -18,9 +17,9 @@ class BuyerSearchStoreAdapter(private val listener: (SearchStoreData) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchStoreData) {
             Glide.with(binding.root).load(item.imageUrl).into(binding.SearchStoreCardImageView)
-            binding.SearchStoreCardStoreName.setText(item.fullname)
-            binding.SearchStoreCardStoreRating.setText(EmojiHelper.getEmoji(0x2605) + item.rating.toString())
-            binding.SearchStoreCardStoreAddress.setText(item.address)
+            binding.SearchStoreCardStoreName.text = item.fullname
+            binding.SearchStoreCardStoreRating.text = EmojiHelper.getEmoji(0x2605) + item.rating.toString()
+            binding.SearchStoreCardStoreAddress.text = item.address
         }
     }
 

@@ -1,17 +1,17 @@
 package com.example.ta_mobile.ui.buyer.search
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerSearchStoreBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -104,7 +104,7 @@ class BuyerSearchStoreFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerSearchProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.buyerSearchProgressBar.visible()

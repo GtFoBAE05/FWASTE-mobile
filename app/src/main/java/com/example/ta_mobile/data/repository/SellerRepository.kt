@@ -5,7 +5,6 @@ import com.example.ta_mobile.data.source.remote.ApiServices
 import com.example.ta_mobile.data.source.remote.model.seller.GetReportForm
 import com.example.ta_mobile.data.source.remote.model.seller.notification.SendNotificationForm
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
-import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse

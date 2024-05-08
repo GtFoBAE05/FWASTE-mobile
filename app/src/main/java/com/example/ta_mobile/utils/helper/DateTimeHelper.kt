@@ -2,7 +2,6 @@ package com.example.ta_mobile.utils.helper
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter

@@ -3,15 +3,11 @@ package com.example.ta_mobile.ui.buyer.profile.mission
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponseData
-import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponseDataVoucherReward
-import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponseData
 import com.example.ta_mobile.databinding.ItemMissionCardLayoutBinding
-import com.example.ta_mobile.databinding.ItemVoucherLayoutBinding
 import com.example.ta_mobile.utils.helper.DiffUtil
 
-class BuyerProfileMissionAdapter() : RecyclerView.Adapter<BuyerProfileMissionAdapter.BuyerProfileMissionViewHolder>(){
+class BuyerProfileMissionAdapter : RecyclerView.Adapter<BuyerProfileMissionAdapter.BuyerProfileMissionViewHolder>(){
     private var items = emptyList<BuyerMissionResponseData>()
     class BuyerProfileMissionViewHolder(val binding : ItemMissionCardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : BuyerMissionResponseData){

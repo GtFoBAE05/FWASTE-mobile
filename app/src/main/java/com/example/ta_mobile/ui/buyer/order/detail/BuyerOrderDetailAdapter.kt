@@ -1,21 +1,15 @@
 package com.example.ta_mobile.ui.buyer.order.detail
 
-import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.response.order.BuyerOrderDetailResponseDataProduct
-import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreData
-import com.example.ta_mobile.databinding.ItemCartProductCardLayoutBinding
 import com.example.ta_mobile.databinding.ItemProductCheckoutCardLayoutBinding
-import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.helper.CurrencyHelper
 import com.example.ta_mobile.utils.helper.DiffUtil
 
-class BuyerOrderDetailAdapter() : RecyclerView.Adapter<BuyerOrderDetailAdapter.BuyerOrderDetailHolder>(){
+class BuyerOrderDetailAdapter : RecyclerView.Adapter<BuyerOrderDetailAdapter.BuyerOrderDetailHolder>(){
     private var items = emptyList<BuyerOrderDetailResponseDataProduct>()
     class BuyerOrderDetailHolder(val binding : ItemProductCheckoutCardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : BuyerOrderDetailResponseDataProduct){

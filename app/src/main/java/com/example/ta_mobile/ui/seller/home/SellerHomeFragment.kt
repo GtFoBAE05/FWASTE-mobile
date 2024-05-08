@@ -1,11 +1,10 @@
 package com.example.ta_mobile.ui.seller.home
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -13,6 +12,7 @@ import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentSellerHomeBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -23,11 +23,6 @@ class SellerHomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SellerHomeViewModel by inject()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +68,7 @@ class SellerHomeFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.sellerHomePB.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.sellerHomePB.visible()

@@ -16,7 +16,6 @@ import com.example.ta_mobile.ui.MainViewModel
 import com.example.ta_mobile.ui.auth.login.LoginViewModel
 import com.example.ta_mobile.ui.auth.register.RegisterViewModel
 import com.example.ta_mobile.ui.buyer.cart.BuyerCartViewModel
-import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutFragment
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutViewModel
 import com.example.ta_mobile.ui.buyer.favourite_store.FavouriteStoreViewModel
 import com.example.ta_mobile.ui.buyer.home.BuyerHomeViewModel
@@ -31,12 +30,8 @@ import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
 import com.example.ta_mobile.ui.seller.order.SellerOrderViewModel
 import com.example.ta_mobile.ui.seller.product.SellerProductViewModel
 import com.example.ta_mobile.ui.seller.profile.SellerProfileViewModel
-import com.example.ta_mobile.utils.Session
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.module.dsl.scopedOf
 import org.koin.dsl.module
 
 private val Context.dataStore by preferencesDataStore(name = "user_preferences")

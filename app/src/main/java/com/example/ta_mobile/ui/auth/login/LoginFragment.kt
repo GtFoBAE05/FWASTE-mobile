@@ -12,6 +12,8 @@ import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentLoginBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -129,12 +131,12 @@ class LoginFragment : Fragment() {
                             }
 
                         } else {
-                            showToast(result.data.message)
+                            showSuccessToast(result.data.message)
                         }
                     }
 
                     is NetworkResult.Error -> {
-                        showToast(result.error)
+                        showErrorToast(result.error)
                         binding.cpiIndicator.gone()
                     }
                 }

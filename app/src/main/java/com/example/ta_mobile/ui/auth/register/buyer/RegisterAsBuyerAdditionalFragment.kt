@@ -4,24 +4,22 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.FragmentRegisterAsBinding
 import com.example.ta_mobile.databinding.FragmentRegisterAsBuyerAdditionalBinding
 import com.example.ta_mobile.ui.auth.register.RegisterViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationToken
@@ -56,7 +54,7 @@ class RegisterAsBuyerAdditionalFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterAsBuyerAdditionalBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -93,7 +91,7 @@ class RegisterAsBuyerAdditionalFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerRegisterProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 is NetworkResult.Loading -> {
                     binding.buyerRegisterProgressBar.visible()
@@ -101,7 +99,7 @@ class RegisterAsBuyerAdditionalFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.buyerRegisterProgressBar.gone()
                     findNavController().navigate(R.id.action_registerAsBuyerAdditionalFragment_to_loginFragment)
-                    showToast(it.data.message)
+                    showSuccessToast(it.data.message)
                 }
             }
         }

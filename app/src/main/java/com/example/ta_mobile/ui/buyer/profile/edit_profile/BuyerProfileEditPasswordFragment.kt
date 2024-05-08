@@ -1,11 +1,10 @@
 package com.example.ta_mobile.ui.buyer.profile.edit_profile
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerProfileEditPasswordBinding
@@ -14,11 +13,7 @@ import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.android.ext.android.inject
-import java.io.File
 
 
 class BuyerProfileEditPasswordFragment : Fragment() {
@@ -30,7 +25,7 @@ class BuyerProfileEditPasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerProfileEditPasswordBinding.inflate(layoutInflater, container,false)
         return binding.root
     }

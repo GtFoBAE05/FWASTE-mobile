@@ -14,8 +14,8 @@ class BuyerHomeStoreNearBuyerAdapter(private val listener : (SearchStoreData) ->
     class BuyerHomeStoreNearBuyerViewHolder(val binding : ItemStoreNearBuyerCardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : SearchStoreData){
             Glide.with(binding.root).load(item.imageUrl).into(binding.storeNearBuyerCardImageView)
-            binding.storeNearBuyerCardStoreName.setText(item.fullname)
-            binding.storeNearBuyerCardStoreAddress.setText(item.address)
+            binding.storeNearBuyerCardStoreName.text = item.fullname
+            binding.storeNearBuyerCardStoreAddress.text = item.address
         }
     }
 

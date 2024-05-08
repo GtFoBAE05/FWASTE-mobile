@@ -3,12 +3,11 @@ package com.example.ta_mobile.ui.buyer.profile.voucher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponseData
 import com.example.ta_mobile.databinding.ItemVoucherLayoutBinding
 import com.example.ta_mobile.utils.helper.DiffUtil
 
-class BuyerProfileVoucherListAdapter() : RecyclerView.Adapter<BuyerProfileVoucherListAdapter.BuyerProfileVoucherViewHolder>(){
+class BuyerProfileVoucherListAdapter : RecyclerView.Adapter<BuyerProfileVoucherListAdapter.BuyerProfileVoucherViewHolder>(){
     private var items = emptyList<UserOwnedVoucherResponseData>()
     class BuyerProfileVoucherViewHolder(val binding : ItemVoucherLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : UserOwnedVoucherResponseData){

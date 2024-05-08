@@ -112,6 +112,10 @@ dependencies {
     implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    //month picker
     implementation("io.github.dzmitry-lakisau:month-year-picker-dialog:1.0.0")
+
+    //toast
+    implementation("com.pranavpandey.android:dynamic-toasts:4.2.1")
 
 }

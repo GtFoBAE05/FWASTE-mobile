@@ -1,15 +1,14 @@
 package com.example.ta_mobile.ui.seller.order.waiting
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentSellerWaitingOrderBinding
-import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusAdapter
 import com.example.ta_mobile.ui.seller.order.SellerOrderStatusAdapter
 import com.example.ta_mobile.ui.seller.order.SellerOrderViewModel
 import com.example.ta_mobile.utils.NetworkResult
@@ -27,7 +26,7 @@ class SellerWaitingOrderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerWaitingOrderBinding.inflate(inflater, container, false)
         return binding.root
     }

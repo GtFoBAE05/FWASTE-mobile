@@ -1,12 +1,11 @@
 package com.example.ta_mobile.ui.buyer.store
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -14,6 +13,8 @@ import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerStoreDetailBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -71,9 +72,9 @@ class BuyerStoreDetailFragment : Fragment() {
     ) {
         Glide.with(binding.root).load(imageUrl)
             .into(binding.buyerStoreDetailHeaderLayout.storeDetailItemImageView)
-        binding.buyerStoreDetailHeaderLayout.storeDetailItemNameTv.setText(storeName)
-        binding.buyerStoreDetailHeaderLayout.storeDetailItemLocationTv.setText(storeAddress)
-        binding.buyerStoreDetailHeaderLayout.storeDetailItemOperationalHourTv.setText("Operational Hour: ${storeOperationalHour}")
+        binding.buyerStoreDetailHeaderLayout.storeDetailItemNameTv.text = storeName
+        binding.buyerStoreDetailHeaderLayout.storeDetailItemLocationTv.text = storeAddress
+        binding.buyerStoreDetailHeaderLayout.storeDetailItemOperationalHourTv.text = "Operational Hour: ${storeOperationalHour}"
 
     }
 
@@ -94,7 +95,7 @@ class BuyerStoreDetailFragment : Fragment() {
             when (it) {
                 is NetworkResult.Error -> {
                     Log.e("TAG", "setupObserver: " + it.error, )
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerStoreDetailProgressBar.gone()
                 }
 
@@ -119,7 +120,7 @@ class BuyerStoreDetailFragment : Fragment() {
             when (it) {
                 is NetworkResult.Error -> {
                     Log.e("TAG", "setupObserver: " + it.error, )
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerStoreDetailProgressBar.gone()
                 }
 
@@ -158,7 +159,7 @@ class BuyerStoreDetailFragment : Fragment() {
             when (it) {
                 is NetworkResult.Error -> {
                     Log.e("TAG", "setupObserver: " + it.error, )
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerStoreDetailProgressBar.gone()
                 }
 
@@ -169,7 +170,7 @@ class BuyerStoreDetailFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.buyerStoreDetailProgressBar.gone()
                     binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_24)
-                    showToast("Store added to favourite")
+                    showSuccessToast("Store added to favourite")
                     viewModel.subscribeTopic(storeId)
                 }
             }
@@ -179,7 +180,7 @@ class BuyerStoreDetailFragment : Fragment() {
             when (it) {
                 is NetworkResult.Error -> {
                     Log.e("TAG", "setupObserver: " + it.error, )
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerStoreDetailProgressBar.gone()
                 }
 
@@ -190,7 +191,7 @@ class BuyerStoreDetailFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.buyerStoreDetailProgressBar.gone()
                     binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
-                    showToast("Store removed from favourite")
+                    showSuccessToast("Store removed from favourite")
                     viewModel.unsubscribeTopic(storeId)
                 }
             }

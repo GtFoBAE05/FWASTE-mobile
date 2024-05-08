@@ -1,24 +1,18 @@
 package com.example.ta_mobile.ui.buyer.checkout
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.example.ta_mobile.data.repository.BuyerRepository
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderFormProduct
-import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponseData
+import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.utils.NetworkResult
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import org.koin.core.component.KoinScopeComponent
 
 class BuyerCheckoutViewModel(private val buyerRepository: BuyerRepository) : ViewModel() {
 

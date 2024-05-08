@@ -1,26 +1,24 @@
 package com.example.ta_mobile.ui.auth.register.seller
 
 import android.Manifest
-import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
-import com.example.ta_mobile.databinding.FragmentRegisterAsBuyerAdditionalBinding
 import com.example.ta_mobile.databinding.FragmentRegisterAsSellerAdditionalBinding
 import com.example.ta_mobile.ui.auth.register.RegisterViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.DateTimeHelper
@@ -33,7 +31,6 @@ import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import org.koin.android.ext.android.inject
-import java.util.Calendar
 
 
 class RegisterAsSellerAdditionalFragment : Fragment() {
@@ -62,7 +59,7 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             FragmentRegisterAsSellerAdditionalBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -114,7 +111,7 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.sellerRegisterProgressBar.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 is NetworkResult.Loading -> {
                     binding.sellerRegisterProgressBar.visible()
@@ -122,7 +119,7 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.sellerRegisterProgressBar.gone()
                     findNavController().popBackStack()
-                    showToast(it.data.message)
+                    showSuccessToast(it.data.message)
                 }
             }
         }

@@ -18,7 +18,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.text.DateFormatSymbols
@@ -37,7 +36,7 @@ class SellerTotalIncomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerTotalIncomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -88,7 +87,7 @@ class SellerTotalIncomeFragment : Fragment() {
         val data = BarData(dataset)
 
         val xAxisFormatter: ValueFormatter = DayAxisValueFormatter(binding.pieChartView)
-        val xAxis: XAxis = binding.pieChartView.getXAxis()
+        val xAxis: XAxis = binding.pieChartView.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setDrawGridLines(false)
         xAxis.setGranularity(1f)
@@ -96,14 +95,14 @@ class SellerTotalIncomeFragment : Fragment() {
         xAxis.setLabelCount(7)
         xAxis.valueFormatter = xAxisFormatter
 
-        binding.pieChartView.setData(data);
+        binding.pieChartView.setData(data)
         binding.pieChartView.invalidate()
     }
 
 
     class DayAxisValueFormatter(private val chart: BarLineChartBase<*>) : ValueFormatter() {
         override fun getFormattedValue(value: Float): String {
-            return DateFormatSymbols(Locale.US).getMonths()[value.toInt()-1]
+            return DateFormatSymbols(Locale.US).months[value.toInt()-1]
         }
     }
 

@@ -4,18 +4,20 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentSellerAddProductBinding
 import com.example.ta_mobile.ui.seller.product.SellerProductViewModel
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.createCustomTempFile
@@ -40,7 +42,7 @@ class SellerAddProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellerAddProductBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -180,7 +182,7 @@ class SellerAddProductFragment : Fragment() {
         viewModel.addProductResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.sellerAddProductprogressBar.gone()
                 }
 
@@ -189,6 +191,7 @@ class SellerAddProductFragment : Fragment() {
                 }
 
                 is NetworkResult.Success -> {
+                    showSuccessToast("Product added successfully")
                     binding.sellerAddProductprogressBar.gone()
                     findNavController().popBackStack()
                 }

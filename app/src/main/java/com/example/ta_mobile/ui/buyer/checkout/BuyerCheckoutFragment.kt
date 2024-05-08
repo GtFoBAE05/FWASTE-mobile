@@ -1,25 +1,22 @@
 package com.example.ta_mobile.ui.buyer.checkout
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerCheckoutBinding
-import com.example.ta_mobile.ui.buyer.cart.BuyerCartAdapter
 import com.example.ta_mobile.ui.buyer.checkout.voucher.BuyerCheckoutVoucherListDialogFragment
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class BuyerCheckoutFragment : Fragment() {
@@ -117,7 +114,7 @@ class BuyerCheckoutFragment : Fragment() {
                 binding.buyerCheckoutVoucherCard.voucherCartTitle.text = "Select your voucher"
                 binding.buyerCheckoutPriceLayout.paymentDetailCardDiscountPriceTv.text = CurrencyHelper.convertToRupiah(0)
             }else{
-                binding.buyerCheckoutVoucherCard.voucherCartTitle.text = it?.title
+                binding.buyerCheckoutVoucherCard.voucherCartTitle.text = it.title
                 binding.buyerCheckoutPriceLayout.paymentDetailCardDiscountPriceTv.text = CurrencyHelper.convertToRupiah(it.amount)
             }
             viewModel.calculateTotal()
@@ -135,7 +132,7 @@ class BuyerCheckoutFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerCheckoutPB.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.buyerCheckoutPB.visible()
@@ -143,7 +140,7 @@ class BuyerCheckoutFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.buyerCheckoutPB.gone()
                     viewModel.clearData()
-                    showToast("Success Order")
+                    showSuccessToast("Success Order")
                     activity?.viewModelStore?.clear()
                     findNavController().navigate(R.id.action_buyerCheckoutFragment_to_buyerHomeFragment)
                 }

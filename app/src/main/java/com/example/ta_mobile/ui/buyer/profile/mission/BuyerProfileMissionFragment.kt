@@ -1,18 +1,17 @@
 package com.example.ta_mobile.ui.buyer.profile.mission
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerProfileMissionBinding
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
-import com.example.ta_mobile.ui.buyer.profile.point.BuyerProfilePointListAdapter
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
@@ -30,7 +29,7 @@ class BuyerProfileMissionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerProfileMissionBinding.inflate(layoutInflater, container, false)
         return  binding.root
     }
@@ -61,7 +60,7 @@ class BuyerProfileMissionFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerProfilePB.gone()
-                    showToast(it.error)
+                    showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
                     binding.buyerProfilePB.visible()

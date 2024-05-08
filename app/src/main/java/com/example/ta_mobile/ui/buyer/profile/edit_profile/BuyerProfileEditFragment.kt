@@ -7,25 +7,24 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.ta_mobile.R
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponseData
 import com.example.ta_mobile.databinding.FragmentBuyerProfileEditBinding
-import com.example.ta_mobile.databinding.FragmentBuyerProfileMissionBinding
-import com.example.ta_mobile.databinding.FragmentBuyerProfilePointBinding
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
-import com.example.ta_mobile.ui.buyer.profile.mission.BuyerProfileMissionAdapter
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.showErrorToast
+import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.createCustomTempFile
@@ -68,7 +67,7 @@ class BuyerProfileEditFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBuyerProfileEditBinding.inflate(layoutInflater, container, false)
         return  binding.root
     }
@@ -100,7 +99,7 @@ class BuyerProfileEditFragment : Fragment() {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                showToast("Permission not allowed")
+                showErrorToast("Permission not allowed")
             }
             fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
                 override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
@@ -109,7 +108,7 @@ class BuyerProfileEditFragment : Fragment() {
             })
                 .addOnSuccessListener { location: Location? ->
                     if (location == null)
-                        showToast("error get location")
+                        showErrorToast("error get location")
                     else {
                         val lat = location.latitude
                         val lon = location.longitude
@@ -195,13 +194,14 @@ class BuyerProfileEditFragment : Fragment() {
         viewModel.updateProfileResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
-                    showToast(it.error)
+                    showErrorToast(it.error)
                     binding.buyerEditProfileProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
                     binding.buyerEditProfileProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    showSuccessToast("Profile Updated")
                     binding.buyerEditProfileProgressBar.gone()
                     findNavController().navigate(R.id.action_buyerProfileEditFragment_to_buyerHomeFragment)
                 }

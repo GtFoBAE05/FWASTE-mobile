@@ -10,10 +10,6 @@ import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.A
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.GetFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.RemoveFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
-import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
-import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
-import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
-import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
@@ -21,7 +17,11 @@ import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpda
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
+import com.example.ta_mobile.data.source.remote.response.order.AddOrderResponse
 import com.example.ta_mobile.data.source.remote.response.order.AddSellerRatingResponse
+import com.example.ta_mobile.data.source.remote.response.order.OrderDetailResponse
+import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponse
+import com.example.ta_mobile.data.source.remote.response.order.UpdateOrderStatusResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers

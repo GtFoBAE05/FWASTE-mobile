@@ -2,21 +2,18 @@ package com.example.ta_mobile.ui.buyer.checkout.voucher
 
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.example.ta_mobile.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.databinding.FragmentBuyerCheckoutVoucherListDialogListDialogBinding
-import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutAdapter
 import com.example.ta_mobile.ui.buyer.checkout.BuyerCheckoutViewModel
 import com.example.ta_mobile.utils.NetworkResult
+import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showToast
+import com.example.ta_mobile.utils.extension.visible
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
@@ -32,7 +29,7 @@ class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentBuyerCheckoutVoucherListDialogListDialogBinding.inflate(
             inflater, container, false
@@ -84,6 +81,14 @@ class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
                         adapter.setData(it.data.data)
                     }
                 }
+            }
+        }
+
+        viewModel.selectedVoucher.observe(viewLifecycleOwner){
+            if(it?.id != null){
+                binding.BuyerCheckoutButtonCancelVoucher.visible()
+            }else{
+                binding.BuyerCheckoutButtonCancelVoucher.gone()
             }
         }
     }

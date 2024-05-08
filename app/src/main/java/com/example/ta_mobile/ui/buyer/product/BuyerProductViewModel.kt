@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.ta_mobile.data.repository.BuyerRepository
 import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
-import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
