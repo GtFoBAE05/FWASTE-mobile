@@ -91,6 +91,7 @@ class BuyerProfileViewModel(
 
     fun logout() {
         viewModelScope.launch {
+            buyerRepository.deleteAll()
             userPrefRepository.clearPref()
         }
     }

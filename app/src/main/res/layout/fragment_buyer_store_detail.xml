@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.buyer.store.BuyerStoreDetailFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/buyerStoreDetailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:titleCentered="true" />
 
     <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/buyerStoreDetailToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -18,12 +25,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/buyerStoreDetailToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/baseline_arrow_back_24"
-                app:titleCentered="true" />
+
 
             <include
                 android:id="@+id/buyerStoreDetailHeaderLayout"
@@ -63,6 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:clickable="true"
         android:src="@drawable/baseline_favorite_border_24"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,13 +77,14 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:nestedScrollingEnabled="false"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:nestedScrollingEnabled="false" />
+        app:layout_constraintVertical_bias="0.5" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

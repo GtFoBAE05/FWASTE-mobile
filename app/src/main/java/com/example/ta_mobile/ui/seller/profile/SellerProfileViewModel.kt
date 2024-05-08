@@ -11,6 +11,8 @@ import com.example.ta_mobile.data.source.remote.response.auth.UpdatePasswordResp
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
 import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.BestSellingProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -30,6 +32,21 @@ class SellerProfileViewModel(
 
     private var _updateUserPasswordesult = MutableLiveData<NetworkResult<UpdatePasswordResponse>>()
     val updateUserPasswordesult: LiveData<NetworkResult<UpdatePasswordResponse>> = _updateUserPasswordesult
+
+
+    private var _bestSellingProductResult = MutableLiveData<NetworkResult<BestSellingProductResponse>>()
+    val bestSellingProductResult: LiveData<NetworkResult<BestSellingProductResponse>> = _bestSellingProductResult
+
+    private var _totalIncomeResult = MutableLiveData<NetworkResult<TotalIncomeResponse>>()
+    val totalIncomeResult: LiveData<NetworkResult<TotalIncomeResponse>> = _totalIncomeResult
+
+    private var startMonth = MutableLiveData<Int>()
+    private var endMonth = MutableLiveData<Int>()
+    private var startYear = MutableLiveData<Int>()
+    private var endYear = MutableLiveData<Int>()
+
+    private var _chartTitle = MutableLiveData<String>()
+    val chartTitle: LiveData<String> = _chartTitle
 
 
     fun getUserDetail(){
@@ -54,6 +71,33 @@ class SellerProfileViewModel(
                 _updateUserPasswordesult.postValue(it)
             }
         }
+    }
+
+    fun setMonthYear(startMonth: Int, endMonth: Int, startYear: Int, endYear: Int){
+        this.startMonth.postValue(startMonth)
+        this.endMonth.postValue(endMonth)
+        this.startYear.postValue(startYear)
+        this.endYear.postValue(endYear)
+    }
+
+    fun getBestSellingProduct(startMonth: Int = 0, endMonth: Int = 0, startYear: Int = 0, endYear: Int = 0){
+        viewModelScope.launch {
+            sellerRepository.getBestSellingProduct(startMonth, endMonth, startYear, endYear).collect{
+                _bestSellingProductResult.postValue(it)
+            }
+        }
+    }
+
+    fun getTotalIncome(startMonth: Int = 0, endMonth: Int = 0, startYear: Int = 0, endYear: Int = 0){
+        viewModelScope.launch {
+            sellerRepository.getTotalIncome(startMonth, endMonth, startYear, endYear).collect{
+                _totalIncomeResult.postValue(it)
+            }
+        }
+    }
+
+    fun setChartTitle(title: String){
+        _chartTitle.postValue(title)
     }
 
     fun logout() {

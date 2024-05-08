@@ -63,6 +63,10 @@ class SellerProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_sellerProfileFragment_to_sellerEditPasswordFragment)
         }
 
+        binding.btnSalesReport.setOnClickListener {
+            findNavController().navigate(R.id.action_sellerProfileFragment_to_sellerReportFragment)
+        }
+
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
             findNavController().navigate(R.id.action_sellerProfileFragment_to_authActivity)

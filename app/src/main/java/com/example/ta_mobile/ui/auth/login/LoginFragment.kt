@@ -1,13 +1,12 @@
 package com.example.ta_mobile.ui.auth.login
 
 import android.Manifest
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentLoginBinding
@@ -41,27 +40,38 @@ class LoginFragment : Fragment() {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                     // Precise location access granted.
                 }
+
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                     // Only approximate location access granted.
-                } permissions.getOrDefault(Manifest.permission.ACCESS_BACKGROUND_LOCATION, false) -> {
-                // Only approximate location access granted.
-                }permissions.getOrDefault(Manifest.permission.CAMERA, false) -> {
-                // Only approximate location access granted.
-                }permissions.getOrDefault(Manifest.permission.READ_EXTERNAL_STORAGE, false) -> {
-                // Only approximate location access granted.
-                }else -> {
-                // No location access granted.
-            }
+                }
+
+                permissions.getOrDefault(Manifest.permission.ACCESS_BACKGROUND_LOCATION, false) -> {
+                    // Only approximate location access granted.
+                }
+
+                permissions.getOrDefault(Manifest.permission.CAMERA, false) -> {
+                    // Only approximate location access granted.
+                }
+
+                permissions.getOrDefault(Manifest.permission.READ_EXTERNAL_STORAGE, false) -> {
+                    // Only approximate location access granted.
+                }
+
+                else -> {
+                    // No location access granted.
+                }
             }
         }
 
-        locationPermissionRequest.launch(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            ))
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+            )
+        )
 
 
         setupButton()
@@ -94,7 +104,9 @@ class LoginFragment : Fragment() {
 
         binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerAsFragment)
+//            findNavController().navigate(R.id.action_loginFragment_to_registerMapsFragment)
         }
+
 
     }
 

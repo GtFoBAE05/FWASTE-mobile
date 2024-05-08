@@ -45,6 +45,7 @@ class BuyerCheckoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.buyerCheckoutToolbar.setTitle("Checkout")
         binding.buyerCheckoutToolbar.setNavigationOnClickListener {
+            activity?.viewModelStore?.clear()
             findNavController().popBackStack()
         }
 

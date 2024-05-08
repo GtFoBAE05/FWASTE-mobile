@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.buyer.order.detail.BuyerOrderDetailFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/buyerCheckoutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:titleCentered="true" />
+
     <ScrollView
+        android:layout_below="@id/buyerCheckoutToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,13 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/buyerCheckoutToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/baseline_arrow_back_24"
-                app:titleCentered="true" />
 
             <include
                 android:id="@+id/buyerOrderDetailDeliveryMethodCard"
@@ -130,8 +131,49 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/giveRatingCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:foregroundGravity="center"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:contentPadding="16dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.hadi.emojiratingbar.EmojiRatingBar
+                android:id="@+id/emoji_rating_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:defaultValue="EMPTY"
+                app:showAllText="true"
+                app:showText="true"
+                app:titleColor="#844848" />
+
+            <Button
+                android:id="@+id/giveRatingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:text="Give Rating" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

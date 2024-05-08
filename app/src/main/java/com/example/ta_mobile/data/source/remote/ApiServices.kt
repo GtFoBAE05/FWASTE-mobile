@@ -4,7 +4,9 @@ import com.example.ta_mobile.data.source.remote.model.auth.BuyerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.LoginForm
 import com.example.ta_mobile.data.source.remote.model.auth.SellerRegisterForm
 import com.example.ta_mobile.data.source.remote.model.auth.UpdatePasswordForm
+import com.example.ta_mobile.data.source.remote.model.buyer.order.AddSellerRatingForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
+import com.example.ta_mobile.data.source.remote.model.seller.GetReportForm
 import com.example.ta_mobile.data.source.remote.model.seller.notification.SendNotificationForm
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
 import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
@@ -26,6 +28,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpda
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
+import com.example.ta_mobile.data.source.remote.response.order.AddSellerRatingResponse
 import com.example.ta_mobile.data.source.remote.response.order.RejectOrderStatusResponse
 import com.example.ta_mobile.data.source.remote.response.seller.notification.SendNotificationResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerAddProductResponse
@@ -35,6 +38,9 @@ import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGe
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMySingleProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerSetVisibilityProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.BestSellingProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponseData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -154,6 +160,17 @@ interface ApiServices {
         @Body addOrderForm: BuyerAddOrderForm
     ): Response<AddOrderResponse>
 
+    //report
+    @POST("user/seller/get-best-selling-product")
+    suspend fun getBestSellingProduct(
+        @Body getReportForm: GetReportForm
+    ): Response<BestSellingProductResponse>
+
+    @POST("user/seller/get-total-income")
+    suspend fun getTotalIncome(
+        @Body getReportForm: GetReportForm
+    ): Response<TotalIncomeResponse>
+
 
     //order
     @POST("user/seller/send-notification")
@@ -186,6 +203,13 @@ interface ApiServices {
         @Path("transactionId") transactionId: String
     ): Response<RejectOrderStatusResponse>
 
+    @PUT("transaction/update-order-rating")
+    suspend fun addOrderRating(
+        @Body body : AddSellerRatingForm
+    ): Response<AddSellerRatingResponse>
+
+
+    //product
     @GET("product/get-my-product")
     suspend fun getMyProduct(
     ): Response<SellerGetMyProductResponse>
@@ -225,7 +249,7 @@ interface ApiServices {
         @Body body : SetProductVisibilityForm
     ): Response<SellerSetVisibilityProductResponse>
 
-    @PUT("product/delete/{productId}")
+    @DELETE("product/delete/{productId}")
     suspend fun deleteProduct(
         @Path("productId") productId: String
     ): Response<SellerDeleteProductResponse>

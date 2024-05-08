@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerAsFragment"
             app:destination="@id/registerAsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerMapsFragment"
+            app:destination="@id/registerMapsFragment" />
     </fragment>
     <activity
         android:id="@+id/buyerActivity"
@@ -97,4 +100,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/registerMapsFragment"
+        android:name="com.example.ta_mobile.ui.auth.register.RegisterMapsFragment"
+        android:label="RegisterMapsFragment" />
 </navigation>

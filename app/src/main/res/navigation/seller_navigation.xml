@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_sellerProfileFragment_to_sellerEditPasswordFragment"
             app:destination="@id/sellerEditPasswordFragment" />
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_sellerReportFragment"
+            app:destination="@id/sellerReportFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductFragment"
@@ -138,4 +141,9 @@
         android:name="com.example.ta_mobile.ui.seller.order.maps.SellerOrderMapsFragment"
         android:label="fragment_seller_order_maps"
         tools:layout="@layout/fragment_seller_order_maps" />
+    <fragment
+        android:id="@+id/sellerReportFragment"
+        android:name="com.example.ta_mobile.ui.seller.profile.report.SellerReportFragment"
+        android:label="fragment_seller_report"
+        tools:layout="@layout/fragment_seller_report" />
 </navigation>

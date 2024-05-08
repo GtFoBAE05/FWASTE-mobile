@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.ta_mobile.data.source.local.db.dao.CartProductDao
 import com.example.ta_mobile.data.source.local.db.entity.CartProductEntity
 import com.example.ta_mobile.data.source.remote.ApiServices
+import com.example.ta_mobile.data.source.remote.model.buyer.order.AddSellerRatingForm
 import com.example.ta_mobile.data.source.remote.model.buyer.order.BuyerAddOrderForm
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.AddFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.GetFavouriteStoreResponse
@@ -20,6 +21,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpda
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
+import com.example.ta_mobile.data.source.remote.response.order.AddSellerRatingResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers
@@ -211,6 +213,37 @@ class BuyerRepository(
                     )
                 } else {
                     storeDetailResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun addSellerRating(transactionId: String, rating: Float): Flow<NetworkResult<AddSellerRatingResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val addSellerRatingResponse = apiServices.addOrderRating(
+                    AddSellerRatingForm(
+                        transactionId,
+                        rating
+                    )
+                )
+                if (addSellerRatingResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            addSellerRatingResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    addSellerRatingResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

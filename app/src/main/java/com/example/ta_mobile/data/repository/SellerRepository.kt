@@ -2,6 +2,7 @@ package com.example.ta_mobile.data.repository
 
 import android.util.Log
 import com.example.ta_mobile.data.source.remote.ApiServices
+import com.example.ta_mobile.data.source.remote.model.seller.GetReportForm
 import com.example.ta_mobile.data.source.remote.model.seller.notification.SendNotificationForm
 import com.example.ta_mobile.data.source.remote.model.seller.product.SetProductVisibilityForm
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
@@ -17,6 +18,8 @@ import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGe
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerGetMySingleProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.product.SellerSetVisibilityProductResponse
 import com.example.ta_mobile.data.source.remote.response.seller.profile.SellerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.BestSellingProductResponse
+import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponse
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.exception.NoDataException
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +35,75 @@ import retrofit2.HttpException
 class SellerRepository(
     private val apiServices: ApiServices,
 ) {
+
+    suspend fun getBestSellingProduct(startMonth: Int = 0, endMonth: Int = 0, startYear: Int = 0, endYear: Int = 0): Flow<NetworkResult<BestSellingProductResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val getBestSellingProductResponse = apiServices.getBestSellingProduct(
+                    GetReportForm(
+                        startMonth,
+                        endMonth,
+                        startYear,
+                        endYear
+                    )
+                )
+                if (getBestSellingProductResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            getBestSellingProductResponse.body()
+                                ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    getBestSellingProductResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("SellerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getTotalIncome(startMonth: Int = 0, endMonth: Int = 0, startYear: Int = 0, endYear: Int = 0): Flow<NetworkResult<TotalIncomeResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val totalIncomeResponse = apiServices.getTotalIncome(
+                    GetReportForm(
+                        startMonth,
+                        endMonth,
+                        startYear,
+                        endYear
+                    )
+                )
+                if (totalIncomeResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            totalIncomeResponse.body()
+                                ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    totalIncomeResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("SellerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun updateSellerProfile(
         fileImage: MultipartBody.Part,
         name: String,

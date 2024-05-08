@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.recyclerview)
     implementation(libs.firebase.messaging)
+    implementation(libs.places)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -103,5 +104,14 @@ dependencies {
 
     //carousel
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+    //rating
+    implementation("com.github.unaisulhadi:emojiratingbar:1.0.5")
+
+    //chart
+    implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("io.github.dzmitry-lakisau:month-year-picker-dialog:1.0.0")
 
 }

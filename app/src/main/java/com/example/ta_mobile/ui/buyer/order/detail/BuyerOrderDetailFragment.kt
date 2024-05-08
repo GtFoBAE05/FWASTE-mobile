@@ -15,6 +15,8 @@ import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.hadi.emojiratingbar.EmojiRatingBar
+import com.hadi.emojiratingbar.RateStatus
 import org.koin.android.ext.android.inject
 
 class BuyerOrderDetailFragment : Fragment() {
@@ -106,7 +108,42 @@ class BuyerOrderDetailFragment : Fragment() {
         binding.buyerOrderDetailPriceLayout.paymentDetailCardTotalPriceTv.text = CurrencyHelper.convertToRupiah(data.totalAmount)
 
 
+        if(!data.isRated && (data.order.orderStatus == "finished" || data.order.orderStatus == "arrived")){
+            var rating = 0
+            binding.giveRatingCard.visible()
+            binding.emojiRatingBar.setRateChangeListener(object : EmojiRatingBar.OnRateChangeListener {
+                override fun onRateChanged(rateStatus: RateStatus) = when (rateStatus) {
 
+                    RateStatus.AWFUL -> {
+                        rating = 1
+                    }
+                    RateStatus.BAD -> {
+                        rating = 2
+                    }
+                    RateStatus.OKAY -> {
+                        rating = 3
+                    }
+                    RateStatus.GOOD -> {
+                        rating = 4
+                    }
+                    RateStatus.GREAT -> {
+                        rating = 5
+                    }
+                    RateStatus.EMPTY -> {
+                        rating = 0
+                    }
+                }
+            })
+
+            binding.giveRatingBtn.setOnClickListener {
+                if (rating!=0){
+                    viewModel.giveRating(transactionId, rating.toFloat())
+                }else{
+                    showToast("Please give rating")
+                }
+            }
+
+        }
     }
 
     private fun setupAdapter(){
@@ -144,6 +181,23 @@ class BuyerOrderDetailFragment : Fragment() {
                     binding.buyerOrderDetailProgressBar.gone()
                     findNavController().navigate(R.id.action_buyerOrderDetailFragment_to_buyerHomeFragment)
                     showToast("Success Update Order")
+                }
+            }
+        }
+
+        viewModel.addOrderRatingResult.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Error ->{
+                    binding.buyerOrderDetailProgressBar.gone()
+                    binding.giveRatingCard.gone()
+                }
+                NetworkResult.Loading -> {
+                    binding.buyerOrderDetailProgressBar.visible()
+                }
+                is NetworkResult.Success -> {
+                    binding.buyerOrderDetailProgressBar.gone()
+                    showToast("Success give rating")
+                    binding.giveRatingCard.gone()
                 }
             }
         }

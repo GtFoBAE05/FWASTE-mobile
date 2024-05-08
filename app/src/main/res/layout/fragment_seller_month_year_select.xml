@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.seller.profile.report.SellerMonthYearSelectFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/et_rounded_corner"
+                android:editable="false"
+                android:focusable="false"
+                android:hint="Select Start Date"
+                android:minHeight="48dp"
+                android:padding="12dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llStartDate">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/et_rounded_corner"
+                android:editable="false"
+                android:focusable="false"
+                android:hint="Select End Date"
+                android:minHeight="48dp"
+                android:padding="12dp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ConfirmDateBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_primary_main"
+            android:text="Confirm"
+            app:layout_constraintEnd_toEndOf="@+id/llEndDate"
+            app:layout_constraintStart_toStartOf="@+id/llEndDate"
+            app:layout_constraintTop_toBottomOf="@+id/llEndDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
