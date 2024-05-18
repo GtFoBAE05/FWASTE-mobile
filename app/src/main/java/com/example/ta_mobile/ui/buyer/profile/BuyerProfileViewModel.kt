@@ -12,6 +12,7 @@ import com.example.ta_mobile.data.source.remote.response.auth.UserDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.referral.BuyerInputReferralResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
 import com.example.ta_mobile.utils.NetworkResult
 import kotlinx.coroutines.launch
@@ -40,6 +41,9 @@ class BuyerProfileViewModel(
 
     private var _updateUserPasswordesult = MutableLiveData<NetworkResult<UpdatePasswordResponse>>()
     val updateUserPasswordesult: LiveData<NetworkResult<UpdatePasswordResponse>> = _updateUserPasswordesult
+
+    private var _inputReferralResult = MutableLiveData<NetworkResult<BuyerInputReferralResponse>>()
+    val inputReferralResult: LiveData<NetworkResult<BuyerInputReferralResponse>> = _inputReferralResult
 
     fun getUserDetail(){
         viewModelScope.launch {
@@ -70,6 +74,15 @@ class BuyerProfileViewModel(
             buyerRepository.getBuyerMission().collect {
                 _userMission.postValue(it)
             }
+        }
+    }
+
+    fun inputReferral(referralCode: String) {
+        viewModelScope.launch {
+            buyerRepository.inputReferral(referralCode).collect {
+                _inputReferralResult.postValue(it)
+            }
+            getUserDetail()
         }
     }
 

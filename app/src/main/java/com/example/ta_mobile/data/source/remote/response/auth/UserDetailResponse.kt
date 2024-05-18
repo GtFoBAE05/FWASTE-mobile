@@ -35,6 +35,8 @@ data class UserDetailResponseData(
     val password: String,
     @SerializedName("referal")
     val referal: String,
+    @SerializedName("referal_filled")
+    val referalFilled: Boolean,
     @SerializedName("address")
     val address: String,
     @SerializedName("location")
@@ -42,11 +44,13 @@ data class UserDetailResponseData(
     @SerializedName("operational_hour")
     val operationalHour: String,
     @SerializedName("rating")
-    val rating: Int,
+    val rating: Float,
     @SerializedName("total_voucher")
     val totalVoucher: Int,
     @SerializedName("total_product")
     val totalProduct: Int,
+    @SerializedName("total_price_saved")
+    val totalPriceSaved: Int,
     @SerializedName("member_since")
     val member_since: String
 )

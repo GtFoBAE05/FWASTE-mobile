@@ -49,17 +49,18 @@ class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
     private fun setupButton(){
         binding.BuyerCheckoutButtonCancelVoucher.setOnClickListener {
             viewModel.clearSelectedVoucher()
+            adapter.setItemId("")
             dismiss()
         }
     }
 
     private fun setupAdapter(){
         binding.list.layoutManager = LinearLayoutManager(requireContext())
-        adapter = BuyerCheckoutVoucherListAdapter{
+        adapter = BuyerCheckoutVoucherListAdapter({
             viewModel.setSelectedVoucher(it)
             Log.e("TAG", "setupAdapter: ", )
             dismiss()
-        }
+        },)
 
         binding.list.adapter = adapter
 
@@ -78,6 +79,8 @@ class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
                         showToast("No Voucher")
                         dismiss()
                     }else{
+                        Log.e("TAG", "setupObserver: " + it.data.data, )
+
                         adapter.setData(it.data.data)
                     }
                 }
@@ -87,6 +90,7 @@ class BuyerCheckoutVoucherListDialogFragment : BottomSheetDialogFragment() {
         viewModel.selectedVoucher.observe(viewLifecycleOwner){
             if(it?.id != null){
                 binding.BuyerCheckoutButtonCancelVoucher.visible()
+                adapter.setItemId(it.id)
             }else{
                 binding.BuyerCheckoutButtonCancelVoucher.gone()
             }

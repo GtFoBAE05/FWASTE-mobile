@@ -115,6 +115,9 @@ class SellerBestSellingProductReportFragment : Fragment() {
         data.setValueTextColor(Color.WHITE)
         binding.pieChartView.setData(data)
 
+        binding.pieChartView.description.text = "Best Selling Product"
+
+
         // undo all highlights
         binding.pieChartView.highlightValues(null)
         binding.pieChartView.invalidate()

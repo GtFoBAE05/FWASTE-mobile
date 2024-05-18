@@ -16,6 +16,8 @@
         <item name="colorSurfaceContainerHighest">@color/white</item>
 
         <item name="fontFamily">@font/base_font</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
 
 
     </style>

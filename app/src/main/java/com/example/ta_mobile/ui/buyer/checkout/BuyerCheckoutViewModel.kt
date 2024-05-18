@@ -81,6 +81,7 @@ class BuyerCheckoutViewModel(private val buyerRepository: BuyerRepository) : Vie
     fun getUserOwnedVoucher() {
         viewModelScope.launch {
             buyerRepository.getUserOwnedVoucher().collect {
+
                 _userVoucherList.postValue(it)
             }
         }

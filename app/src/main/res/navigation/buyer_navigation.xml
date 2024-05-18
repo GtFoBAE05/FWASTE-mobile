@@ -43,6 +43,11 @@
         <action
             android:id="@+id/action_buyerProfileFragment_to_favouriteStoreFragment"
             app:destination="@id/favouriteStoreFragment" />
+        <action
+            android:id="@+id/action_buyerProfileFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/authActivity"
@@ -71,7 +76,11 @@
         android:id="@+id/buyerProductFragment"
         android:name="com.example.ta_mobile.ui.buyer.product.BuyerProductFragment"
         android:label="fragment_buyer_product"
-        tools:layout="@layout/fragment_buyer_product" />
+        tools:layout="@layout/fragment_buyer_product" >
+        <action
+            android:id="@+id/action_buyerProductFragment_to_buyerStoreDetailFragment"
+            app:destination="@id/buyerStoreDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/buyerCartFragment"
         android:name="com.example.ta_mobile.ui.buyer.cart.BuyerCartFragment"
@@ -128,12 +137,22 @@
         android:id="@+id/buyerProfileVoucherFragment"
         android:name="com.example.ta_mobile.ui.buyer.profile.voucher.BuyerProfileVoucherFragment"
         android:label="fragment_buyer_profile_voucher"
-        tools:layout="@layout/fragment_buyer_profile_voucher" />
+        tools:layout="@layout/fragment_buyer_profile_voucher" >
+        <action
+            android:id="@+id/action_buyerProfileVoucherFragment_to_buyerProfileMissionFragment"
+            app:destination="@id/buyerProfileMissionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/buyerProfileMissionFragment"
         android:name="com.example.ta_mobile.ui.buyer.profile.mission.BuyerProfileMissionFragment"
         android:label="fragment_buyer_profile_mission"
-        tools:layout="@layout/fragment_buyer_profile_mission" />
+        tools:layout="@layout/fragment_buyer_profile_mission" >
+        <action
+            android:id="@+id/action_buyerProfileMissionFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/buyerProfileEditFragment"
         android:name="com.example.ta_mobile.ui.buyer.profile.edit_profile.BuyerProfileEditFragment"

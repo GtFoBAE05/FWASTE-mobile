@@ -1,5 +1,6 @@
 package com.example.ta_mobile.ui.buyer.profile.voucher
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerProfileVoucherBinding
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.utils.NetworkResult
@@ -42,7 +44,23 @@ class BuyerProfileVoucherFragment : Fragment() {
 
         setupAdapter()
         setupObserver()
+        setupButton()
 
+    }
+
+    private fun setupButton(){
+        binding.buyerProfileVoucherGetMoreVoucherHint.setOnClickListener {
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle("Get More Voucher")
+            alertDialog.setMessage("You can obtain the voucher by completing available missions. Please visit the missions page to see the list of missions you can complete.")
+            alertDialog.setPositiveButton("Okay") { dialog, _ ->
+                findNavController().navigate(R.id.action_buyerProfileVoucherFragment_to_buyerProfileMissionFragment)
+            }
+
+            alertDialog.setNegativeButton("Close", null)
+
+            alertDialog.show()
+        }
     }
 
     private fun setupAdapter(){

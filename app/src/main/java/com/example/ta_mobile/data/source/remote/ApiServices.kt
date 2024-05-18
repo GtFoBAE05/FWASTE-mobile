@@ -21,6 +21,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDe
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.referral.BuyerInputReferralResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
@@ -121,6 +122,11 @@ interface ApiServices {
 
 
     //buyer
+    @PUT("user/buyer/update-referral-filled/{referral}")
+    suspend fun inputReferral(
+        @Path("referral") referral: String
+    ): Response<BuyerInputReferralResponse>
+
     @GET("user/search-seller")
     suspend fun searchStore(
         @Query("keyword") keyword: String
@@ -226,6 +232,7 @@ interface ApiServices {
         @Part("category") category: RequestBody,
         @Part("description") description: RequestBody,
         @Part("price") price: RequestBody,
+        @Part("original_price") originalPrice: RequestBody,
         @Part("stock_count") stockCount: RequestBody,
         @Part("rack_position") rackPosition: RequestBody,
     ): Response<SellerAddProductResponse>
@@ -239,6 +246,7 @@ interface ApiServices {
         @Part("category") category: RequestBody,
         @Part("description") description: RequestBody,
         @Part("price") price: RequestBody,
+        @Part("original_price") originalPrice: RequestBody,
         @Part("stock_count") stockCount: RequestBody,
         @Part("rack_position") rackPosition: RequestBody,
     ): Response<SellerEditProductResponse>

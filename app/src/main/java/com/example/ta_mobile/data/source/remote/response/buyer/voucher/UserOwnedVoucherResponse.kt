@@ -10,7 +10,13 @@ data class UserOwnedVoucherResponse(
     val message: String,
     @SerializedName("data")
     val data: List<UserOwnedVoucherResponseData>
-)
+){
+    init {
+        data.forEach {
+            it.isSelected = true
+        }
+    }
+}
 
 data class UserOwnedVoucherResponseData(
     @SerializedName("id")
@@ -24,5 +30,16 @@ data class UserOwnedVoucherResponseData(
     @SerializedName("amount")
     val amount: Int,
     @SerializedName("expire_at")
-    val expireAt: String
+    val expireAt: String,
+    var isSelected : Boolean = true
+)
+
+data class UserOwnedVoucherResponseDataMappedWithIsSelected(
+    val id: String,
+    val title: String,
+    val description: String,
+    val type: String,
+    val amount: Int,
+    val expireAt: String,
+    val isSelected : Boolean = true
 )

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -34,17 +35,25 @@
             app:layout_constraintTop_toBottomOf="@+id/productCardItemImageView" />
 
         <TextView
-            android:id="@+id/productCardItemPriceTv"
+            android:id="@+id/productCardItemOriginalPriceTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="Rp90.000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/productCardItemTitleTv"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/productCardItemTitleTv"
             app:layout_constraintTop_toBottomOf="@+id/productCardItemTitleTv" />
+
+        <TextView
+            android:id="@+id/productCardItemPriceTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/productCardItemTitleTv"
+            app:layout_constraintStart_toEndOf="@+id/productCardItemOriginalPriceTv"
+            app:layout_constraintTop_toTopOf="@+id/productCardItemOriginalPriceTv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

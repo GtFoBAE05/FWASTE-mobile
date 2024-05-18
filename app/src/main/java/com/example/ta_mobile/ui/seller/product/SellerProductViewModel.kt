@@ -58,6 +58,7 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
         category: String,
         description: String,
         price: String,
+        originalPrice : String,
         stockCount: String,
         rackPosition: String,
     ) {
@@ -68,6 +69,7 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
                 category,
                 description,
                 price,
+                originalPrice,
                 stockCount,
                 rackPosition
             ).collect {
@@ -83,6 +85,7 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
         category: String,
         description: String,
         price: String,
+        originalPrice : String,
         stockCount: String,
         rackPosition: String,
     ) {
@@ -94,6 +97,7 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
                 category,
                 description,
                 price,
+                originalPrice,
                 stockCount,
                 rackPosition
             ).collect {

@@ -52,8 +52,13 @@ class BuyerProfilePointFragment : Fragment() {
     }
 
     private fun setupView(data : BuyerPointResponseData){
+        val totalMinimumPoints = data.userPoint + data.pointToNextLevel
+        val percentage = (data.userPoint.toFloat() / totalMinimumPoints.toFloat()) * 100
+
         binding.buyerPointProfileCurrentPointLevelTv.text = "${data.userPoint} pts - ${data.levelName}"
         binding.buyerProfilePointNeedToGainTv.text = "Gain ${data.pointToNextLevel} to reach next level"
+        binding.buyerLevelProgressBar.progress = percentage
+        binding.buyerLevelProgressBar.labelText = "archive ${percentage.toInt()}%"
     }
 
     private fun setupButton(){

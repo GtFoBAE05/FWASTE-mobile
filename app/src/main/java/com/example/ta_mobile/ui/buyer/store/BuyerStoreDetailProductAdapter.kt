@@ -1,5 +1,7 @@
 package com.example.ta_mobile.ui.buyer.store
 
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,10 @@ class BuyerStoreDetailProductAdapter(private val listener: (StoreDetailResponseP
         fun bind(item: StoreDetailResponseProductsData) {
             Glide.with(binding.root).load(item.imageUrl).into(binding.productCardItemImageView)
             binding.productCardItemTitleTv.text = item.name
+            binding.productCardItemOriginalPriceTv.text = CurrencyHelper.convertToRupiah(item.originalPrice)
+            binding.productCardItemOriginalPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             binding.productCardItemPriceTv.text = CurrencyHelper.convertToRupiah(item.price)
+            binding.productCardItemPriceTv.setTypeface(null, Typeface.BOLD);
         }
     }
 

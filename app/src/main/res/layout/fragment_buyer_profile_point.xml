@@ -49,13 +49,35 @@
         app:layout_constraintStart_toStartOf="@+id/buyerPointProfileCurrentPointLevelTv"
         app:layout_constraintTop_toBottomOf="@+id/buyerPointProfileCurrentPointLevelTv" />
 
+    <com.skydoves.progressview.ProgressView
+        android:id="@+id/buyerLevelProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buyerProfilePointNeedToGainTv"
+        app:progressView_colorBackground="@color/white"
+        app:progressView_colorProgress="@color/skyBlue"
+        app:progressView_min="0"
+        app:progressView_max="100"
+        app:progressView_labelTypeface="bold"
+        app:progressView_labelSpace="10dp"
+        app:progressView_labelSize="13sp"
+        app:progressView_labelColorInner="@color/white"
+        app:progressView_labelColorOuter="@color/black"
+        app:progressView_autoAnimate="true"
+        />
+
     <View
         android:id="@+id/buyerProfilePointDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/buyerProfilePointNeedToGainTv"
+        app:layout_constraintTop_toBottomOf="@+id/buyerLevelProgressBar"
         tools:layout_editor_absoluteX="-38dp" />
 
     <TextView
@@ -73,10 +95,11 @@
     <include
         android:id="@+id/buyerProfilePointHintScrollView"
         layout="@layout/earn_point_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buyerProfilePointEarnPointTv" />
 

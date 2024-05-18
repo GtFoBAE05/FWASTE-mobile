@@ -83,8 +83,11 @@ class SellerTotalIncomeFragment : Fragment() {
             entries.add(BarEntry(it.month.toFloat(), it.income.toFloat()))
         }
 
-        val dataset = BarDataSet(entries, "# of Calls")
+        val dataset = BarDataSet(entries, "Total Income Report")
         val data = BarData(dataset)
+
+
+        binding.pieChartView.description.text = "Total Income Report"
 
         val xAxisFormatter: ValueFormatter = DayAxisValueFormatter(binding.pieChartView)
         val xAxis: XAxis = binding.pieChartView.xAxis

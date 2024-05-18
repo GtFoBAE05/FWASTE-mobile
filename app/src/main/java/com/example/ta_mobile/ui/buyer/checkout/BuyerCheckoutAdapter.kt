@@ -1,5 +1,6 @@
 package com.example.ta_mobile.ui.buyer.checkout
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,10 @@ class BuyerCheckoutAdapter : RecyclerView.Adapter<BuyerCheckoutAdapter.BuyerChec
         val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtil)
         items = data
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun setVoucherIsUsed(id:String){
+
     }
 
 }

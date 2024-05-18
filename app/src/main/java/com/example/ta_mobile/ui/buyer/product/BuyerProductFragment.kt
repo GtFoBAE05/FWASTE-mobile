@@ -1,6 +1,7 @@
 package com.example.ta_mobile.ui.buyer.product
 
 import android.app.AlertDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.ta_mobile.R
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailDataProductDataResponse
 import com.example.ta_mobile.databinding.FragmentBuyerProductBinding
 import com.example.ta_mobile.utils.NetworkResult
@@ -83,7 +85,16 @@ class BuyerProductFragment : Fragment() {
             viewModel.checkIfStoreValid(data.storeId).observe(viewLifecycleOwner){
                 if(it){
                     viewModel.insertCartProduct(data.id, data.storeId, data.storeName, data.imageUrl, data.name, data.price.toDouble(), count)
-                    findNavController().popBackStack()
+                    val bundle = Bundle()
+                    bundle.putString("storeId", data.storeId)
+//                    findNavController().navigate(R.id.action_buyerProductFragment_to_buyerStoreDetailFragment, bundle)
+//                    if (findNavController().currentDestination?.id == R.id.buyerStoreDetailFragment) {
+//                        findNavController().navigate(BuyerProductFragmentDirections.actionBuyerProductFragmentToBuyerStoreDetailFragment())
+//                    }
+                    if (findNavController().currentDestination?.id == R.id.buyerProductFragment) {
+                        findNavController().popBackStack()
+                    }
+//                    findNavController().popBackStack()
                     showSuccessToast("Success Add To Cart")
                 }else{
                     AlertDialog.Builder(requireContext())
@@ -132,6 +143,8 @@ class BuyerProductFragment : Fragment() {
                     data = it.data.data.products
 
                     Glide.with(binding.root).load(it.data.data.products.imageUrl).into(binding.buyerProductDetailImageView)
+                    binding.buyerProductDetailOriginalPriceTv.text = CurrencyHelper.convertToRupiah(it.data.data.products.originalPrice)
+                    binding.buyerProductDetailOriginalPriceTv.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
                     binding.buyerProductDetailPriceTv.text = CurrencyHelper.convertToRupiah(it.data.data.products.price)
                     binding.buyerProductScreenTitleTv.text = it.data.data.products.name
                     binding.buyerProductDetailDescTv.text = it.data.data.products.description

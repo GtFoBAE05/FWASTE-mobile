@@ -27,6 +27,8 @@ data class SellerGetMyProductResponseData(
     val description: String,
     @SerializedName("price")
     val price: Int,
+    @SerializedName("original_price")
+    val originalPrice: Int,
     @SerializedName("stock_count")
     val stockCount: Int,
     @SerializedName("rack_position")

@@ -27,5 +27,5 @@ data class GetFavouriteStoreResponseData(
     @SerializedName("operational_hour")
     val operationalHour: String,
     @SerializedName("rating")
-    val rating: Int,
+    val rating: Double,
 )

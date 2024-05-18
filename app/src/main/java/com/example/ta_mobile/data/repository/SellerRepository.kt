@@ -324,6 +324,7 @@ class SellerRepository(
         category: String,
         description: String,
         price: String,
+        originalPrice : String,
         stockCount: String,
         rackPosition: String,
     ): Flow<NetworkResult<SellerAddProductResponse>> {
@@ -336,6 +337,7 @@ class SellerRepository(
                     category.toRequestBody("text/plain".toMediaType()),
                     description.toRequestBody("text/plain".toMediaType()),
                     price.toRequestBody("text/plain".toMediaType()),
+                    originalPrice.toRequestBody("text/plain".toMediaType()),
                     stockCount.toRequestBody("text/plain".toMediaType()),
                     rackPosition.toRequestBody("text/plain".toMediaType()),
                 )
@@ -368,6 +370,7 @@ class SellerRepository(
         category: String,
         description: String,
         price: String,
+        originalPrice: String,
         stockCount: String,
         rackPosition: String,
     ): Flow<NetworkResult<SellerEditProductResponse>> {
@@ -381,6 +384,7 @@ class SellerRepository(
                     category.toRequestBody("text/plain".toMediaType()),
                     description.toRequestBody("text/plain".toMediaType()),
                     price.toRequestBody("text/plain".toMediaType()),
+                    originalPrice.toRequestBody("text/plain".toMediaType()),
                     stockCount.toRequestBody("text/plain".toMediaType()),
                     rackPosition.toRequestBody("text/plain".toMediaType()),
                 )

@@ -1,5 +1,7 @@
 package com.example.ta_mobile.ui.seller.product.detail
 
+import android.app.AlertDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,9 +69,11 @@ class SellerDetailProductFragment : Fragment() {
         binding.productDetailCategoryTv.text = "Category : ${data.products.category}"
         binding.productDetailDescriptionTv.text = data.products.description
         binding.productDetailPriceTv.text = CurrencyHelper.convertToRupiah(data.products.price)
+        binding.productDetailOriginalPriceTv.text = CurrencyHelper.convertToRupiah(data.products.originalPrice)
         binding.productDetailStockCount.text = "Stock : ${data.products.stockCount}"
         binding.productDetailRackPosition.text = "Rack Position : ${data.products.rackPosition}"
 
+        binding.productDetailOriginalPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
 
     private fun setupButton(){
@@ -80,7 +84,18 @@ class SellerDetailProductFragment : Fragment() {
         }
 
         binding.productDetailDeleteProduct.setOnClickListener {
-            viewModel.deleteProduct(productId)
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Delete Product")
+                .setMessage("Are you sure want to delete this product?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    dialog.dismiss()
+                    viewModel.deleteProduct(productId)
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+
+            dialog.show()
         }
 
         binding.productDetailUpdateVisibilitybtn.setOnClickListener {

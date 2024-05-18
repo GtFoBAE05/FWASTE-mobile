@@ -14,6 +14,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDe
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.referral.BuyerInputReferralResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.SearchStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.store.StoreDetailResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.voucher.UserOwnedVoucherResponse
@@ -57,6 +58,34 @@ class BuyerRepository(
 
     suspend fun deleteAll() {
         cartProductDao.deleteAll()
+    }
+
+    suspend fun inputReferral(referral: String): Flow<NetworkResult<BuyerInputReferralResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val inputReferralResponse = apiServices.inputReferral(
+                    referral
+                )
+                if (inputReferralResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            inputReferralResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    inputReferralResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun searchStore(keyword: String): Flow<NetworkResult<SearchStoreResponse>> {

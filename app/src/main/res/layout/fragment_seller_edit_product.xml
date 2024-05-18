@@ -145,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Price"
+                    android:text="Product Discount Price"
                     android:textStyle="bold" />
 
                 <EditText
@@ -154,7 +154,36 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_rounded_corner"
-                    android:hint="Type your product price..."
+                    android:hint="Type your product discount price..."
+                    android:inputType="number|numberDecimal"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBuyerRegisterOriginalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Original Price"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etsellerEditProductOriginalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_rounded_corner"
+                    android:hint="Type your product original price..."
+                    android:inputType="number|numberDecimal"
                     android:minHeight="48dp"
                     android:padding="12dp" />
 
@@ -182,6 +211,7 @@
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_rounded_corner"
                     android:hint="Type your product stock count..."
+                    android:inputType="number|numberDecimal"
                     android:minHeight="48dp"
                     android:padding="12dp" />
 

@@ -41,6 +41,15 @@
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
+                android:id="@+id/buyerProductDetailOriginalPriceTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Rp30.000"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/buyerProductDetailPriceTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

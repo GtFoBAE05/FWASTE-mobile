@@ -97,6 +97,7 @@ class SellerEditProductFragment : Fragment() {
         binding.etsellerEditProductCategory.setText(data.products.category)
         binding.etsellerEditProductDescription.setText(data.products.description)
         binding.etsellerEditProductPrice.setText(data.products.price.toString())
+        binding.etsellerEditProductOriginalPrice.setText(data.products.originalPrice.toString())
         binding.etsellerEditProductStock.setText(data.products.stockCount.toString())
         binding.etsellerEditProductRackPosition.setText(data.products.rackPosition.toString())
 
@@ -149,6 +150,7 @@ class SellerEditProductFragment : Fragment() {
         val category = binding.etsellerEditProductCategory.text.toString().trim()
         val description = binding.etsellerEditProductDescription.text.toString().trim()
         val price = binding.etsellerEditProductPrice.text.toString().trim()
+        val originalPrice = binding.etsellerEditProductOriginalPrice.text.toString().trim()
         val stock = binding.etsellerEditProductStock.text.toString().trim()
         val rack = binding.etsellerEditProductRackPosition.text.toString().trim()
 
@@ -173,6 +175,11 @@ class SellerEditProductFragment : Fragment() {
             binding.etsellerEditProductPrice.error = getString(R.string.form_empty_message)
         }
 
+        if (originalPrice.isEmpty()) {
+            isError = true
+            binding.etsellerEditProductOriginalPrice.error = getString(R.string.form_empty_message)
+        }
+
         if (stock.isEmpty()) {
             isError = true
             binding.etsellerEditProductStock.error = getString(R.string.form_empty_message)
@@ -183,9 +190,9 @@ class SellerEditProductFragment : Fragment() {
             binding.etsellerEditProductRackPosition.error = getString(R.string.form_empty_message)
         }
 
-        if (currentImageUri == null) {
+        if (originalPrice.toInt()<price.toInt()){
             isError = true
-            showToast("Please add image")
+            showToast("Original price must be greater than price")
         }
 
         if (!isError) {
@@ -205,6 +212,7 @@ class SellerEditProductFragment : Fragment() {
                 category,
                 description,
                 price,
+                originalPrice,
                 stock,
                 rack
             )

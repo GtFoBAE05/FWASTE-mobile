@@ -49,6 +49,7 @@ class SellerProfileFragment : Fragment() {
         binding.profileEmail.text = data.fullname
         binding.profileBalance.text = "Balance: ${CurrencyHelper.convertToRupiah(data.balance)}"
         binding.profileCreatedAt.text = DateTimeHelper.convertDate(data.member_since)
+        binding.productSavedTv.text = "You have saved ${data.totalProduct } products"
     }
 
     private fun setupButton() {

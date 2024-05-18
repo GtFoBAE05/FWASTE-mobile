@@ -55,6 +55,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/et_rounded_corner"
             android:hint="@string/input_placeholder_email"
+            android:inputType="text|textEmailAddress"
             android:minHeight="48dp"
             android:padding="12dp" />
 

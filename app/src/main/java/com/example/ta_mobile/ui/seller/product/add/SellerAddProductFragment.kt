@@ -117,6 +117,7 @@ class SellerAddProductFragment : Fragment() {
         val category = binding.etsellerAddProductCategory.text.toString().trim()
         val description = binding.etsellerAddProductDescription.text.toString().trim()
         val price = binding.etsellerAddProductPrice.text.toString().trim()
+        val originalPrice = binding.etsellerAddProductOriginakPrice.text.toString().trim()
         val stock = binding.etsellerAddProductStock.text.toString().trim()
         val rack = binding.etsellerAddProductRackPosition.text.toString().trim()
 
@@ -139,6 +140,11 @@ class SellerAddProductFragment : Fragment() {
         if (price.isEmpty()) {
             isError = true
             binding.etsellerAddProductPrice.error = getString(R.string.form_empty_message)
+        }
+
+        if (originalPrice.isEmpty()) {
+            isError = true
+            binding.etsellerAddProductOriginakPrice.error = getString(R.string.form_empty_message)
         }
 
         if (stock.isEmpty()) {
@@ -172,6 +178,7 @@ class SellerAddProductFragment : Fragment() {
                 category,
                 description,
                 price,
+                originalPrice,
                 stock,
                 rack
             )

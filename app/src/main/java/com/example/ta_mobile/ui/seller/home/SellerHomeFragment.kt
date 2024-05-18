@@ -52,9 +52,8 @@ class SellerHomeFragment : Fragment() {
 
     private fun setupView(){
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel("https://bit.ly/2YoJ77H", ))
-        imageList.add(SlideModel("https://bit.ly/2BteuF2", ))
-        imageList.add(SlideModel("https://bit.ly/3fLJf72", ))
+        imageList.add(SlideModel(R.drawable.food_waste_ads_01, ))
+        imageList.add(SlideModel(R.drawable.express_delivery_ads_02, ))
         binding.sellerHomeImageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         binding.sellerHomeImageSlider.setOnClickListener {

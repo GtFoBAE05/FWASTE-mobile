@@ -118,4 +118,7 @@ dependencies {
     //toast
     implementation("com.pranavpandey.android:dynamic-toasts:4.2.1")
 
+    //toast
+    implementation("com.github.skydoves:progressview:1.1.3")
+
 }

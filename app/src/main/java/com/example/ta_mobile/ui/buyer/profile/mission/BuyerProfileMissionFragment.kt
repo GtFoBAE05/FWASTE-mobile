@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentBuyerProfileMissionBinding
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
 import com.example.ta_mobile.utils.NetworkResult
@@ -50,7 +51,9 @@ class BuyerProfileMissionFragment : Fragment() {
 
     private fun setupAdapter(){
         binding.buyerProfileMissionRv.layoutManager = LinearLayoutManager(requireContext())
-        adapter = BuyerProfileMissionAdapter()
+        adapter = BuyerProfileMissionAdapter {
+            findNavController().navigate(R.id.action_buyerProfileMissionFragment_to_buyerHomeFragment)
+        }
 
         binding.buyerProfileMissionRv.adapter = adapter
     }
