@@ -1,4 +1,4 @@
-package com.example.ta_mobile.ui.buyer.search
+package com.example.ta_mobile.ui.buyer.search.store
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

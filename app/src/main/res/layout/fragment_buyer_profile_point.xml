@@ -36,7 +36,6 @@
         android:drawableStart="@drawable/outline_point_24"
         android:drawablePadding="4dp"
         android:includeFontPadding="true"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/buyerProfilePointTitle"
         app:layout_constraintTop_toBottomOf="@+id/buyerProfilePointTitle" />
 
@@ -45,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="gain.."
         app:layout_constraintStart_toStartOf="@+id/buyerPointProfileCurrentPointLevelTv"
         app:layout_constraintTop_toBottomOf="@+id/buyerPointProfileCurrentPointLevelTv" />
 

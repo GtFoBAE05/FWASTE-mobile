@@ -151,9 +151,11 @@ class SellerDetailOrderFragment : Fragment() {
                     binding.sellerOrderPB.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerOrderDetailScrollView.gone()
                     binding.sellerOrderPB.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerOrderDetailScrollView.visible()
                     binding.sellerOrderPB.gone()
                     adapter.setData(it.data.data.order.product)
                     setupView(it.data.data)
@@ -168,9 +170,11 @@ class SellerDetailOrderFragment : Fragment() {
                     binding.sellerOrderPB.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerOrderDetailScrollView.gone()
                     binding.sellerOrderPB.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerOrderDetailScrollView.visible()
                     binding.sellerOrderPB.gone()
                     findNavController().popBackStack()
                     showSuccessToast("Success Update Order")

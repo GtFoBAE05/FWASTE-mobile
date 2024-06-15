@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ta_mobile.R
 import com.example.ta_mobile.databinding.FragmentFavouriteStoreBinding
 import com.example.ta_mobile.utils.NetworkResult
+import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showToast
+import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
 
 class FavouriteStoreFragment : Fragment() {
@@ -55,9 +57,12 @@ class FavouriteStoreFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
-
+                    binding.buyerFavouriteStoreProgressBar.visible()
+                    binding.buyerFavouriteStoreNestedScrollView.gone()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerFavouriteStoreNestedScrollView.visible()
+                    binding.buyerFavouriteStoreProgressBar.gone()
                     adapter.setData(it.data.data)
                 }
             }

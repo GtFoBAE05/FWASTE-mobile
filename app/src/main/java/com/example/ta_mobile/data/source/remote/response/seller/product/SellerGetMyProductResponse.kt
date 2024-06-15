@@ -35,6 +35,10 @@ data class SellerGetMyProductResponseData(
     val rackPosition: String,
     @SerializedName("category")
     val category: String,
+    @SerializedName("production_date")
+    val productionDate: String,
+    @SerializedName("expire_date")
+    val expireDate: String,
     @SerializedName("is_visible")
     val isVisible: Boolean
 )

@@ -61,6 +61,8 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
         originalPrice : String,
         stockCount: String,
         rackPosition: String,
+        productionDate:String,
+        expiredDate:String,
     ) {
         viewModelScope.launch {
             sellerRepository.addProduct(
@@ -71,7 +73,9 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
                 price,
                 originalPrice,
                 stockCount,
-                rackPosition
+                rackPosition,
+                productionDate,
+                expiredDate
             ).collect {
                 _addProductResponse.postValue(it)
             }
@@ -88,6 +92,8 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
         originalPrice : String,
         stockCount: String,
         rackPosition: String,
+        productionDate:String,
+        expiredDate:String,
     ) {
         viewModelScope.launch {
             sellerRepository.editProduct(
@@ -99,7 +105,9 @@ class SellerProductViewModel(private val sellerRepository: SellerRepository) : V
                 price,
                 originalPrice,
                 stockCount,
-                rackPosition
+                rackPosition,
+                productionDate,
+                expiredDate
             ).collect {
                 _editProductResponse.postValue(it)
             }

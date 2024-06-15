@@ -116,8 +116,12 @@ class LoginFragment : Fragment() {
         viewModel.userLogin.observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {
-                    is NetworkResult.Loading -> binding.cpiIndicator.visible()
+                    is NetworkResult.Loading -> {
+                        binding.cpiIndicator.visible()
+                        binding.loginContainer.gone()
+                    }
                     is NetworkResult.Success -> {
+                        binding.loginContainer.visible()
                         binding.cpiIndicator.gone()
                         val isLoginSuccess = result.data.status
                         if (isLoginSuccess) {
@@ -138,6 +142,7 @@ class LoginFragment : Fragment() {
                     is NetworkResult.Error -> {
                         showErrorToast(result.error)
                         binding.cpiIndicator.gone()
+                        binding.loginContainer.visible()
                     }
                 }
             }

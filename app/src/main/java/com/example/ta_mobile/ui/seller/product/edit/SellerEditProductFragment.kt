@@ -1,5 +1,6 @@
 package com.example.ta_mobile.ui.seller.product.edit
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -23,6 +26,7 @@ import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
+import com.example.ta_mobile.utils.helper.DateTimeHelper
 import com.example.ta_mobile.utils.helper.createCustomTempFile
 import com.example.ta_mobile.utils.helper.downloadImageAsTempFile
 import com.example.ta_mobile.utils.helper.reduceFileImage
@@ -34,6 +38,9 @@ import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class SellerEditProductFragment : Fragment() {
@@ -43,6 +50,17 @@ class SellerEditProductFragment : Fragment() {
 
     private val viewModel : SellerProductViewModel by inject()
     private lateinit var productId:String
+
+
+    private val calendar = Calendar.getInstance()
+
+    private var prodYear:Int = Calendar.getInstance().get(Calendar.YEAR)
+    private var prodMonth:Int = Calendar.getInstance().get(Calendar.MONTH)
+    private var prodDay:Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+    private var expYear:Int = Calendar.getInstance().get(Calendar.YEAR)
+    private var expMonth:Int = Calendar.getInstance().get(Calendar.MONTH)
+    private var expDay:Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
     private var currentImageUri : Uri? = null
     private var getFile: File? = null
@@ -72,6 +90,7 @@ class SellerEditProductFragment : Fragment() {
         viewModel.getSingleProduct(productId)
         setupObserver()
         setupButton()
+        setupEditText()
 
 
     }
@@ -94,12 +113,14 @@ class SellerEditProductFragment : Fragment() {
 
         Glide.with(binding.root).load(data.products.imageUrl).into(binding.sellerEditProductimageView)
         binding.etsellerEditProductName.setText(data.products.name)
-        binding.etsellerEditProductCategory.setText(data.products.category)
+        binding.etsellerEditProductCategory.setSelection(resources.getStringArray(R.array.food_category_array).indexOf(data.products.category))
         binding.etsellerEditProductDescription.setText(data.products.description)
         binding.etsellerEditProductPrice.setText(data.products.price.toString())
         binding.etsellerEditProductOriginalPrice.setText(data.products.originalPrice.toString())
         binding.etsellerEditProductStock.setText(data.products.stockCount.toString())
         binding.etsellerEditProductRackPosition.setText(data.products.rackPosition.toString())
+        binding.etsellerEditProductProductionDate.setText(DateTimeHelper.convertDate(data.products.productionDate))
+        binding.etsellerEditProductExpireDate.setText(DateTimeHelper.convertDate(data.products.expireDate))
 
     }
 
@@ -144,16 +165,96 @@ class SellerEditProductFragment : Fragment() {
         return myFile
     }
 
+    private fun setupEditText() {
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.food_category_array,
+            android.R.layout.simple_spinner_item
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.etsellerEditProductCategory.adapter = it
+        }
+
+
+
+        binding.etsellerEditProductProductionDate.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(
+                requireContext(), { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    val cProdDate = Calendar.getInstance()
+                    cProdDate.set(prodYear, prodMonth, prodDay)
+
+                    val cExpDate = Calendar.getInstance()
+                    cExpDate.set(expYear, expMonth, expDay)
+
+                    if (cProdDate.after(cExpDate)) {
+                        showToast("Production date must be before expire date")
+                        binding.etsellerEditProductExpireDate.text.clear()
+
+                        expYear = Calendar.getInstance().get(Calendar.YEAR)
+                        expMonth = Calendar.getInstance().get(Calendar.MONTH)
+                        expDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+                        return@DatePickerDialog
+                    }
+
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(year, monthOfYear, dayOfMonth)
+                    val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate.time)
+                    prodYear = year
+                    prodMonth = monthOfYear
+                    prodDay = dayOfMonth
+                    binding.etsellerEditProductProductionDate.setText(formattedDate)
+
+
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+
+
+            datePickerDialog.show()
+        }
+
+        binding.etsellerEditProductExpireDate.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(
+                requireContext(), {DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(year, monthOfYear, dayOfMonth)
+                    val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate.time)
+
+                    expYear = year
+                    expMonth = monthOfYear
+                    expYear = dayOfMonth
+
+                    binding.etsellerEditProductExpireDate.setText(formattedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+
+
+            datePickerDialog.show()
+        }
+
+    }
+
     private fun checkAddProductForm() {
         var isError = false
         val name = binding.etsellerEditProductName.text.toString()
-        val category = binding.etsellerEditProductCategory.text.toString().trim()
+        val category = binding.etsellerEditProductCategory.selectedItem.toString()
         val description = binding.etsellerEditProductDescription.text.toString().trim()
         val price = binding.etsellerEditProductPrice.text.toString().trim()
         val originalPrice = binding.etsellerEditProductOriginalPrice.text.toString().trim()
         val stock = binding.etsellerEditProductStock.text.toString().trim()
         val rack = binding.etsellerEditProductRackPosition.text.toString().trim()
-
+        val prodDate = binding.etsellerEditProductProductionDate.text.toString().trim()
+        val expDate = binding.etsellerEditProductExpireDate.text.toString().trim()
 
         if (name.isEmpty()) {
             isError = true
@@ -162,7 +263,8 @@ class SellerEditProductFragment : Fragment() {
 
         if (category.isEmpty()) {
             isError = true
-            binding.etsellerEditProductCategory.error = getString(R.string.form_empty_message)
+            val spinner = binding.etsellerEditProductCategory.selectedView as TextView
+            spinner.error = getString(R.string.form_empty_message)
         }
 
         if (description.isEmpty()) {
@@ -195,6 +297,16 @@ class SellerEditProductFragment : Fragment() {
             showToast("Original price must be greater than price")
         }
 
+        if (prodDate.isEmpty()) {
+            isError = true
+            binding.etsellerEditProductProductionDate.error = getString(R.string.form_empty_message)
+        }
+
+        if (expDate.isEmpty()) {
+            isError = true
+            binding.etsellerEditProductExpireDate.error = getString(R.string.form_empty_message)
+        }
+
         if (!isError) {
             val file = getFile as File
             val reducedImageSize = reduceFileImage(file)
@@ -214,7 +326,9 @@ class SellerEditProductFragment : Fragment() {
                 price,
                 originalPrice,
                 stock,
-                rack
+                rack,
+                DateTimeHelper.formatDate(prodDate),
+                DateTimeHelper.formatDate(expDate)
             )
         }
     }
@@ -229,9 +343,11 @@ class SellerEditProductFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerEditProductNestedScrollView.gone()
                     binding.sellerEditProductprogressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerEditProductNestedScrollView.visible()
                     binding.sellerEditProductprogressBar.gone()
                     setupView(it.data.data)
                 }
@@ -246,9 +362,11 @@ class SellerEditProductFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerEditProductNestedScrollView.gone()
                     binding.sellerEditProductprogressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerEditProductNestedScrollView.visible()
                     binding.sellerEditProductprogressBar.gone()
                     showSuccessToast("Product edited successfully")
                     findNavController().popBackStack()

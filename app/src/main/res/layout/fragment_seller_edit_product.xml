@@ -15,6 +15,7 @@
         app:titleCentered="true" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/sellerEditProductNestedScrollView"
         android:layout_below="@+id/sellerEditProductToolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,6 +27,32 @@
             android:orientation="vertical" >
 
 
+            <ImageView
+                android:id="@+id/sellerEditProductimageView"
+                android:layout_width="148dp"
+                android:layout_height="148dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sellerEditProductEditImagebutton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Edit Image"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_main"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/primary_main" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -33,23 +60,6 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/sellerEditProductimageView"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
-
-                <Button
-                    android:id="@+id/sellerEditProductEditImagebutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="24dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_primary_main"
-                    android:text="Edit Image" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,15 +104,16 @@
                     android:text="Product Category"
                     android:textStyle="bold" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/etsellerEditProductCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:background="@drawable/et_rounded_corner"
+                    android:background="@drawable/spinner_background_drawable"
                     android:hint="type your product category..."
                     android:minHeight="48dp"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -216,6 +227,63 @@
                     android:padding="12dp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llsellerEditProductProductionDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Production Date"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etsellerEditProductProductionDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_rounded_corner"
+                    android:hint="Add your product Production Date..."
+                    android:focusable="false"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llsellerEditProductExpireDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Expire Date"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etsellerEditProductExpireDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_rounded_corner"
+                    android:hint="Add your product Expire Date..."
+                    android:focusable="false"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/llsellerEditProductRackPosition"

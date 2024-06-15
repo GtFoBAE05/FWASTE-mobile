@@ -48,6 +48,10 @@ data class ProductDetailDataProductDataResponse(
     val stockCount: Int,
     @SerializedName("rack_position")
     val rackPosition: String,
+    @SerializedName("production_date")
+    val productionDate: String,
+    @SerializedName("expire_date")
+    val expireDate: String,
     @SerializedName("is_visible")
     val isVisible: Boolean
 )

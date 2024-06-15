@@ -14,28 +14,18 @@ fun Activity.showToast(text: String, longToast: Boolean = false) {
 }
 
 fun Fragment.showToast(text: String, longToast: Boolean = false) {
-//    activity?.let { context ->
-//        if (longToast) {
-//            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-//        } else {
-//            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
     activity?.let { context ->
         DynamicToast.make(context, text).show()
     }
 }
 
 fun Fragment.showSuccessToast(text: String, longToast: Boolean = false) {
-
     activity?.let { context ->
         DynamicToast.makeSuccess(context, text).show()
     }
 }
 
 fun Fragment.showErrorToast(text: String, longToast: Boolean = false) {
-
     activity?.let { context ->
         DynamicToast.makeError(context, text).show()
     }

@@ -8,7 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val url = "http://10.0.2.2:4000/api/"
+const val url = "https://ta-backend-rho.vercel.app/api/"
+//const val url = "http://10.0.2.2:4000/api/"
 class ApiConfig(private val dataStore: DataStore<Preferences>) {
     fun getApiService(): ApiServices {
 

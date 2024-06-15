@@ -39,6 +39,11 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        setupButton()
+    }
+
+    private fun setupButton(){
         binding.etStartDate.setOnClickListener {
             val dialog = MonthYearPickerDialog.Builder(
                 requireActivity(),
@@ -108,6 +113,27 @@ class SellerMonthYearSelectFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        binding.sellerResetFilterButton.setOnClickListener {
+            viewModel.setMonthYear(
+                startMonth = 0,
+                endMonth = 0,
+                startYear = 0,
+                endYear = 0)
+            viewModel.getBestSellingProduct(
+                startMonth = 0,
+                endMonth = 0,
+                startYear = 0,
+                endYear = 0
+            )
+            viewModel.getTotalIncome(
+                startMonth = 0,
+                endMonth = 0,
+                startYear = 0,
+                endYear = 0
+            )
+            viewModel.setChartTitle("All Time")
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {

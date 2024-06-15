@@ -1,5 +1,7 @@
 package com.example.ta_mobile.ui.seller.profile.report
 
+import android.graphics.Color
+import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +17,10 @@ import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.text.DateFormatSymbols
@@ -46,6 +49,8 @@ class SellerTotalIncomeFragment : Fragment() {
 
         viewModel.getTotalIncome()
         setupObserver()
+        binding.lineChartView.setTouchEnabled(true)
+        binding.lineChartView.setPinchZoom(true)
     }
 
     private fun setupObserver() {
@@ -54,17 +59,19 @@ class SellerTotalIncomeFragment : Fragment() {
             when (it) {
                 is NetworkResult.Loading -> {
                     binding.totalIncomePB.visible()
+                    binding.lineChartView.gone()
                 }
 
                 is NetworkResult.Success -> {
                     binding.totalIncomePB.gone()
-
+                    binding.lineChartView.visible()
                     setData(it.data.data)
 
                 }
 
                 is NetworkResult.Error -> {
                     binding.totalIncomePB.gone()
+                    binding.lineChartView.visible()
                     showToast(it.error)
                     Log.e("TAG", "setupObserver: " + it.error)
                 }
@@ -72,25 +79,36 @@ class SellerTotalIncomeFragment : Fragment() {
 
         }
 
-
-
     }
 
 
     private fun setData(abc: List<TotalIncomeResponseData>) {
-        val entries = ArrayList<BarEntry>()
+        val entries = ArrayList<Entry>()
         abc.forEach {
             entries.add(BarEntry(it.month.toFloat(), it.income.toFloat()))
         }
 
-        val dataset = BarDataSet(entries, "Total Income Report")
-        val data = BarData(dataset)
+        val dataset = LineDataSet(entries, "Total Income Report")
+        dataset.enableDashedLine(10f, 5f, 0f)
+        dataset.enableDashedHighlightLine(10f, 5f, 0f)
+        dataset.setColor(Color.DKGRAY)
+        dataset.setCircleColor(Color.DKGRAY)
+        dataset.setLineWidth(1f)
+        dataset.circleRadius = 3f
+        dataset.setDrawCircleHole(false)
+        dataset.valueTextSize = 9f
+        dataset.setDrawFilled(true)
+        dataset.formLineWidth = 1f
+        dataset.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+        dataset.formSize = 15f
+
+        val data = LineData(dataset)
 
 
-        binding.pieChartView.description.text = "Total Income Report"
+        binding.lineChartView.description.text = "Total Income Report"
 
-        val xAxisFormatter: ValueFormatter = DayAxisValueFormatter(binding.pieChartView)
-        val xAxis: XAxis = binding.pieChartView.xAxis
+        val xAxisFormatter: ValueFormatter = DayAxisValueFormatter(binding.lineChartView)
+        val xAxis: XAxis = binding.lineChartView.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setDrawGridLines(false)
         xAxis.setGranularity(1f)
@@ -98,8 +116,8 @@ class SellerTotalIncomeFragment : Fragment() {
         xAxis.setLabelCount(7)
         xAxis.valueFormatter = xAxisFormatter
 
-        binding.pieChartView.setData(data)
-        binding.pieChartView.invalidate()
+        binding.lineChartView.setData(data)
+        binding.lineChartView.invalidate()
     }
 
 

@@ -24,7 +24,7 @@ class BuyerStoreDetailProductAdapter(private val listener: (StoreDetailResponseP
             binding.productCardItemOriginalPriceTv.text = CurrencyHelper.convertToRupiah(item.originalPrice)
             binding.productCardItemOriginalPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             binding.productCardItemPriceTv.text = CurrencyHelper.convertToRupiah(item.price)
-            binding.productCardItemPriceTv.setTypeface(null, Typeface.BOLD);
+            binding.productCardItemPriceTv.setTypeface(null, Typeface.BOLD)
         }
     }
 

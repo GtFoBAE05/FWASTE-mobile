@@ -118,10 +118,12 @@ class SellerSendNotificationFragment : Fragment() {
                 }
 
                 NetworkResult.Loading -> {
+                    binding.llSellerSendNotification.gone()
                     binding.sellerSendNotificationProgressBar.visible()
                 }
 
                 is NetworkResult.Success -> {
+                    binding.llSellerSendNotification.visible()
                     binding.sellerSendNotificationProgressBar.gone()
                     showSuccessToast("Success send notification")
                     findNavController().popBackStack()

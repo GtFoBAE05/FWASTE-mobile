@@ -83,9 +83,11 @@ class SellerProfileFragment : Fragment() {
                         binding.sellerProfileProgressBar.gone()
                     }
                     NetworkResult.Loading -> {
+                        binding.sellerProfileScrollView.gone()
                         binding.sellerProfileProgressBar.visible()
                     }
                     is NetworkResult.Success -> {
+                        binding.sellerProfileScrollView.visible()
                         binding.sellerProfileProgressBar.gone()
                         setupView(it.data.data)
                     }

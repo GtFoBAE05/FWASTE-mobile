@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/llStartDate"
@@ -87,6 +87,27 @@
             app:layout_constraintEnd_toEndOf="@+id/llEndDate"
             app:layout_constraintStart_toStartOf="@+id/llEndDate"
             app:layout_constraintTop_toBottomOf="@+id/llEndDate" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sellerResetFilterButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Reset Filter"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_main"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ConfirmDateBtn"
+            app:layout_constraintStart_toStartOf="@+id/ConfirmDateBtn"
+            app:layout_constraintTop_toBottomOf="@+id/ConfirmDateBtn"
+            app:strokeColor="@color/primary_main" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

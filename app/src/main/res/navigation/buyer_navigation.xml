@@ -11,14 +11,26 @@
         android:label="fragment_buyer_home"
         tools:layout="@layout/fragment_buyer_home" >
         <action
-            android:id="@+id/action_buyerHomeFragment_to_buyerSearchStoreFragment"
-            app:destination="@id/buyerSearchStoreFragment" />
-        <action
             android:id="@+id/action_buyerHomeFragment_to_buyerStoreDetailFragment"
             app:destination="@id/buyerStoreDetailFragment" />
         <action
             android:id="@+id/action_buyerHomeFragment_to_buyerProductFragment"
             app:destination="@id/buyerProductFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerProfileVoucherFragment"
+            app:destination="@id/buyerProfileVoucherFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerProfilePointFragment"
+            app:destination="@id/buyerProfilePointFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerSearchProductFragment"
+            app:destination="@id/buyerSearchProductFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerSearchProductByDiscountFragment"
+            app:destination="@id/buyerSearchProductByDiscountFragment" />
+        <action
+            android:id="@+id/action_buyerHomeFragment_to_buyerSearchStoreFragment"
+            app:destination="@id/buyerSearchStoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/buyerProfileFragment"
@@ -56,7 +68,7 @@
         tools:layout="@layout/activity_auth" />
     <fragment
         android:id="@+id/buyerSearchStoreFragment"
-        android:name="com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreFragment"
+        android:name="com.example.ta_mobile.ui.buyer.search.store.BuyerSearchStoreFragment"
         android:label="fragment_buyer_search_store"
         tools:layout="@layout/fragment_buyer_search_store" >
         <action
@@ -71,6 +83,11 @@
         <action
             android:id="@+id/action_buyerStoreDetailFragment_to_buyerProductFragment"
             app:destination="@id/buyerProductFragment" />
+        <action
+            android:id="@+id/action_buyerStoreDetailFragment_to_buyerHomeFragment"
+            app:destination="@id/buyerHomeFragment"
+            app:popUpTo="@id/buyerHomeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/buyerProductFragment"
@@ -188,5 +205,23 @@
         <action
             android:id="@+id/action_favouriteStoreFragment_to_buyerStoreDetailFragment"
             app:destination="@id/buyerStoreDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerSearchProductFragment"
+        android:name="com.example.ta_mobile.ui.buyer.search.product.category.BuyerSearchProductFragment"
+        android:label="fragment_buyer_search_product"
+        tools:layout="@layout/fragment_buyer_search_product" >
+        <action
+            android:id="@+id/action_buyerSearchProductFragment_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerSearchProductByDiscountFragment"
+        android:name="com.example.ta_mobile.ui.buyer.search.product.discount.BuyerSearchProductByDiscountFragment"
+        android:label="fragment_buyer_search_product_by_discount"
+        tools:layout="@layout/fragment_buyer_search_product_by_discount" >
+        <action
+            android:id="@+id/action_buyerSearchProductByDiscountFragment_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
     </fragment>
 </navigation>

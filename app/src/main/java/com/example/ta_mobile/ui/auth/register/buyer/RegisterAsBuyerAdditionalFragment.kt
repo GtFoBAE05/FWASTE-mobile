@@ -91,10 +91,12 @@ class RegisterAsBuyerAdditionalFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerRegisterProgressBar.gone()
+                    binding.clBuyerRegisterAdditional.visible()
                     showErrorToast(it.error)
                 }
                 is NetworkResult.Loading -> {
                     binding.buyerRegisterProgressBar.visible()
+                    binding.clBuyerRegisterAdditional.gone()
                 }
                 is NetworkResult.Success -> {
                     binding.buyerRegisterProgressBar.gone()
@@ -137,6 +139,10 @@ class RegisterAsBuyerAdditionalFragment : Fragment() {
                     }
 
                 }
+                .addOnFailureListener {
+                    showToast("error get location")
+                }
+
         }
 
     }

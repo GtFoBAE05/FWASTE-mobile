@@ -56,7 +56,7 @@ class BuyerStoreDetailFragment : Fragment() {
 
         binding.buyerStoreDetailToolbar.title = "Store Detail"
         binding.buyerStoreDetailToolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_buyerStoreDetailFragment_to_buyerHomeFragment)
         }
 
         binding.buyerStoreDetailGoToCartBtn.setOnClickListener {
@@ -101,9 +101,15 @@ class BuyerStoreDetailFragment : Fragment() {
 
                 NetworkResult.Loading -> {
                     binding.buyerStoreDetailProgressBar.visible()
+                    binding.buyerStoreDetailFAB.gone()
+                    binding.buyerStoreDetailNestedScrollView.gone()
+                    binding.buyerStoreDetailHeaderLayout.root.gone()
                 }
 
                 is NetworkResult.Success -> {
+                    binding.buyerStoreDetailNestedScrollView.visible()
+                    binding.buyerStoreDetailFAB.visible()
+                    binding.buyerStoreDetailHeaderLayout.root.visible()
                     binding.buyerStoreDetailProgressBar.gone()
                     adapter.setData(it.data.data.products)
                     setupView(
@@ -126,16 +132,21 @@ class BuyerStoreDetailFragment : Fragment() {
 
                 NetworkResult.Loading -> {
                     binding.buyerStoreDetailProgressBar.visible()
+                    binding.buyerStoreDetailFAB.gone()
+                    binding.buyerStoreDetailNestedScrollView.gone()
                 }
 
                 is NetworkResult.Success -> {
+                    binding.buyerStoreDetailNestedScrollView.visible()
+                    binding.buyerStoreDetailFAB.visible()
                     binding.buyerStoreDetailProgressBar.gone()
                     if (it.data.data.isEmpty()) {
                         binding.buyerStoreDetailFAB.setOnClickListener {
                             viewModel.addFavouriteStore(storeId)
                         }
-                        binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
                     }
+                    binding.buyerStoreDetailFAB.icon = resources.getDrawable(R.drawable.baseline_favorite_border_24)
+                    binding.buyerStoreDetailFAB.text = "Add to Favourite"
 
                     for (favStore in it.data.data) {
 
@@ -143,14 +154,17 @@ class BuyerStoreDetailFragment : Fragment() {
                             binding.buyerStoreDetailFAB.setOnClickListener {
                                 viewModel.removeFavouriteStore(favStore.id)
                             }
-                            binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_24)
+                            binding.buyerStoreDetailFAB.icon = resources.getDrawable(R.drawable.baseline_favorite_24)
+                            binding.buyerStoreDetailFAB.text = "Remove from Favourite"
                         }else{
                             binding.buyerStoreDetailFAB.setOnClickListener {
-                            viewModel.addFavouriteStore(storeId)
-                        }
-                            binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
+                                viewModel.addFavouriteStore(storeId)
+                            }
+                            binding.buyerStoreDetailFAB.icon = resources.getDrawable(R.drawable.baseline_favorite_border_24)
+                            binding.buyerStoreDetailFAB.text = "Add to Favourite"
                         }
                     }
+
                 }
             }
         }
@@ -165,11 +179,16 @@ class BuyerStoreDetailFragment : Fragment() {
 
                 NetworkResult.Loading -> {
                     binding.buyerStoreDetailProgressBar.visible()
+                    binding.buyerStoreDetailFAB.gone()
+                    binding.buyerStoreDetailNestedScrollView.gone()
                 }
 
                 is NetworkResult.Success -> {
                     binding.buyerStoreDetailProgressBar.gone()
-                    binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_24)
+                    binding.buyerStoreDetailNestedScrollView.visible()
+                    binding.buyerStoreDetailFAB.visible()
+                    binding.buyerStoreDetailFAB.icon = resources.getDrawable(R.drawable.baseline_favorite_24)
+                    binding.buyerStoreDetailFAB.text = "Remove from Favourite"
                     showSuccessToast("Store added to favourite")
                     viewModel.subscribeTopic(storeId)
                 }
@@ -190,8 +209,9 @@ class BuyerStoreDetailFragment : Fragment() {
 
                 is NetworkResult.Success -> {
                     binding.buyerStoreDetailProgressBar.gone()
-                    binding.buyerStoreDetailFAB.setImageResource(R.drawable.baseline_favorite_border_24)
+                    binding.buyerStoreDetailFAB.icon = resources.getDrawable(R.drawable.baseline_favorite_border_24)
                     showSuccessToast("Store removed from favourite")
+                    binding.buyerStoreDetailFAB.text = "Add to Favourite"
                     viewModel.unsubscribeTopic(storeId)
                 }
             }

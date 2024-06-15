@@ -30,7 +30,7 @@ class BuyerInputReferralFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentBuyerInputReferralListDialogBinding.inflate(inflater, container, false)
         return binding.root

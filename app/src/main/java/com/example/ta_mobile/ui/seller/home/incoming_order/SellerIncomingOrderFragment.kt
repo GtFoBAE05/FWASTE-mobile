@@ -106,9 +106,11 @@ class SellerIncomingOrderFragment : Fragment() {
                     binding.sellerIncomingOrderProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerIncomingOrderContentLayout.gone()
                     binding.sellerIncomingOrderProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerIncomingOrderContentLayout.visible()
                     binding.sellerIncomingOrderProgressBar.gone()
                     setupView(it.data.data)
                     orderId = it.data.data.order.id
@@ -123,8 +125,10 @@ class SellerIncomingOrderFragment : Fragment() {
                 is NetworkResult.Error -> {
                     showErrorToast(it.error)
                     binding.sellerIncomingOrderProgressBar.gone()
+                    binding.sellerIncomingOrderContentLayout.visible()
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerIncomingOrderContentLayout.gone()
                     binding.sellerIncomingOrderProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
@@ -140,9 +144,11 @@ class SellerIncomingOrderFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     showErrorToast(it.error)
+                    binding.sellerIncomingOrderContentLayout.visible()
                     binding.sellerIncomingOrderProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerIncomingOrderContentLayout.gone()
                     binding.sellerIncomingOrderProgressBar.visible()
                 }
                 is NetworkResult.Success -> {

@@ -170,8 +170,10 @@ class BuyerOrderDetailFragment : Fragment() {
                 }
                 NetworkResult.Loading -> {
                     binding.buyerOrderDetailProgressBar.visible()
+                    binding.buyerOrderDetailScrollView.gone()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerOrderDetailScrollView.visible()
                     binding.buyerOrderDetailProgressBar.gone()
                     adapter.setData(it.data.data.order.product)
                     setupView(it.data.data)
@@ -186,9 +188,11 @@ class BuyerOrderDetailFragment : Fragment() {
                 }
                 NetworkResult.Loading -> {
                     binding.buyerOrderDetailProgressBar.visible()
+                    binding.buyerOrderDetailScrollView.gone()
                 }
                 is NetworkResult.Success -> {
                     binding.buyerOrderDetailProgressBar.gone()
+                    binding.buyerOrderDetailScrollView.visible()
                     findNavController().navigate(R.id.action_buyerOrderDetailFragment_to_buyerHomeFragment)
                     showSuccessToast("Success Update Order")
                 }
@@ -203,9 +207,11 @@ class BuyerOrderDetailFragment : Fragment() {
                 }
                 NetworkResult.Loading -> {
                     binding.buyerOrderDetailProgressBar.visible()
+                    binding.buyerOrderDetailScrollView.gone()
                 }
                 is NetworkResult.Success -> {
                     binding.buyerOrderDetailProgressBar.gone()
+                    binding.buyerOrderDetailScrollView.visible()
                     showSuccessToast("Success give rating")
                     binding.giveRatingCard.gone()
                 }

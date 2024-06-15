@@ -1,4 +1,4 @@
-package com.example.ta_mobile.ui.buyer.search
+package com.example.ta_mobile.ui.buyer.search.store
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import com.example.ta_mobile.databinding.FragmentBuyerSearchStoreBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showErrorToast
-import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import org.koin.android.ext.android.inject
 

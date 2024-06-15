@@ -14,11 +14,13 @@ import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDe
 import com.example.ta_mobile.databinding.FragmentBuyerProductBinding
 import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
+import com.example.ta_mobile.utils.extension.safeNavigateWithArgs
 import com.example.ta_mobile.utils.extension.showErrorToast
 import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.example.ta_mobile.utils.helper.DateTimeHelper
 import org.koin.android.ext.android.inject
 
 class BuyerProductFragment : Fragment() {
@@ -29,6 +31,7 @@ class BuyerProductFragment : Fragment() {
     private val viewModel: BuyerProductViewModel by inject()
 
     private lateinit var productId : String
+    private lateinit var storeId : String
     private lateinit var data: ProductDetailDataProductDataResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +61,9 @@ class BuyerProductFragment : Fragment() {
     private fun setupButton(){
 
         binding.buyerProductDetailToolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            val bundle = Bundle()
+            bundle.putString("storeId", storeId)
+            findNavController().navigate(R.id.action_buyerProductFragment_to_buyerStoreDetailFragment, bundle)
         }
 
         var count = 1
@@ -85,16 +90,20 @@ class BuyerProductFragment : Fragment() {
             viewModel.checkIfStoreValid(data.storeId).observe(viewLifecycleOwner){
                 if(it){
                     viewModel.insertCartProduct(data.id, data.storeId, data.storeName, data.imageUrl, data.name, data.price.toDouble(), count)
-                    val bundle = Bundle()
-                    bundle.putString("storeId", data.storeId)
+//                    val bundle = Bundle()
+//                    bundle.putString("storeId", data.storeId)
 //                    findNavController().navigate(R.id.action_buyerProductFragment_to_buyerStoreDetailFragment, bundle)
 //                    if (findNavController().currentDestination?.id == R.id.buyerStoreDetailFragment) {
 //                        findNavController().navigate(BuyerProductFragmentDirections.actionBuyerProductFragmentToBuyerStoreDetailFragment())
 //                    }
-                    if (findNavController().currentDestination?.id == R.id.buyerProductFragment) {
-                        findNavController().popBackStack()
-                    }
+//                    if (findNavController().currentDestination?.id == R.id.buyerProductFragment) {
+//                        findNavController().popBackStack()
+//                    }
 //                    findNavController().popBackStack()
+
+                    val bundle = Bundle()
+                    bundle.putString("storeId", storeId)
+                    findNavController().safeNavigateWithArgs(BuyerProductFragmentDirections.actionBuyerProductFragmentToBuyerStoreDetailFragment(), bundle)
                     showSuccessToast("Success Add To Cart")
                 }else{
                     AlertDialog.Builder(requireContext())
@@ -135,9 +144,11 @@ class BuyerProductFragment : Fragment() {
                     binding.buyerProductDetailProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.buyerProductDetailScrollView.gone()
                     binding.buyerProductDetailProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerProductDetailScrollView.visible()
                     binding.buyerProductDetailProgressBar.gone()
 
                     data = it.data.data.products
@@ -152,6 +163,13 @@ class BuyerProductFragment : Fragment() {
                     Glide.with(binding.root).load(it.data.data.storeImageUrl).into(binding.buyerProductDetailScreenStoreCard.storeNameWithLocImageView)
                     binding.buyerProductDetailScreenStoreCard.storeNameWithLocTitleTv.text = it.data.data.storeName
                     binding.buyerProductDetailScreenStoreCard.storeNameWithLocLocationTv.text = it.data.data.storeAddress
+
+                    binding.buyerProductProductionDateTv.text =
+                        "Production Date: ${DateTimeHelper.convertDate(it.data.data.products.productionDate)}"
+                    binding.buyerProductExpireDateTv.text =
+                        "Expire Date: ${DateTimeHelper.convertDate(it.data.data.products.expireDate)}"
+
+                    storeId = it.data.data.products.storeId
                 }
             }
         }

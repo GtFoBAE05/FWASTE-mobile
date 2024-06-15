@@ -327,6 +327,8 @@ class SellerRepository(
         originalPrice : String,
         stockCount: String,
         rackPosition: String,
+        productionDate:String,
+        expireDate:String
     ): Flow<NetworkResult<SellerAddProductResponse>> {
         return flow {
             emit(NetworkResult.Loading)
@@ -340,6 +342,8 @@ class SellerRepository(
                     originalPrice.toRequestBody("text/plain".toMediaType()),
                     stockCount.toRequestBody("text/plain".toMediaType()),
                     rackPosition.toRequestBody("text/plain".toMediaType()),
+                    productionDate.toRequestBody("text/plain".toMediaType()),
+                    expireDate.toRequestBody("text/plain".toMediaType()),
                 )
                 if (sellerAddProductResponse.isSuccessful) {
                     emit(
@@ -373,6 +377,8 @@ class SellerRepository(
         originalPrice: String,
         stockCount: String,
         rackPosition: String,
+        productionDate:String,
+        expireDate:String
     ): Flow<NetworkResult<SellerEditProductResponse>> {
         return flow {
             emit(NetworkResult.Loading)
@@ -387,6 +393,8 @@ class SellerRepository(
                     originalPrice.toRequestBody("text/plain".toMediaType()),
                     stockCount.toRequestBody("text/plain".toMediaType()),
                     rackPosition.toRequestBody("text/plain".toMediaType()),
+                    productionDate.toRequestBody("text/plain".toMediaType()),
+                    expireDate.toRequestBody("text/plain".toMediaType()),
                 )
                 if (sellerEditProductResponse.isSuccessful) {
                     emit(

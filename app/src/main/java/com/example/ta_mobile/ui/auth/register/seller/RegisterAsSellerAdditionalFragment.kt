@@ -107,18 +107,24 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
     }
 
     private fun setupObserver(){
+
+        binding.sellerRegisterProgressBar.visibility = View.VISIBLE
+        binding.sellerRegisterProgressBar.visibility = View.GONE
+
         registerViewModel.registerResult.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Error -> {
                     binding.sellerRegisterProgressBar.gone()
+                    binding.clSellerRegisterAdditional.visible()
                     showErrorToast(it.error)
                 }
                 is NetworkResult.Loading -> {
                     binding.sellerRegisterProgressBar.visible()
+                    binding.clSellerRegisterAdditional.gone()
                 }
                 is NetworkResult.Success -> {
                     binding.sellerRegisterProgressBar.gone()
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.action_registerAsSellerAdditionalFragment_to_loginFragment)
                     showSuccessToast(it.data.message)
                 }
             }
@@ -193,6 +199,9 @@ class RegisterAsSellerAdditionalFragment : Fragment() {
                         binding.etRegisterLocation.setText("${lat},${lon}")
                     }
 
+                }
+                .addOnFailureListener {
+                    showToast("error get location")
                 }
         }
 

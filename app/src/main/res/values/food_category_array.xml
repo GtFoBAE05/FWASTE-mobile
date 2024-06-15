@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_category_array">
+        <item>heavy meals</item>
+        <item>bread</item>
+        <item>snack</item>
+        <item>sweets</item>
+        <item>seafood</item>
+        <item>drink</item>
+    </string-array>
+</resources>

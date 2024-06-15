@@ -52,20 +52,18 @@ class SellerBestSellingProductReportFragment : Fragment() {
 
             when (it) {
                 is NetworkResult.Loading -> {
+                    binding.pieChartView.gone()
                 binding.bestSellingProductPB.visible()
                 }
 
                 is NetworkResult.Success -> {
                     binding.bestSellingProductPB.gone()
-
-
+                    binding.pieChartView.visible()
                     setData(it.data.data)
-
-
-
                 }
 
                 is NetworkResult.Error -> {
+                    binding.pieChartView.visible()
                     binding.bestSellingProductPB.gone()
                     showToast(it.error)
                     Log.e("TAG", "setupObserver: " + it.error)
@@ -102,16 +100,21 @@ class SellerBestSellingProductReportFragment : Fragment() {
 
         // add a lot of colors
         val colors = ArrayList<Int>()
-        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-        colors.add(ColorTemplate.getHoloBlue())
+        colors.add(0, ColorTemplate.rgb("#003f5c"))
+        colors.add(0, ColorTemplate.rgb("#58508d"))
+        colors.add(0, ColorTemplate.rgb("#bc5090"))
+        colors.add(0, ColorTemplate.rgb("#ff6361"))
+        colors.add(0, ColorTemplate.rgb("#ffa600"))
+//        for (c in ColorTemplate.MATERIAL_COLORS) colors.add(c)
+//        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+//        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+//        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+//        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+//        colors.add(ColorTemplate.getHoloBlue())
         dataSet.colors = colors
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(11f)
+        data.setValueTextSize(15f)
         data.setValueTextColor(Color.WHITE)
         binding.pieChartView.setData(data)
 

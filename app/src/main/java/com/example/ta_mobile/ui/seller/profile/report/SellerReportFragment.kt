@@ -73,7 +73,8 @@ class SellerReportFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when(position){
                 0 -> tab.text = "Best Selling Product"
-                1 -> tab.text = "Total Income"
+                1 -> tab.text = "Total Income Line Chart"
+                2 -> tab.text = "Total Income Table View"
             }
         }.attach()
 
@@ -91,12 +92,13 @@ class SellerReportFragment : Fragment() {
     }
 
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 2
+        override fun getItemCount(): Int = 3
 
         override fun createFragment(position: Int): Fragment{
             return when(position){
                 0 -> SellerBestSellingProductReportFragment()
                 1 -> SellerTotalIncomeFragment()
+                2 -> SellerTotalIncomeTableViewFragment()
                 else -> SellerBestSellingProductReportFragment()
             }
         }

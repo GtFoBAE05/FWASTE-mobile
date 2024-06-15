@@ -70,9 +70,11 @@ class SellerHomeFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerHomell.gone()
                     binding.sellerHomePB.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.sellerHomell.visible()
                     binding.sellerHomePB.gone()
 
                     if(it.data.data.isNotEmpty()){

@@ -53,7 +53,7 @@ class BuyerProfileVoucherFragment : Fragment() {
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setTitle("Get More Voucher")
             alertDialog.setMessage("You can obtain the voucher by completing available missions. Please visit the missions page to see the list of missions you can complete.")
-            alertDialog.setPositiveButton("Okay") { dialog, _ ->
+            alertDialog.setPositiveButton("Go~") { dialog, _ ->
                 findNavController().navigate(R.id.action_buyerProfileVoucherFragment_to_buyerProfileMissionFragment)
             }
 
@@ -79,9 +79,11 @@ class BuyerProfileVoucherFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.buyerProfileVoucherNestedScrollView.gone()
                     binding.buyerProfileVoucherProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerProfileVoucherNestedScrollView.visible()
                     binding.buyerProfileVoucherProgressBar.gone()
                     if(it.data.data.isEmpty()){
                     }else{

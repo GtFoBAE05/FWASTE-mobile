@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
-    id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
     alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
     id("com.google.gms.google-services")
 }
@@ -118,7 +118,11 @@ dependencies {
     //toast
     implementation("com.pranavpandey.android:dynamic-toasts:4.2.1")
 
-    //toast
+    //progress view
     implementation("com.github.skydoves:progressview:1.1.3")
+
+    //circle image view
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 
 }

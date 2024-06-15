@@ -24,7 +24,9 @@ import com.example.ta_mobile.ui.buyer.order.BuyerOrderStatusViewModel
 import com.example.ta_mobile.ui.buyer.order.detail.BuyerOrderDetailViewModel
 import com.example.ta_mobile.ui.buyer.product.BuyerProductViewModel
 import com.example.ta_mobile.ui.buyer.profile.BuyerProfileViewModel
-import com.example.ta_mobile.ui.buyer.search.BuyerSearchStoreViewModel
+import com.example.ta_mobile.ui.buyer.search.product.category.BuyerSearchProductViewModel
+import com.example.ta_mobile.ui.buyer.search.product.discount.BuyerSearchProductByDiscountViewModel
+import com.example.ta_mobile.ui.buyer.search.store.BuyerSearchStoreViewModel
 import com.example.ta_mobile.ui.buyer.store.BuyerStoreDetailViewModel
 import com.example.ta_mobile.ui.seller.home.SellerHomeViewModel
 import com.example.ta_mobile.ui.seller.order.SellerOrderViewModel
@@ -77,14 +79,16 @@ val viewModelModule = module {
 
 
     //buyer
-    viewModel { BuyerHomeViewModel(get(), get()) }
+    viewModel { BuyerHomeViewModel(get(), get(), get()) }
     viewModel { BuyerNearestStoreViewModel(get())}
     viewModel { BuyerOrderStatusViewModel(get())}
     viewModel { BuyerCartViewModel(get()) }
     viewModel { BuyerProfileViewModel(get(), get(), get()) }
 
 
-    viewModel { BuyerSearchStoreViewModel(get())}
+    viewModel { BuyerSearchStoreViewModel(get()) }
+    viewModel { BuyerSearchProductViewModel(get()) }
+    viewModel { BuyerSearchProductByDiscountViewModel(get()) }
     viewModel { BuyerStoreDetailViewModel(get()) }
     viewModel { BuyerProductViewModel(get()) }
 

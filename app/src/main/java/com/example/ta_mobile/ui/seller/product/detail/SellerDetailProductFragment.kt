@@ -20,6 +20,7 @@ import com.example.ta_mobile.utils.extension.showSuccessToast
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.example.ta_mobile.utils.helper.DateTimeHelper
 import org.koin.android.ext.android.inject
 
 
@@ -72,6 +73,10 @@ class SellerDetailProductFragment : Fragment() {
         binding.productDetailOriginalPriceTv.text = CurrencyHelper.convertToRupiah(data.products.originalPrice)
         binding.productDetailStockCount.text = "Stock : ${data.products.stockCount}"
         binding.productDetailRackPosition.text = "Rack Position : ${data.products.rackPosition}"
+        binding.productDetailProductionDateTv.text =
+            "Production Date: ${DateTimeHelper.convertDate(data.products.productionDate)}"
+        binding.productDetailExpireDateTv.text =
+            "Expire Date: ${DateTimeHelper.convertDate(data.products.expireDate)}"
 
         binding.productDetailOriginalPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
@@ -108,6 +113,7 @@ class SellerDetailProductFragment : Fragment() {
         viewModel.mySingleProductData.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
+                    binding.sellerDetailProductScrollView.visible()
                     binding.sellerDetailProgressBar.gone()
                     setupView(it.data.data)
 
@@ -115,9 +121,9 @@ class SellerDetailProductFragment : Fragment() {
 
 
                     if (productVisible) {
-                        binding.productDetailUpdateVisibilitybtn.text = "Set as Hidden"
+                        binding.productDetailUpdateVisibilitybtn.text = "Hide this product"
                     } else {
-                        binding.productDetailUpdateVisibilitybtn.text = "Set as Visible"
+                        binding.productDetailUpdateVisibilitybtn.text = "Show this product"
                     }
 
 
@@ -129,6 +135,7 @@ class SellerDetailProductFragment : Fragment() {
                     showToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerDetailProductScrollView.gone()
                     binding.sellerDetailProgressBar.visible()
                 }
             }
@@ -137,6 +144,7 @@ class SellerDetailProductFragment : Fragment() {
         viewModel.setProductVisibility.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
+                    binding.sellerDetailProductScrollView.visible()
                     binding.sellerDetailProgressBar.gone()
                     viewModel.getSingleProduct(productId)
 
@@ -148,6 +156,7 @@ class SellerDetailProductFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerDetailProductScrollView.gone()
                     binding.sellerDetailProgressBar.visible()
                 }
             }
@@ -156,6 +165,7 @@ class SellerDetailProductFragment : Fragment() {
         viewModel.deleteProductResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
+                    binding.sellerDetailProductScrollView.visible()
                     binding.sellerDetailProgressBar.gone()
                     findNavController().popBackStack()
                     showSuccessToast("Product Deleted")
@@ -168,6 +178,7 @@ class SellerDetailProductFragment : Fragment() {
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.sellerDetailProductScrollView.gone()
                     binding.sellerDetailProgressBar.visible()
                 }
             }

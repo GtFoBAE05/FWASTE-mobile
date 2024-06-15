@@ -107,9 +107,11 @@ class BuyerProfileFragment : Fragment() {
                     binding.buyerProfileProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.buyerProfileScrollView.gone()
                     binding.buyerProfileProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerProfileScrollView.visible()
                     binding.buyerProfileProgressBar.gone()
                     setupView(it.data.data)
 

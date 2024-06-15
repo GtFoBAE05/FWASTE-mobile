@@ -18,6 +18,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.G
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.RemoveFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.product.SearchProductResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
@@ -224,6 +225,16 @@ interface ApiServices {
         @Path("productId") productId: String
     ): Response<SellerGetMySingleProductResponse>
 
+    @GET("product/search-by-category/")
+    suspend fun searchProductByCategory(
+        @Query("keyword") keyword: String
+    ): Response<SearchProductResponse>
+
+    @GET("product/search-by-discount/")
+    suspend fun searchProductByDiscount(
+        @Query("discount") discount: String
+    ): Response<SearchProductResponse>
+
     @Multipart
     @POST("product/add")
     suspend fun addProduct(
@@ -235,6 +246,8 @@ interface ApiServices {
         @Part("original_price") originalPrice: RequestBody,
         @Part("stock_count") stockCount: RequestBody,
         @Part("rack_position") rackPosition: RequestBody,
+        @Part("production_date") productionDate: RequestBody,
+        @Part("expire_date") expireDate: RequestBody,
     ): Response<SellerAddProductResponse>
 
     @Multipart
@@ -249,6 +262,8 @@ interface ApiServices {
         @Part("original_price") originalPrice: RequestBody,
         @Part("stock_count") stockCount: RequestBody,
         @Part("rack_position") rackPosition: RequestBody,
+        @Part("production_date") productionDate: RequestBody,
+        @Part("expire_date") expireDate: RequestBody,
     ): Response<SellerEditProductResponse>
 
     @PUT("product/edit-visible")

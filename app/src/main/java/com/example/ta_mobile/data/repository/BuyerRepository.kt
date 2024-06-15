@@ -11,6 +11,7 @@ import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.G
 import com.example.ta_mobile.data.source.remote.response.buyer.favourite_store.RemoveFavouriteStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.nearest_store.NearestStoreResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.product.ProductDetailResponse
+import com.example.ta_mobile.data.source.remote.response.buyer.product.SearchProductResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerMissionResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerPointResponse
 import com.example.ta_mobile.data.source.remote.response.buyer.profile.BuyerUpdateProfileResponse
@@ -273,6 +274,62 @@ class BuyerRepository(
                     )
                 } else {
                     addSellerRatingResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun searchProductByCategory(keyword: String): Flow<NetworkResult<SearchProductResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val searchProductResponse = apiServices.searchProductByCategory(
+                    keyword
+                )
+                if (searchProductResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            searchProductResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    searchProductResponse.errorBody()?.let {
+                        val error = JSONObject(it.string())
+                        emit(NetworkResult.Error(error.getString("message")))
+                    }
+                }
+            } catch (e: HttpException) {
+                Log.e("BuyerRepository", "HttpException: " + e.message)
+                emit(NetworkResult.Error("Request Failed: ${e.message.toString()}"))
+            } catch (e: Exception) {
+                emit(NetworkResult.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun searchProductByDiscount(keyword: String): Flow<NetworkResult<SearchProductResponse>> {
+        return flow {
+            emit(NetworkResult.Loading)
+            try {
+                val searchProductResponse = apiServices.searchProductByDiscount(
+                    keyword
+                )
+                if (searchProductResponse.isSuccessful) {
+                    emit(
+                        NetworkResult.Success(
+                            searchProductResponse.body() ?: throw NoDataException("No data found")
+                        )
+                    )
+                } else {
+                    searchProductResponse.errorBody()?.let {
                         val error = JSONObject(it.string())
                         emit(NetworkResult.Error(error.getString("message")))
                     }

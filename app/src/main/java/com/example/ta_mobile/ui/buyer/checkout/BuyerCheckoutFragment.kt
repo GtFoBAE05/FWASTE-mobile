@@ -132,9 +132,11 @@ class BuyerCheckoutFragment : Fragment() {
             when(it){
                 is NetworkResult.Error -> {
                     binding.buyerCheckoutPB.gone()
+                    binding.buyerCheckoutNSV.visible()
                     showErrorToast(it.error)
                 }
                 NetworkResult.Loading -> {
+                    binding.buyerCheckoutNSV.gone()
                     binding.buyerCheckoutPB.visible()
                 }
                 is NetworkResult.Success -> {

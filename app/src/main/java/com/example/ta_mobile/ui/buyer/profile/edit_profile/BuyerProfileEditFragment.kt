@@ -29,6 +29,7 @@ import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
 import com.example.ta_mobile.utils.helper.createCustomTempFile
 import com.example.ta_mobile.utils.helper.downloadImageAsTempFile
+import com.example.ta_mobile.utils.helper.reduceFileImage
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -183,8 +184,10 @@ class BuyerProfileEditFragment : Fragment() {
                 }
                 NetworkResult.Loading -> {
                     binding.buyerEditProfileProgressBar.visible()
+                    binding.buyerEditProfileScrollView.gone()
                 }
                 is NetworkResult.Success -> {
+                    binding.buyerEditProfileScrollView.visible()
                     binding.buyerEditProfileProgressBar.gone()
                     setupView(it.data.data)
                 }
@@ -198,6 +201,7 @@ class BuyerProfileEditFragment : Fragment() {
                     binding.buyerEditProfileProgressBar.gone()
                 }
                 NetworkResult.Loading -> {
+                    binding.buyerEditProfileScrollView.gone()
                     binding.buyerEditProfileProgressBar.visible()
                 }
                 is NetworkResult.Success -> {
@@ -247,7 +251,8 @@ class BuyerProfileEditFragment : Fragment() {
 
         if (!isError) {
             val file = getFile as File
-            val image = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val reducedImageSize = reduceFileImage(file)
+            val image = reducedImageSize.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imagePart: MultipartBody.Part = MultipartBody.Part.createFormData(
                 "image",
                 file.name,
