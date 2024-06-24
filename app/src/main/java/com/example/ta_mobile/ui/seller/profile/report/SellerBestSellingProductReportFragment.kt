@@ -14,6 +14,7 @@ import com.example.ta_mobile.utils.NetworkResult
 import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.extension.showToast
 import com.example.ta_mobile.utils.extension.visible
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -124,6 +125,17 @@ class SellerBestSellingProductReportFragment : Fragment() {
         // undo all highlights
         binding.pieChartView.highlightValues(null)
         binding.pieChartView.invalidate()
+
+        binding.pieChartView.legend.apply {
+            textSize = 13f
+            verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            orientation = Legend.LegendOrientation.VERTICAL
+            setDrawInside(false)
+//            xEntrySpace = 4f
+//            yEntrySpace = 0f
+//            yOffset = 0f
+        }
+
     }
 
 

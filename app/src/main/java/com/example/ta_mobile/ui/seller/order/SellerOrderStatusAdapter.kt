@@ -7,6 +7,7 @@ import com.example.ta_mobile.data.source.remote.response.order.OrderStatusRespon
 import com.example.ta_mobile.databinding.ItemOrderStatusCardLayoutBinding
 import com.example.ta_mobile.utils.extension.gone
 import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.example.ta_mobile.utils.helper.DateTimeHelper
 import com.example.ta_mobile.utils.helper.DiffUtil
 
 class SellerOrderStatusAdapter(private val listener : (OrderStatusResponseData) -> Unit) : RecyclerView.Adapter<SellerOrderStatusAdapter.SellerOrderStatusViewHolder>(){
@@ -15,6 +16,8 @@ class SellerOrderStatusAdapter(private val listener : (OrderStatusResponseData) 
         fun bind(item : OrderStatusResponseData){
             binding.orderStatusCardImageView.gone()
             binding.orderStatusCardTitleTv.text = item.userName
+            binding.orderStatusCardTitleTvDateTime.text = DateTimeHelper.convertDateWithTime(item.createdAt)
+            binding.orderStatusCardTitleTvMenu.text = item.productNames
             binding.orderStatusCardTotalItemTv.text = CurrencyHelper.convertToRupiah(item.totalAmount)
 
         }

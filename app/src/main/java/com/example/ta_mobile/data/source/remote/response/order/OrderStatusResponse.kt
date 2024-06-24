@@ -30,5 +30,9 @@ data class OrderStatusResponseData(
     @SerializedName("total_amount")
     val totalAmount: Int,
     @SerializedName("is_rated")
-    val isRated: Boolean
+    val isRated: Boolean,
+    @SerializedName("product_names")
+    val productNames: String,
+    @SerializedName("created_at")
+    val createdAt:String
 )

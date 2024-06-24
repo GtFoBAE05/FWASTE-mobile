@@ -1,5 +1,6 @@
 package com.example.ta_mobile.ui.seller.profile.report
 
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.view.marginLeft
 import androidx.core.view.marginStart
+import androidx.core.view.setMargins
 import androidx.fragment.app.Fragment
 import com.example.ta_mobile.data.source.remote.response.seller.report.TotalIncomeResponseData
 import com.example.ta_mobile.databinding.FragmentSellerTotalIncomeTableViewBinding
@@ -78,31 +81,43 @@ class SellerTotalIncomeTableViewFragment : Fragment() {
         for ((index, item) in abc.withIndex()) {
             val row = TableRow(requireContext()).apply {
                 layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
-                if (index % 2 == 0) {
-                    setBackgroundColor(0xFF6F9C33.toInt())
-                }else{
-                    setBackgroundColor(0xFF92C94A.toInt())
-                }
+//                if (index == 0) {
+//                    setBackgroundColor(0xFF6F9C33.toInt())
+//                }else{
+
+//                }
+
             }
 
             val noTextView = TextView(requireContext()).apply {
                 text = (index + 1).toString()
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
-                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f).apply {
+                    setMargins(1,1,1,1)
+
+                }
+                setBackgroundColor(Color.WHITE)
 //                setPadding(10, 10, 10, 10)
             }
 
             val monthTextView = TextView(requireContext()).apply {
                 text = DateFormatSymbols(Locale.US).months[item.month.toInt()-1]
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
-                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f).apply {
+                    setMargins(1,1,1,1)
+
+                }
+                setBackgroundColor(Color.WHITE)
 //                setPadding(10, 10, 10, 10)
             }
 
             val totalTextView = TextView(requireContext()).apply {
                 text = CurrencyHelper.convertToRupiah(item.income)
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
-                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f).apply {
+                    setMargins(1,1,1,1)
+                }
+                setBackgroundColor(Color.WHITE)
 //                setPadding(10, 10, 10, 10)
             }
 

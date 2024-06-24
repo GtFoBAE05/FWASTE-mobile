@@ -130,7 +130,6 @@ class BuyerNearestStoreFragment : Fragment() {
 
                         }, viewLifecycleOwner)
 
-                        setupObserver()
                     }
 
                 }

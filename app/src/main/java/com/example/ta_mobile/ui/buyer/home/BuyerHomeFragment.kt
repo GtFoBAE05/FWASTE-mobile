@@ -36,17 +36,16 @@ import org.koin.android.ext.android.inject
 
 class BuyerHomeFragment : Fragment() {
 
-    private lateinit var _binding : FragmentBuyerHomeBinding
+    private lateinit var _binding: FragmentBuyerHomeBinding
     private val binding get() = _binding
 
     private val viewModel: BuyerHomeViewModel by inject()
-    private lateinit var storeNearBuyerAdapter : BuyerHomeStoreNearBuyerAdapter
+    private lateinit var storeNearBuyerAdapter: BuyerHomeStoreNearBuyerAdapter
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
     }
 
@@ -63,43 +62,51 @@ class BuyerHomeFragment : Fragment() {
         binding.buyerHomeToolbar.setTitle("Explore")
 
         viewModel.getUserDetail()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+
         setupAdapter()
-        setupObserver()
         setupView()
         setupSearchView()
         setupButton()
 
         getMyLocation()
+        setupObserver()
+
     }
 
-    private fun setupObserver(){
-        viewModel.getUserName().observe(viewLifecycleOwner){
+    private fun setupObserver() {
+        viewModel.getUserName().observe(viewLifecycleOwner) {
             binding.buyerHomeUserNameTv.text = "Welcome, ${it}"
         }
 
-        viewModel.storeNearBuyerResult.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.storeNearBuyerResult.observe(viewLifecycleOwner) {
+            when (it) {
                 is NetworkResult.Error -> {
                     showErrorToast(it.error)
                 }
+
                 NetworkResult.Loading -> {
                     binding.buyerHomeNestedScrollView.gone()
                 }
+
                 is NetworkResult.Success -> {
-                    binding.buyerHomeNestedScrollView.visible()
                     storeNearBuyerAdapter.setData(it.data.data)
+                    binding.buyerHomeNestedScrollView.visible()
                 }
             }
         }
 
-        viewModel.userDetailData.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.userDetailData.observe(viewLifecycleOwner) {
+            when (it) {
                 is NetworkResult.Error -> {
                     showErrorToast(it.error)
                 }
+
                 NetworkResult.Loading -> {
                     binding.buyerHomeNestedScrollView.gone()
                 }
+
                 is NetworkResult.Success -> {
                     binding.buyerHomeNestedScrollView.visible()
                     binding.voucherTotalTv.text = it.data.data.totalVoucher.toString()
@@ -109,10 +116,10 @@ class BuyerHomeFragment : Fragment() {
         }
     }
 
-    private fun setupView(){
+    private fun setupView() {
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.food_waste_ads_01, ))
-        imageList.add(SlideModel(R.drawable.express_delivery_ads_02, ))
+        imageList.add(SlideModel(R.drawable.food_waste_ads_01))
+        imageList.add(SlideModel(R.drawable.express_delivery_ads_02))
         binding.buyerHomeImageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         binding.buyerHomeImageSlider.setOnClickListener {
@@ -120,14 +127,17 @@ class BuyerHomeFragment : Fragment() {
 
     }
 
-    private fun setupSearchView(){
+    private fun setupSearchView() {
         binding.buyerHomeSearchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 val bundle = Bundle()
                 bundle.putString("keyword", query)
-                findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchStoreFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_buyerHomeFragment_to_buyerSearchStoreFragment,
+                    bundle
+                )
                 return false
             }
 
@@ -138,17 +148,20 @@ class BuyerHomeFragment : Fragment() {
         })
     }
 
-    private fun setupAdapter(){
+    private fun setupAdapter() {
         binding.buyerHomeStoreNearBuyerRv.layoutManager = LinearLayoutManager(requireContext())
-        storeNearBuyerAdapter = BuyerHomeStoreNearBuyerAdapter{
+        storeNearBuyerAdapter = BuyerHomeStoreNearBuyerAdapter {
             val bundle = Bundle()
             bundle.putString("storeId", it.id)
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerStoreDetailFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerStoreDetailFragment,
+                bundle
+            )
         }
         binding.buyerHomeStoreNearBuyerRv.adapter = storeNearBuyerAdapter
     }
 
-    private fun setupButton(){
+    private fun setupButton() {
         binding.voucherTotalTv.setOnClickListener {
             findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerProfileVoucherFragment)
         }
@@ -160,37 +173,55 @@ class BuyerHomeFragment : Fragment() {
         binding.heavyMealsCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "heavy meals")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductFragment,
+                bundle
+            )
         }
 
         binding.snackCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "snack")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductFragment,
+                bundle
+            )
         }
 
         binding.breadCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "bread")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductFragment,
+                bundle
+            )
         }
 
         binding.seafoodCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "seafood")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductFragment,
+                bundle
+            )
         }
 
         binding.drinkCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "drink")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductFragment,
+                bundle
+            )
         }
 
         binding.thirtyPercentCategory.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("keyword", "30")
-            findNavController().navigate(R.id.action_buyerHomeFragment_to_buyerSearchProductByDiscountFragment, bundle)
+            findNavController().navigate(
+                R.id.action_buyerHomeFragment_to_buyerSearchProductByDiscountFragment,
+                bundle
+            )
         }
     }
 
@@ -210,11 +241,14 @@ class BuyerHomeFragment : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
 
-            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
-                override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
+            fusedLocationClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                object : CancellationToken() {
+                    override fun onCanceledRequested(p0: OnTokenCanceledListener) =
+                        CancellationTokenSource().token
 
-                override fun isCancellationRequested() = false
-            })
+                    override fun isCancellationRequested() = false
+                })
                 .addOnSuccessListener { location: Location? ->
                     if (location == null)
                         showErrorToast("error get location")
@@ -223,7 +257,6 @@ class BuyerHomeFragment : Fragment() {
                         val lon = location.longitude
                         viewModel.getNearestStore(lat, lon, 50.0)
 
-                        setupObserver()
                     }
 
                 }
@@ -231,6 +264,13 @@ class BuyerHomeFragment : Fragment() {
         } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }
+
+    override fun onDestroyView() {
+        viewModel.storeNearBuyerResult.removeObservers(requireParentFragment().viewLifecycleOwner)
+        viewModel.userDetailData.removeObservers(requireParentFragment().viewLifecycleOwner)
+
+        super.onDestroyView()
     }
 
 }

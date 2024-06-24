@@ -1,5 +1,7 @@
 package com.example.ta_mobile.ui.buyer.order
 
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.ta_mobile.data.source.remote.response.order.OrderStatusResponseData
 import com.example.ta_mobile.databinding.ItemOrderStatusCardLayoutBinding
 import com.example.ta_mobile.utils.helper.CurrencyHelper
+import com.example.ta_mobile.utils.helper.DateTimeHelper
 import com.example.ta_mobile.utils.helper.DiffUtil
 
 class BuyerOrderStatusAdapter(private val listener : (OrderStatusResponseData) -> Unit) : RecyclerView.Adapter<BuyerOrderStatusAdapter.BuyerOrderStatusViewHolder>(){
@@ -15,6 +18,8 @@ class BuyerOrderStatusAdapter(private val listener : (OrderStatusResponseData) -
         fun bind(item : OrderStatusResponseData){
             Glide.with(binding.root).load(item.storeImageUrl).into(binding.orderStatusCardImageView)
             binding.orderStatusCardTitleTv.text = item.storeName
+            binding.orderStatusCardTitleTvDateTime.text = DateTimeHelper.convertDateWithTime(item.createdAt)
+            binding.orderStatusCardTitleTvMenu.text = item.productNames
             binding.orderStatusCardTotalItemTv.text = CurrencyHelper.convertToRupiah(item.totalAmount)
 
         }

@@ -78,12 +78,13 @@ class SellerHomeFragment : Fragment() {
                     binding.sellerHomePB.gone()
 
                     if(it.data.data.isNotEmpty()){
-                        binding.btnIncomingOrderProduct.visible()
-                        val bundle = Bundle()
-                        bundle.putString("transactionId", it.data.data.first().id)
+//                        binding.btnIncomingOrderProduct.visible()
+//                        val bundle = Bundle()
+//                        bundle.putString("transactionId", it.data.data.first().id)
 
                         binding.btnIncomingOrderProduct.setOnClickListener {
-                            findNavController().navigate(R.id.action_sellerHomeFragment_to_sellerIncomingOrderFragment, bundle)
+//                            findNavController().navigate(R.id.action_sellerHomeFragment_to_sellerIncomingOrderFragment, bundle)
+                            findNavController().navigate(R.id.action_sellerHomeFragment_to_sellerOrderFragment)
                         }
 
                     }else{

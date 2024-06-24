@@ -50,7 +50,10 @@
         android:src="@drawable/baseline_question_mark_24"
 
         android:text="Hint"
-        app:icon="@drawable/baseline_question_mark_24" />
+        app:icon="@drawable/baseline_question_mark_24"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/primary_main"
+        app:iconTint="@color/white" />
 
     <ProgressBar
         android:id="@+id/buyerProfileVoucherProgressBar"

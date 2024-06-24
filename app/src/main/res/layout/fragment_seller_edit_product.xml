@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/sellerEditProductimageView"
-                android:layout_width="148dp"
-                android:layout_height="148dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"

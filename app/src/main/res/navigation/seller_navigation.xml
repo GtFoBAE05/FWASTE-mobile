@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_sellerHomeFragment_to_sellerSendNotificationFragment"
             app:destination="@id/sellerSendNotificationFragment" />
+        <action
+            android:id="@+id/action_sellerHomeFragment_to_sellerOrderFragment"
+            app:destination="@id/sellerOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderFragment"

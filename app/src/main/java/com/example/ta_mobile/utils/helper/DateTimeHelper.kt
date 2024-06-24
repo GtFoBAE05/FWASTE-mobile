@@ -25,6 +25,15 @@ object DateTimeHelper {
         return date?.let { outputFormat.format(it) } ?: ""
     }
 
+    fun convertDateWithTime(dateStr: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.getDefault())
+        val date = inputFormat.parse(dateStr)
+        return date?.let { outputFormat.format(it) } ?: ""
+    }
+
+
+
     fun formatDate(inputDate: String): String {
         val inputFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
         val date = inputFormat.parse(inputDate)
